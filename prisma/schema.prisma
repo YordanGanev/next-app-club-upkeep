@@ -1,0 +1,132 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String    @id @default(uuid())
+  picture       String    @default("/default.png")
+  name          String?
+  nickname      String?   @unique
+  email         String?   @unique
+  verified      Boolean   @default(false)
+  orgId         Int?
+  birthdate     DateTime? @db.Date
+  country       String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  unseenInvites Int       @default(0)
+  club          Club[]
+  invite        Invite[]
+  player        Player[]
+  team          Team[]    @relation("TeamToUser")
+
+  @@index([email])
+}
+
+model Club {
+  id        String   @id @default(uuid())
+  ownerId   String
+  name      String   @unique
+  country   String?
+  picture   String   @default("/default_club.png")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  owner     User     @relation(fields: [ownerId], references: [id])
+  teams     Team[]
+}
+
+model Team {
+  id        String    @id @default(uuid())
+  clubId    String
+  picture   String    @default("/default_team.png")
+  sport     SportType
+  name      String    @unique
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  events    Event[]
+  invite    Invite[]
+  player    Player[]
+  club      Club      @relation(fields: [clubId], references: [id], onDelete: Cascade)
+  staff     User[]    @relation("TeamToUser")
+}
+
+model Player {
+  id        String    @id @default(uuid())
+  userId    String?
+  teamId    String?
+  number    Int?
+  goals     Int?
+  points    Int?
+  played    Int?      @default(0)
+  started   Int?      @default(0)
+  trainings Int       @default(0)
+  joinnedAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  name      String?
+  picture   String?
+  medical   Medical[]
+  Team      Team?     @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  user      User?     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, teamId])
+  @@unique([name, teamId])
+}
+
+model Medical {
+  id       String   @id @default(uuid())
+  playerId String
+  age      Int?
+  height   Int
+  weight   Int
+  date     DateTime @default(now())
+  player   Player   @relation(fields: [playerId], references: [id], onDelete: Cascade)
+}
+
+model Event {
+  id     String    @id @default(uuid())
+  teamId String
+  type   EventType
+  date   DateTime
+  note   String
+  team   Team      @relation(fields: [teamId], references: [id], onDelete: Cascade)
+}
+
+model Invite {
+  teamId String
+  userId String
+  type   InviteType @default(PLAYER)
+  team   Team       @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  user   User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([teamId, userId])
+}
+
+enum EventType {
+  TRAINING
+  LEAGUE_GAME
+  TOURNAMENT_GAME
+  TACTICS
+  MEETING
+  MEDICAL
+}
+
+enum SportType {
+  FOOTBALL
+  BASKETBALL
+  VOLLEYBALL
+  HANDBALL
+  ICE_HOKEY
+  FIELD_HOKEY
+  RUGBY
+  OTHER
+}
+
+enum InviteType {
+  PLAYER
+  STAFF
+}
