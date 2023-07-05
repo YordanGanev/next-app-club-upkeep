@@ -40,8 +40,9 @@
 }
 
 .userMenu li i {
-    width: 22px;
-    text-align: center;
+    display: inline-block;
+    width: 2em;
+    /* text-align: center; */
 }
 
 .userMenu li:hover {
@@ -49,6 +50,7 @@
 }
 
 .close {
+    cursor: pointer;
     top: -40px;
     right: 0;
     position: absolute;

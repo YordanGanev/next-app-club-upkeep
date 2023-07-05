@@ -21,16 +21,19 @@ import { useUser } from "@auth0/nextjs-auth0/client";
 
 import Connecting from "@components/basic/connecting";
 import { NotificationContext } from "@contexts/NotificationContext";
+import { PopoutContext } from "@/contexts/PopoutContext";
 
 import Style from "./styles/Navigation.module.css";
 
-export default function Navigation({ profileMenu }) {
+export default function Navigation() {
   const pathname = usePathname();
 
   const { user, error, isLoading } = useUser();
 
   const { notification, setNotifyState, setNotifyInvites } =
     useContext(NotificationContext);
+
+  const { profileMenuState, setProfileMenuState } = useContext(PopoutContext);
 
   const [mobileMenuHide, setMobileView] = useState(true);
 
@@ -51,19 +54,19 @@ export default function Navigation({ profileMenu }) {
 
     fetch(`/api/user/${notification.options[0].userId}/invite`, {
       method: "DELETE",
-    }).then(setNotifyInvites(0));
+    }).then(() => setNotifyInvites(0));
   };
 
-  const handleProfileMenu = () => {
-    profileMenu.set(!profileMenu.visible);
-  };
+  // const handleProfileMenu = () => {
+  //   profileMenu.set(!profileMenu.visible);
+  // };
 
   const addNotify = notification?.options?.length > 0;
   notification?.new;
 
   return (
     <>
-      <div className={Style.wrapper} closed={mobileMenuHide ? "true" : null}>
+      <div className={`${Style.wrapper} ${mobileMenuHide ? "closed" : null}`}>
         <nav>
           <div className={Style.header}>
             <div
@@ -97,8 +100,7 @@ export default function Navigation({ profileMenu }) {
               return (
                 <div key={item.slug} className={Style.linkContainer}>
                   <Link
-                    select={current ? "true" : null}
-                    className={Style.link}
+                    className={`${Style.link} ${current ? "select" : null}`}
                     href={"/" + item.slug}
                   >
                     <i>
@@ -111,14 +113,17 @@ export default function Navigation({ profileMenu }) {
             })}
           </div>
           <div className={Style.user}>
-            <div className={Style.notifications} add={addNotify ? "" : null}>
+            <div
+              className={`${Style.notifications} ${addNotify ? "add" : null}`}
+            >
               <button onClick={handleNotification}>
                 <i>
-                  <FontAwesomeIcon icon={addNotify === true ? faBell : farBell}>
-                    {notification?.new > 0 && (
-                      <div className={Style.newNotify}>{notification?.new}</div>
-                    )}
-                  </FontAwesomeIcon>
+                  <FontAwesomeIcon
+                    icon={addNotify === true ? faBell : farBell}
+                  />
+                  {notification?.new > 0 && (
+                    <div className={Style.newNotify}>{notification?.new}</div>
+                  )}
                 </i>
                 <span> Notifications </span>
               </button>
@@ -126,15 +131,18 @@ export default function Navigation({ profileMenu }) {
 
             {isLoading && (
               <div className={Style.profile}>
-                <Connecting />
+                <Connecting message={null} />
               </div>
             )}
             {!isLoading && user && (
-              <button className={Style.profile} onClick={handleProfileMenu}>
+              <button
+                className={Style.profile}
+                onClick={() => setProfileMenuState(true)}
+              >
                 <Image
                   width="32"
                   height="32"
-                  src={user.picture}
+                  src={user.picture as any}
                   alt={`@img-${user.name}`}
                 />
                 <span>

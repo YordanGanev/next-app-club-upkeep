@@ -10,6 +10,8 @@ type PopoutContextType = {
   setAction: (action: ConfirmActionType) => void;
   filterOpts: PopoutBackgroundType;
   setFilterOpts: (opts: PopoutBackgroundType) => void;
+  profileMenuState: boolean;
+  setProfileMenuState: (state: boolean) => void;
 };
 
 type PopoutBackgroundType = {
@@ -23,10 +25,6 @@ type ConfirmActionType = {
   title: string;
   message: string;
   callback: () => void;
-};
-
-type ProfileMenuType = {
-  visible: boolean;
 };
 
 type InputType = {
@@ -70,6 +68,8 @@ const PopoutContextDefault = {
   setAction: () => {},
   filterOpts: windowFilterDefault,
   setFilterOpts: () => {},
+  profileMenuState: false,
+  setProfileMenuState: () => {},
 };
 
 export const PopoutContext =
@@ -83,6 +83,8 @@ function PopoutContextProvider({ children }: { children: React.ReactNode }) {
 
   const [filterOpts, setFilterOpts] =
     useState<PopoutBackgroundType>(windowFilterDefault);
+
+  const [profileMenuState, setProfileMenuState] = useState<boolean>(false);
 
   function setAction(action: ConfirmActionType) {
     setActionState(action);
@@ -117,6 +119,8 @@ function PopoutContextProvider({ children }: { children: React.ReactNode }) {
         setAction,
         filterOpts,
         setFilterOpts,
+        profileMenuState,
+        setProfileMenuState,
       }}
     >
       {children}

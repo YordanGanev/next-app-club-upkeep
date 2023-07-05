@@ -1,6 +1,6 @@
 import Style from "./styles/Connecting.module.css";
 
-export default function Connecting({ message }) {
+export default function Connecting({ message }: { message: string | null }) {
   return (
     <>
       <div className={Style.wrapper}>

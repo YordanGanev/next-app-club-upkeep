@@ -1,5 +1,5 @@
 // "use client";
-// import ProfileMenu from "./ProfileMenu";
+import ProfileMenu from "./ProfileMenu";
 // import NotificationsMenu from "./NotificationsMenu";
 // import PopupForm from "./PopupForm";
 import ConfirmAction from "./ConfirmAction";
@@ -10,7 +10,7 @@ export default function PopoutHandler() {
     <>
       {/* Cover the screen for outside of menu clicks */}
       <WindowFilter />
-      {/* <ProfileMenu state={profileMenu} /> */}
+      <ProfileMenu />
       {/* <NotificationsMenu /> */}
       {/* <PopupForm form={form} /> */}
       <ConfirmAction />

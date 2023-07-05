@@ -94,7 +94,7 @@
     text-transform: capitalize;
 }
 
-.link[select] {
+.link.select {
     background-color: var(--themeDark);
 }
 
@@ -193,7 +193,7 @@
         overflow: visible;
     }
 
-    .wrapper[closed] .main,
+    .wrapper.closed .main,
     .wrapper[closed] .user {
         display: none;
     }
