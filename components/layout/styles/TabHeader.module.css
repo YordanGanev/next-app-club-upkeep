@@ -1,0 +1,52 @@
+.wrapper {
+    top: 0;
+    display: inline-block;
+    background-color: var(--themeDarkAlt);
+    border-bottom: 1px solid var(--themeLight);
+    position: sticky;
+    position: -webkit-sticky;
+    width: 100%;
+    z-index: var(--zIdxTabHeader);
+}
+
+.tabs {
+    /* border: 1px solid red; */
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.tabs::-webkit-scrollbar {
+    display: none;
+}
+
+.tabs>a {
+    height: 100%;
+    padding: 1rem;
+    color: var(--themeLighterAlt);
+    position: relative;
+    /* bottom: -2px; */
+}
+
+.tabs>a:hover {
+    color: var(--white);
+    background-color: var(--themePrimary);
+}
+
+.active {
+    
+    color: var(--white) !important;
+}
+
+.active::after {
+    content: "";
+    background-color: var(--extraTertiary);
+    position: absolute;
+    width: calc(100% - 1rem);
+    height: 4px;
+    border-radius: 4px;
+    bottom: 0;
+    left: .5rem;
+}

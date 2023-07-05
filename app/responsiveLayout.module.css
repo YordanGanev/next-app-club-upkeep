@@ -1,0 +1,43 @@
+.wrapper {
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: grid;
+    grid-template-rows: auto 1fr;
+}
+
+.data {
+    display: flex;
+    width: 100%;
+    overflow-x: auto;
+}
+
+.main {
+    background-color: var(--black);
+}
+
+.data>div {
+    min-height: 100vh;
+    max-height: 100vh;
+}
+
+.main {
+    overflow-y: scroll;
+    flex: 1 auto;
+    min-height: 100vh;
+    max-height: 100vh;
+}
+
+@media screen and (max-width: 500px) {
+    .data {
+        display: flex;
+        flex-direction: column;
+    }
+    .data>div {
+        min-height: fit-content;
+        max-height: fit-content;
+    }
+    .main {
+        min-height: unset;
+        max-height: unset;
+    }
+}

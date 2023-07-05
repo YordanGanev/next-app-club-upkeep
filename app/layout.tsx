@@ -1,8 +1,18 @@
 import React from "react";
-import { UserProvider } from "@auth0/nextjs-auth0/client";
 
+import { UserProvider } from "@auth0/nextjs-auth0/client";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+
+import NotificationProvider from "@contexts/NotificationContext";
+import ConfirmActionProvider from "@contexts/ConfirmActionContext";
+
+import Navigation from "@components/layout/navigation";
 import "./globals.css";
 import { Inter } from "next/font/google";
+
+import Style from "./responsiveLayout.module.css";
+import Head from "next/head";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,10 +27,31 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <UserProvider>
-      <html lang="en">
-        <body className={inter.className}>{children}</body>
-      </html>
-    </UserProvider>
+    <html lang="en">
+      <Head>
+        {/* <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/solid.min.css" integrity="sha512-bdTSJB23zykBjGDvyuZUrLhHD0Rfre0jxTd0/jpTbV7sZL8DCth/88aHX0bq2RV8HK3zx5Qj6r2rRU/Otsjk+g==" crossorigin="anonymous" referrerpolicy="no-referrer" /> */}{" "}
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+          integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+          crossOrigin="anonymous"
+          referrerPolicy="no-referrer"
+        />
+      </Head>
+      <UserProvider>
+        <NotificationProvider>
+          <ConfirmActionProvider>
+            <body className={inter.className}>
+              <div className={Style.wrapper}>
+                <div className={Style.data}>
+                  <Navigation profileMenu={null} />
+                  <main className={Style.main}>{children}</main>
+                </div>
+              </div>
+            </body>
+          </ConfirmActionProvider>
+        </NotificationProvider>
+      </UserProvider>
+    </html>
   );
 }

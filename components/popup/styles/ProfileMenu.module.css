@@ -1,0 +1,90 @@
+/* Profile */
+
+.userProfileMenu {
+    background-color: var(--neutralPrimary);
+    border: 1px solid var(--themeDarkAlt);
+    border-radius: 0.5em;
+    position: absolute;
+    bottom: 4rem;
+    left: .5rem;
+    z-index: var(--zIdxPopup);
+    box-shadow: 0px 0px 5px 1px var(--white);
+    min-width: calc(240px - .5rem);
+}
+
+.userProfileMenu>ul {
+    list-style: none;
+}
+
+.userProfileMenu {
+    display: block;
+}
+
+.userInfo {
+    border-bottom: 1px solid var(--themeDarkAlt);
+    padding: 0.5rem 1rem;
+}
+
+.userMenu {
+    background-color: var(--neutralPrimary);
+    border-radius: 0.5em;
+}
+
+.userMenu ul {
+    list-style: none;
+}
+
+.userMenu li {
+    padding: 0.75rem 1rem;
+    border-radius: 1.5rem;
+}
+
+.userMenu li i {
+    width: 22px;
+    text-align: center;
+}
+
+.userMenu li:hover {
+    background-color: var(--themeDarkAlt);
+}
+
+.close {
+    top: -40px;
+    right: 0;
+    position: absolute;
+    border-radius: .5rem;
+    background-color: var(--neutralPrimary);
+    border: 1px solid var(--white);
+    height: 36px;
+    aspect-ratio: 1;
+}
+
+.close::after,
+.close::before {
+    position: absolute;
+    content: "";
+    display: block;
+    height: 26px;
+    width: 4px;
+    background-color: var(--errorColor);
+    left: 50%;
+    top: 50%;
+}
+
+.close::after {
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+.close::before {
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+
+@media screen and (max-width: 500px) {
+    .userProfileMenu {
+        bottom: unset;
+        position: absolute;
+        top: 340px;
+        left: 1rem;
+        right: 1rem;
+    }
+}

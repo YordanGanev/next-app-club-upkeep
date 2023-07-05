@@ -1,0 +1,128 @@
+/* Form positions */
+
+.wrapper {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: clampmin(var(--max-width), 95vw);
+    z-index: var(--zIdxPopup);
+}
+
+
+/* Close Title and header */
+
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #333;
+    gap: 1rem;
+}
+
+
+/* Close button styles */
+
+.close {
+    cursor: pointer;
+    background-color: var(--themeLighter);
+    border-radius: 50%;
+    position: relative;
+}
+
+.header>div,
+.close {
+    height: 32px;
+    aspect-ratio: 1;
+}
+
+.close:focus,
+.close:hover {
+    background-color: var(--themeLighterAlt);
+}
+
+
+/* Draw x */
+
+.close::before,
+.close::after {
+    content: "";
+    display: block;
+    background-color: var(--extraWhite);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 4px;
+    height: 20px;
+    border-radius: 2px;
+}
+
+.close::before {
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.close::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+
+/* Fix view for form inputs */
+
+.form {
+    border-radius: 1rem;
+    width: 100%;
+    max-width: clampmin(600px, 95vw);
+    border: 2px solid var(--neutralSecondary);
+    padding: 1rem;
+    background-color: var(--extraDarker);
+}
+
+.formField {
+    display: flex;
+    flex-direction: column;
+}
+
+.form>div>label {
+    margin-top: 0.5rem;
+    margin-left: 0.5rem;
+    margin-top: 1rem;
+    font-size: 1rem;
+}
+
+.form>.formField>input,
+.form>.formField>select,
+.form>.formField>button {
+    margin: 0.5rem;
+    background-color: var(--neutralPrimary);
+    padding: 0.5rem;
+    border-color: var(--neutralPrimaryAlt);
+    border-radius: 0.5rem;
+    font-size: 1.2rem;
+}
+
+.form>.formField>button {
+    cursor: pointer;
+}
+
+.form input:focus {
+    outline: none;
+}
+
+.formField:last-of-type {
+    padding-top: 1rem;
+    border-top: 1px solid #333;
+}
+
+
+/* Error message */
+
+.error {
+    text-align: center;
+    padding: 0.5rem;
+    color: var(--extraLight);
+}

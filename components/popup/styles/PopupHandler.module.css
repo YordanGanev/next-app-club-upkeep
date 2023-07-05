@@ -1,0 +1,23 @@
+.wrapper {
+  /* display: none; */
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--zIdxPopup);
+
+  overflow: visible;
+}
+
+.wrapper:not([blockclicks]) {
+  pointer-events: none;
+}
+
+.wrapper[blur] {
+  backdrop-filter: blur(1px);
+}
+
+.wrapper[darken] {
+  background-color: rgba(0, 0, 0, 0.4);
+}

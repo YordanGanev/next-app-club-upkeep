@@ -1,0 +1,25 @@
+.btnExtra,
+.btnNormal {
+    all: unset;
+    padding: 0.3rem 1rem;
+    border-radius: .5rem;
+    cursor: pointer;
+    text-align: center;
+}
+
+.btnExtra:hover,
+.btnNormal:hover,
+.btnExtra:focus,
+.btnNormal:focus {
+    filter: brightness(1.2);
+}
+
+.btnNormal {
+    background-color: var(--themeLighter);
+    border-color: var(--themeLighterAlt);
+}
+
+.btnExtra {
+    background-color: var(--extraSecondary);
+    border-color: var(--extraPrimary);
+}

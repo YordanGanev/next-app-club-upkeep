@@ -1,0 +1,121 @@
+.wrapper {
+    background-color: var(--neutralPrimary);
+    border: 1px solid var(--themeDarkAlt);
+    border-radius: 0.5em;
+    position: absolute;
+    left: .5rem;
+    bottom: 7rem;
+    max-height: 75%;
+    display: flex;
+    flex-direction: column;
+    z-index: var(--zIdxPopup);
+    box-shadow: 0px 0px 5px 1px var(--white);
+}
+
+.notifications {
+    overflow-y: scroll;
+    padding: 0.75em;    
+    
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.wrapper[notvisible] {
+    display: none;
+}
+
+
+/* Single Invite */
+
+.invite {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+
+/* */
+
+.spacer {
+    display: block;
+    min-height: 1px;
+    background-color: var(--themeDarkAlt);
+    border-radius: 0.5px;
+}
+
+
+/* Image << */
+
+.invite>div>img {
+    border-radius: 50%;
+}
+
+
+/* >> Content Team+Buttons */
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-content: stretch;
+    gap: 0.5rem;
+    min-width: 200px;
+    flex-grow: 4;
+}
+
+.type {
+    color: var(--themeDarkAlt);
+}
+
+/* >>(accept)(decline) Buttons */
+
+.buttons {
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 1rem;
+}
+
+/* Close */
+
+
+.close {
+    display:block;
+    top: -40px;
+    right: 0px;
+    position: absolute;
+    border-radius: .5rem;
+    background-color: var(--neutralPrimary);
+    border: 1px solid var(--white);
+    height: 36px;
+    aspect-ratio: 1;
+}
+
+.close::after,
+.close::before {
+    position: absolute;
+    content: "";
+    display: block;
+    height: 26px;
+    width: 4px;
+    background-color: var(--errorColor);
+    left: 50%;
+    top: 50%;
+}
+
+.close::after {
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+.close::before {
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+
+@media screen and (max-width: 500px) {
+    .wrapper {
+        position: fixed;
+        top: 290px;
+        left: 1rem;
+        right: 1rem;
+        bottom: 1rem;
+    }
+}

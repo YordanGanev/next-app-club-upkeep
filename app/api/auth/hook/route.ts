@@ -6,7 +6,7 @@ export async function POST(request: Request) {
     // handle request body json
     const json = await request.json();
 
-    // console.log(json);
+    console.log(json);
     const { email, name, picture, nickname, secret } = json;
 
     // validate

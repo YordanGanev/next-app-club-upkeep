@@ -12,7 +12,7 @@ export default function Home() {
 
   if (user) {
     return (
-      <main className={styles.main}>
+      <div>
         <div className={styles.description}>
           <h1 className={styles.title}>Next.js 13 test</h1>
           <p>Hello {user.name}</p>
@@ -20,7 +20,7 @@ export default function Home() {
         <div>
           <Link href="/api/auth/logout">Logout</Link>
         </div>
-      </main>
+      </div>
     );
   }
 
