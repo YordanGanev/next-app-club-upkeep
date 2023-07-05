@@ -9,12 +9,16 @@ import {
   UserNotifyContextType,
 } from "@contexts/NotificationContext";
 
+import { PopoutContext } from "@contexts/PopoutContext";
+
 import { User as PrismaUser, Invite as PrismaInvite } from "@prisma/client";
 
 export default function Home({ appUser }: { appUser: UserNotifyContextType }) {
   const { user, error, isLoading } = useUser();
   const { setNotifyInvites, setNotifyOptions } =
     useContext(NotificationContext);
+
+  const { actionState, filterOpts, setFilterOpts } = useContext(PopoutContext);
 
   NotificationUpdate(appUser, setNotifyInvites, setNotifyOptions);
 
@@ -25,7 +29,18 @@ export default function Home({ appUser }: { appUser: UserNotifyContextType }) {
     return (
       <div>
         <div>
-          <h1>Next.js 13 test</h1>
+          <h1
+            onClick={() => {
+              console.log("clicked");
+              setFilterOpts({
+                darken: !filterOpts.darken,
+                blockClick: !filterOpts.blockClick,
+                blur: !filterOpts.darken,
+              });
+            }}
+          >
+            Next.js 13 test
+          </h1>
           <p>Hello {user.name}</p>
         </div>
         <div>

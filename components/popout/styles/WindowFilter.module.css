@@ -8,16 +8,17 @@
   z-index: var(--zIdxPopup);
 
   overflow: visible;
-}
-
-.wrapper:not([blockclicks]) {
   pointer-events: none;
 }
 
-.wrapper[blur] {
+.block {
+  pointer-events: all;
+}
+
+.blur {
   backdrop-filter: blur(1px);
 }
 
-.wrapper[darken] {
+.darken {
   background-color: rgba(0, 0, 0, 0.4);
 }

@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import { User as PrismaUser, Invite as PrismaInvite } from "@prisma/client";
 import { createContext, useEffect, useState } from "react";
 

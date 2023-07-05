@@ -6,8 +6,11 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 
 import NotificationProvider from "@contexts/NotificationContext";
 import ConfirmActionProvider from "@contexts/ConfirmActionContext";
+import PopoutContextProvider from "@/contexts/PopoutContext";
 
 import Navigation from "@components/layout/navigation";
+import PopoutHandler from "@components/popout/PopoutHandler";
+
 import "./globals.css";
 import { Inter } from "next/font/google";
 
@@ -40,7 +43,8 @@ export default function RootLayout({
       </Head>
       <UserProvider>
         <NotificationProvider>
-          <ConfirmActionProvider>
+          <PopoutContextProvider>
+            {/* <ConfirmActionProvider> */}
             <body className={inter.className}>
               <div className={Style.wrapper}>
                 <div className={Style.data}>
@@ -48,8 +52,10 @@ export default function RootLayout({
                   <main className={Style.main}>{children}</main>
                 </div>
               </div>
+              <PopoutHandler />
             </body>
-          </ConfirmActionProvider>
+            {/* </ConfirmActionProvider> */}
+          </PopoutContextProvider>
         </NotificationProvider>
       </UserProvider>
     </html>
