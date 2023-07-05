@@ -1,46 +1,50 @@
+"use client";
+
 import { useContext } from "react";
 
-import { useOutsideClick } from "utils/hooks";
-import { ConfirmActionContext } from "contexts/ConfirmActionContext";
+import { useOutsideClick } from "@utils/hooks";
+import { PopoutContext } from "@contexts/PopoutContext";
 
-import Button from "components/basic/button";
+import Button from "@components/basic/button";
 
 import Style from "./styles/ConfirmAction.module.css";
 
 export default function ConfirmAction() {
-  const ref = useOutsideClick(() => DeclineAction());
+  const { actionVisible, actionState, actionAccept, actionDecline } =
+    useContext(PopoutContext);
 
-  const { confirmAction, AcceptAction, DeclineAction } =
-    useContext(ConfirmActionContext);
+  const ref = useOutsideClick(() => actionDecline());
 
   return (
-    <div ref={ref}>
-      {confirmAction.visible && (
+    <div ref={ref as any}>
+      {actionVisible && (
         <div className={Style.wrapper}>
-          <div className={Style.form} onSubmit={(e) => formSubmitHandler(e)}>
+          <div className={Style.form} onSubmit={(e) => console.log(e)}>
             <div className={Style.header}>
               <div></div>
-              <h2>Confirm Action</h2>
+              <h2>{actionState?.title}</h2>
               <button
                 className={Style.close}
                 onClick={(e) => {
-                  DeclineAction();
+                  actionDecline();
                 }}
               ></button>
             </div>
             <div className={Style.message}>
-              <h3>{confirmAction.message}</h3>
+              <h3>{actionState?.message}</h3>
             </div>
             <div className={Style.buttons}>
               <Button
                 label={"Confirm"}
                 isSpecial={true}
-                callback={AcceptAction}
+                callback={actionAccept}
+                type={null}
               />
               <Button
                 label={"Decline"}
                 isSpecial={false}
-                callback={DeclineAction}
+                callback={actionDecline}
+                type={null}
               />
             </div>
           </div>

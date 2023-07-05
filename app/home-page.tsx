@@ -18,7 +18,7 @@ export default function Home({ appUser }: { appUser: UserNotifyContextType }) {
   const { setNotifyInvites, setNotifyOptions } =
     useContext(NotificationContext);
 
-  const { actionState, filterOpts, setFilterOpts } = useContext(PopoutContext);
+  const { setAction, filterOpts, setFilterOpts } = useContext(PopoutContext);
 
   NotificationUpdate(appUser, setNotifyInvites, setNotifyOptions);
 
@@ -41,7 +41,19 @@ export default function Home({ appUser }: { appUser: UserNotifyContextType }) {
           >
             Next.js 13 test
           </h1>
-          <p>Hello {user.name}</p>
+          <p
+            onClick={() => {
+              setAction({
+                title: "Confirm Action",
+                message: "Confirm action",
+                callback: () => {
+                  console.log("callback");
+                },
+              });
+            }}
+          >
+            Hello {user.name}
+          </p>
         </div>
         <div>
           <Link href="/api/auth/logout">Logout</Link>

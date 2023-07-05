@@ -3,25 +3,13 @@
 import { createContext, useEffect, useState } from "react";
 
 type PopoutContextType = {
-  actionState: boolean | null;
+  actionVisible: boolean | null;
+  actionState: ConfirmActionType | null;
   actionAccept: () => void;
   actionDecline: () => void;
   setAction: (action: ConfirmActionType) => void;
   filterOpts: PopoutBackgroundType;
   setFilterOpts: (opts: PopoutBackgroundType) => void;
-};
-
-const PopoutContextDefault = {
-  actionState: false,
-  actionAccept: () => {},
-  actionDecline: () => {},
-  setAction: () => {},
-  filterOpts: {
-    blockClick: false,
-    blur: false,
-    darken: false,
-  },
-  setFilterOpts: () => {},
 };
 
 type PopoutBackgroundType = {
@@ -31,7 +19,7 @@ type PopoutBackgroundType = {
 };
 
 type ConfirmActionType = {
-  visible: boolean | null;
+  // visible: boolean | null;
   title: string;
   message: string;
   callback: () => void;
@@ -61,9 +49,6 @@ type InputType = {
 //   title: string;
 // };
 
-export const PopoutContext =
-  createContext<PopoutContextType>(PopoutContextDefault);
-
 const confirmActionDefault = {
   visible: false,
   title: "Confirm Action",
@@ -77,41 +62,56 @@ const windowFilterDefault = {
   darken: false,
 };
 
+const PopoutContextDefault = {
+  actionVisible: false,
+  actionState: confirmActionDefault,
+  actionAccept: () => {},
+  actionDecline: () => {},
+  setAction: () => {},
+  filterOpts: windowFilterDefault,
+  setFilterOpts: () => {},
+};
+
+export const PopoutContext =
+  createContext<PopoutContextType>(PopoutContextDefault);
+
 function PopoutContextProvider({ children }: { children: React.ReactNode }) {
   const [actionState, setActionState] =
     useState<ConfirmActionType>(confirmActionDefault);
 
+  const [actionVisible, setActionVisible] = useState<boolean>(false);
+
   const [filterOpts, setFilterOpts] =
     useState<PopoutBackgroundType>(windowFilterDefault);
 
-  function hideAction() {
-    setActionState((prev) => {
-      return {
-        ...prev,
-        visible: false,
-      };
-    });
-  }
   function setAction(action: ConfirmActionType) {
-    if (action.visible != true) action.visible = true;
-
     setActionState(action);
+
+    setActionVisible(true);
+    setFilterOpts({
+      blockClick: true,
+      blur: true,
+      darken: true,
+    });
   }
 
   function actionAccept() {
     actionState.callback();
 
-    hideAction();
+    setActionVisible(false);
+    setFilterOpts(windowFilterDefault);
   }
 
   function actionDecline() {
-    hideAction();
+    setActionVisible(false);
+    setFilterOpts(windowFilterDefault);
   }
 
   return (
     <PopoutContext.Provider
       value={{
-        actionState: actionState.visible,
+        actionVisible,
+        actionState,
         actionAccept,
         actionDecline,
         setAction,

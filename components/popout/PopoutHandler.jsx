@@ -2,7 +2,7 @@
 // import ProfileMenu from "./ProfileMenu";
 // import NotificationsMenu from "./NotificationsMenu";
 // import PopupForm from "./PopupForm";
-// import ConfirmAction from "./ConfirmAction";
+import ConfirmAction from "./ConfirmAction";
 import WindowFilter from "./WindowFilter";
 
 export default function PopoutHandler() {
@@ -13,7 +13,7 @@ export default function PopoutHandler() {
       {/* <ProfileMenu state={profileMenu} /> */}
       {/* <NotificationsMenu /> */}
       {/* <PopupForm form={form} /> */}
-      {/* <ConfirmAction /> */}
+      <ConfirmAction />
     </>
   );
 }

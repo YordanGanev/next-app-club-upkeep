@@ -8,6 +8,7 @@
   z-index: var(--zIdxPopup);
 
   overflow: visible;
+
   pointer-events: none;
 }
 
