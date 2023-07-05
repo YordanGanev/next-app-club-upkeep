@@ -1,28 +1,20 @@
-"use client";
+import React from "react";
+import { prisma } from "@utils/db";
 
-import Link from "next/link";
-import styles from "./page.module.css";
-import { useUser } from "@auth0/nextjs-auth0/client";
+import { UserNotifyContextType } from "@contexts/NotificationContext";
 
-export default function Home() {
-  const { user, error, isLoading } = useUser();
+import Home from "./home-page";
+export default async function page() {
+  const appUser = await prisma.user.findUnique({
+    where: {
+      email: "yordanganew@gmail.com",
+    },
+    include: {
+      invite: true,
+    },
+  });
 
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>{error.message}</div>;
+  console.log(appUser);
 
-  if (user) {
-    return (
-      <div>
-        <div className={styles.description}>
-          <h1 className={styles.title}>Next.js 13 test</h1>
-          <p>Hello {user.name}</p>
-        </div>
-        <div>
-          <Link href="/api/auth/logout">Logout</Link>
-        </div>
-      </div>
-    );
-  }
-
-  return <a href="/api/auth/login">Login</a>;
+  return <Home appUser={appUser} />;
 }
