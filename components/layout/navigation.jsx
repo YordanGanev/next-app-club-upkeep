@@ -3,17 +3,28 @@
 import Link from "next/link";
 import Image from "next/image";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faBars,
+  faFlagCheckered,
+  faPeopleGroup,
+  faCalendar,
+  faBell,
+  faEllipsis,
+} from "@fortawesome/free-solid-svg-icons";
+
+import { faBell as farBell } from "@fortawesome/free-regular-svg-icons";
+
 import { useContext, useState } from "react";
-import { useRouter, usePathname } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useUser } from "@auth0/nextjs-auth0/client";
 
-import Connecting from "components/basic/connecting";
-import { NotificationContext } from "contexts/NotificationContext";
+import Connecting from "@components/basic/connecting";
+import { NotificationContext } from "@contexts/NotificationContext";
 
 import Style from "./styles/Navigation.module.css";
 
 export default function Navigation({ profileMenu }) {
-  const router = useRouter();
   const pathname = usePathname();
 
   const { user, error, isLoading } = useUser();
@@ -26,9 +37,9 @@ export default function Navigation({ profileMenu }) {
   const main = pathname.split("/")[1];
 
   const items = [
-    { slug: "clubs", icon: "fa-solid fa-flag-checkered" },
-    { slug: "teams", icon: "fa-solid fa-people-group" },
-    { slug: "schedule", icon: "fa-solid fa-calendar" },
+    { slug: "clubs", icon: faFlagCheckered },
+    { slug: "teams", icon: faPeopleGroup },
+    { slug: "schedule", icon: faCalendar },
   ];
 
   const handleNotification = () => {
@@ -61,11 +72,9 @@ export default function Navigation({ profileMenu }) {
                 setMobileView(!mobileMenuHide);
               }}
             >
-              <i
-                className={
-                  mobileMenuHide ? "fa-solid fa-bars" : "fa-solid fa-minus"
-                }
-              ></i>
+              <i>
+                <FontAwesomeIcon icon={faBars} />
+              </i>
             </div>
             <Link href="/home">
               <Image
@@ -92,7 +101,9 @@ export default function Navigation({ profileMenu }) {
                     className={Style.link}
                     href={"/" + item.slug}
                   >
-                    <i className={item.icon}></i>
+                    <i>
+                      <FontAwesomeIcon icon={item.icon} />
+                    </i>
                     <span>{item.slug}</span>
                   </Link>
                 </div>
@@ -102,14 +113,12 @@ export default function Navigation({ profileMenu }) {
           <div className={Style.user}>
             <div className={Style.notifications} add={addNotify ? "" : null}>
               <button onClick={handleNotification}>
-                <i
-                  className={`${
-                    addNotify === true ? "fa-solid" : "fa-regular"
-                  } fa-bell`}
-                >
-                  {notification?.new > 0 && (
-                    <div className={Style.newNotify}>{notification?.new}</div>
-                  )}
+                <i>
+                  <FontAwesomeIcon icon={addNotify === true ? faBell : farBell}>
+                    {notification?.new > 0 && (
+                      <div className={Style.newNotify}>{notification?.new}</div>
+                    )}
+                  </FontAwesomeIcon>
                 </i>
                 <span> Notifications </span>
               </button>
@@ -131,7 +140,9 @@ export default function Navigation({ profileMenu }) {
                 <span>
                   {user.name === user.email ? user.nickname : user.name}
                 </span>
-                <i className="fa-solid fa-ellipsis"></i>
+                <i>
+                  <FontAwesomeIcon icon={faEllipsis} />
+                </i>
               </button>
             )}
           </div>
