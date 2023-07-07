@@ -5,7 +5,6 @@ import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 
 import NotificationProvider from "@contexts/NotificationContext";
-import ConfirmActionProvider from "@contexts/ConfirmActionContext";
 import PopoutContextProvider from "@/contexts/PopoutContext";
 
 import Navigation from "@components/layout/navigation";
@@ -31,30 +30,19 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <Head>
-        {/* <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/solid.min.css" integrity="sha512-bdTSJB23zykBjGDvyuZUrLhHD0Rfre0jxTd0/jpTbV7sZL8DCth/88aHX0bq2RV8HK3zx5Qj6r2rRU/Otsjk+g==" crossorigin="anonymous" referrerpolicy="no-referrer" /> */}{" "}
-        <link
-          rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
-          integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
-          crossOrigin="anonymous"
-          referrerPolicy="no-referrer"
-        />
-      </Head>
       <UserProvider>
         <NotificationProvider>
           <PopoutContextProvider>
-            {/* <ConfirmActionProvider> */}
-            <body className={inter.className}>
+            {/* <body className={inter.className}> */}
+            <body>
               <div className={Style.wrapper}>
                 <div className={Style.data}>
-                  <Navigation profileMenu={null} />
+                  <Navigation />
                   <main className={Style.main}>{children}</main>
                 </div>
               </div>
               <PopoutHandler />
             </body>
-            {/* </ConfirmActionProvider> */}
           </PopoutContextProvider>
         </NotificationProvider>
       </UserProvider>

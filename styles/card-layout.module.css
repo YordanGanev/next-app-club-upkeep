@@ -1,0 +1,77 @@
+.wrapper {
+    max-width: var(--max-width);
+    margin: 1em auto;
+}
+
+.wrapperWizButton {
+    max-width: calc(var(--max-width) + var(--paddingWizButton));
+    margin: 1em auto;
+    padding-right: var(--paddingWizButton);
+}
+
+.container {
+    display: grid;
+    gap: 1em;
+    grid-template-columns: repeat( auto-fill, minmax(20rem, 1fr));
+    padding-right: 60px;
+}
+
+.card {
+    border-radius: 1em;
+    display: flex;
+}
+
+.card>a {
+    padding: 1em;
+    display: flex;
+    gap: .5rem;
+    align-items: center;
+}
+
+.card:hover {
+    background-color: #333;
+}
+
+.card div,
+.card p,
+.card h2 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.card img {
+    border-radius: 50%;
+}
+
+.card h2 {
+    padding-bottom: .5em;
+}
+
+
+/*---*/
+
+.stats {
+    display: flex;
+    gap: .5em;
+    justify-content: space-evenly;
+}
+
+.stats>div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: .25em;
+    margin-top: .5em;
+    margin-bottom: .5em;
+}
+
+.statsLabel {
+    font-weight: 700;
+    text-align: center;
+    filter: brightness(.5);
+}
+
+.icon > span {
+    padding-left: .5em;
+}

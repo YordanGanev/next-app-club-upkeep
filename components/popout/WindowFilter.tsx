@@ -12,7 +12,5 @@ export default function WindowFilter() {
   const blur = filterOpts?.blur ? Style.blur : null;
   const darken = filterOpts?.darken ? Style.darken : null;
 
-  // console.log(`${Style.wrapper} ${block} ${blur} ${darken}`);
-
   return <div className={`${Style.wrapper} ${block} ${blur} ${darken}`} />;
 }

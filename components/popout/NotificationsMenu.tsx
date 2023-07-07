@@ -1,15 +1,17 @@
+"use client";
+
 import { useUser } from "@auth0/nextjs-auth0/client";
-import { useOutsideClick } from "utils/hooks";
+import { useOutsideClick } from "@utils/hooks";
 
 import Image from "next/image";
 import Style from "./styles/Notifications.module.css";
 
-import Button from "components/basic/button";
-import { useRouter } from "next/router";
+import Button from "@components/basic/button";
+import { useRouter, usePathname } from "next/navigation";
 
 import { useContext } from "react";
 
-import { NotificationContext } from "contexts/NotificationContext";
+import { NotificationContext } from "@contexts/NotificationContext";
 
 export default function NotificationsMenu() {
   const { user, isLoading } = useUser();
@@ -17,7 +19,10 @@ export default function NotificationsMenu() {
   const { notification, setNotifyState, setNotifyOptions } =
     useContext(NotificationContext);
 
+  console.log("notification", notification);
+
   const router = useRouter();
+  const pathname = usePathname();
 
   const ref = useOutsideClick(() => {
     setNotifyState(false);
@@ -26,15 +31,18 @@ export default function NotificationsMenu() {
   if (!notification?.visible) return null;
   if (notification?.options?.length === 0) return null;
 
-  const removeRow = (remove) => {
+  const removeRow = (remove: string) => {
     if (notification.options?.length === 1) setNotifyState(false);
 
     setNotifyOptions(
-      notification.options?.filter((opt) => opt.team.name !== remove)
+      notification.options?.filter((opt: any) => opt.team.name !== remove)
     );
   };
 
-  const inviteHandler = async (accept, { userId, teamId }) => {
+  const inviteHandler = async (
+    accept: boolean,
+    { userId, teamId }: { userId: string; teamId: string }
+  ) => {
     await fetch("/api/invite/reply", {
       method: accept ? "POST" : "DELETE",
       headers: {
@@ -42,8 +50,8 @@ export default function NotificationsMenu() {
       },
       body: JSON.stringify({ userId, teamId }),
     }).then(() => {
-      if (accept && router.pathname === "/teams") {
-        router.replace(router.asPath);
+      if (accept && pathname === "/teams") {
+        router.replace(pathname);
       }
     });
   };
@@ -51,7 +59,7 @@ export default function NotificationsMenu() {
   // Display Empty div to keep component reference
   // This Fixes warnings for returning null if not visible
   return (
-    <div ref={ref}>
+    <div ref={ref as any}>
       {user && !isLoading && (
         <div className={Style.wrapper}>
           <div
@@ -62,7 +70,7 @@ export default function NotificationsMenu() {
             className={Style.notifications}
             onClick={(e) => e.stopPropagation()}
           >
-            {notification.options?.map((inv) => {
+            {notification.options?.map((inv: any) => {
               return (
                 <div className={Style.invite} key={inv.team.name}>
                   <div>
@@ -78,13 +86,16 @@ export default function NotificationsMenu() {
                     <p>{inv.type}</p>
                     <div className={Style.buttons}>
                       <Button
+                        type={null}
                         label="Decline"
+                        isSpecial={false}
                         callback={() => {
                           removeRow(inv.team.name);
                           inviteHandler(false, inv);
                         }}
                       />
                       <Button
+                        type={null}
                         label="Accept"
                         isSpecial={true}
                         callback={() => {

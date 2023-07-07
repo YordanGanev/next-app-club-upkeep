@@ -39,7 +39,7 @@
     flex: 1 1 auto;
 }
 
-.notifications[add]:hover>button,
+.notifications.add:hover>button,
 .profile:hover,
 .linkContainer:hover>.link {
     background-color: var(--themeSecondary);
@@ -108,7 +108,7 @@
     opacity: .5;
 }
 
-.notifications[add] {
+.notifications.add {
     cursor: pointer;
     opacity: 1;
 }
@@ -194,7 +194,7 @@
     }
 
     .wrapper.closed .main,
-    .wrapper[closed] .user {
+    .wrapper.closed .user {
         display: none;
     }
 

@@ -33,7 +33,7 @@ export default function Navigation() {
   const { notification, setNotifyState, setNotifyInvites } =
     useContext(NotificationContext);
 
-  const { profileMenuState, setProfileMenuState } = useContext(PopoutContext);
+  const { setProfileMenuState } = useContext(PopoutContext);
 
   const [mobileMenuHide, setMobileView] = useState(true);
 
@@ -50,23 +50,26 @@ export default function Navigation() {
 
     setNotifyState(true);
 
+    console.log("setNotifyState", true);
     if (!notification.new) return;
+
+    setNotifyInvites(0);
+    console.log("setNotifyInvites", 0);
 
     fetch(`/api/user/${notification.options[0].userId}/invite`, {
       method: "DELETE",
+      cache: "no-cache",
     }).then(() => setNotifyInvites(0));
   };
-
-  // const handleProfileMenu = () => {
-  //   profileMenu.set(!profileMenu.visible);
-  // };
 
   const addNotify = notification?.options?.length > 0;
   notification?.new;
 
   return (
     <>
-      <div className={`${Style.wrapper} ${mobileMenuHide ? "closed" : null}`}>
+      <div
+        className={`${Style.wrapper} ${mobileMenuHide ? Style.closed : null}`}
+      >
         <nav>
           <div className={Style.header}>
             <div
@@ -79,7 +82,7 @@ export default function Navigation() {
                 <FontAwesomeIcon icon={faBars} />
               </i>
             </div>
-            <Link href="/home">
+            <Link href="/">
               <Image
                 src="/icon.png"
                 alt="Club Upkeep Logo"
@@ -100,7 +103,7 @@ export default function Navigation() {
               return (
                 <div key={item.slug} className={Style.linkContainer}>
                   <Link
-                    className={`${Style.link} ${current ? "select" : null}`}
+                    className={`${Style.link} ${current ? Style.select : null}`}
                     href={"/" + item.slug}
                   >
                     <i>
@@ -114,7 +117,9 @@ export default function Navigation() {
           </div>
           <div className={Style.user}>
             <div
-              className={`${Style.notifications} ${addNotify ? "add" : null}`}
+              className={`${Style.notifications} ${
+                addNotify ? Style.add : null
+              }`}
             >
               <button onClick={handleNotification}>
                 <i>

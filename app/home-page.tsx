@@ -20,6 +20,7 @@ export default function Home({ appUser }: { appUser: UserNotifyContextType }) {
 
   const { setAction, filterOpts, setFilterOpts } = useContext(PopoutContext);
 
+  console.log("appUser", appUser);
   NotificationUpdate(appUser, setNotifyInvites, setNotifyOptions);
 
   if (isLoading) return <div>Loading...</div>;

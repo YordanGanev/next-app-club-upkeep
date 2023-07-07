@@ -8,10 +8,18 @@ type PopoutContextType = {
   actionAccept: () => void;
   actionDecline: () => void;
   setAction: (action: ConfirmActionType) => void;
+
   filterOpts: PopoutBackgroundType;
   setFilterOpts: (opts: PopoutBackgroundType) => void;
+
   profileMenuState: boolean;
   setProfileMenuState: (state: boolean) => void;
+
+  formState: FormType;
+  setFormState: (form: FormType) => void;
+  formVisible: boolean;
+  formShow: () => void;
+  formHide: () => void;
 };
 
 type PopoutBackgroundType = {
@@ -21,13 +29,12 @@ type PopoutBackgroundType = {
 };
 
 type ConfirmActionType = {
-  // visible: boolean | null;
   title: string;
   message: string;
   callback: () => void;
 };
 
-type InputType = {
+export type InputType = {
   type: string;
   name: string;
   value: any | null;
@@ -42,10 +49,18 @@ type InputType = {
   handleChange: ((e: any) => void) | null;
 };
 
-// type FormType = {
-//   visible: boolean;
-//   title: string;
-// };
+export type FormType = {
+  fetch: {
+    url: string;
+    method?: string;
+    cached?: boolean;
+    headers: {
+      "Content-Type": string;
+    };
+  };
+  title: string;
+  inputs: InputType[];
+};
 
 const confirmActionDefault = {
   visible: false,
@@ -60,6 +75,17 @@ const windowFilterDefault = {
   darken: false,
 };
 
+const formDefault = {
+  fetch: {
+    url: "",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  },
+  title: "",
+  inputs: [],
+};
+
 const PopoutContextDefault = {
   actionVisible: false,
   actionState: confirmActionDefault,
@@ -70,20 +96,33 @@ const PopoutContextDefault = {
   setFilterOpts: () => {},
   profileMenuState: false,
   setProfileMenuState: () => {},
+  formState: formDefault,
+  setFormState: () => {},
+  formVisible: false,
+  formShow: () => {},
+  formHide: () => {},
 };
 
 export const PopoutContext =
   createContext<PopoutContextType>(PopoutContextDefault);
 
 function PopoutContextProvider({ children }: { children: React.ReactNode }) {
+  // Confirm Action
   const [actionState, setActionState] =
     useState<ConfirmActionType>(confirmActionDefault);
 
   const [actionVisible, setActionVisible] = useState<boolean>(false);
 
+  // Filters
   const [filterOpts, setFilterOpts] =
     useState<PopoutBackgroundType>(windowFilterDefault);
 
+  // Form
+  const [formState, setFormState] = useState<FormType>(formDefault);
+
+  const [formVisible, setFormVisible] = useState<boolean>(false);
+
+  // Profile
   const [profileMenuState, setProfileMenuState] = useState<boolean>(false);
 
   function setAction(action: ConfirmActionType) {
@@ -109,6 +148,20 @@ function PopoutContextProvider({ children }: { children: React.ReactNode }) {
     setFilterOpts(windowFilterDefault);
   }
 
+  function formShow() {
+    setFormVisible(true);
+    setFilterOpts({
+      blockClick: true,
+      blur: false,
+      darken: true,
+    });
+  }
+
+  function formHide() {
+    setFormVisible(false);
+    setFilterOpts(windowFilterDefault);
+  }
+
   return (
     <PopoutContext.Provider
       value={{
@@ -121,6 +174,11 @@ function PopoutContextProvider({ children }: { children: React.ReactNode }) {
         setFilterOpts,
         profileMenuState,
         setProfileMenuState,
+        formState,
+        setFormState,
+        formVisible,
+        formShow,
+        formHide,
       }}
     >
       {children}
