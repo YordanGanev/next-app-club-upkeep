@@ -38,13 +38,11 @@ export default function ConfirmAction() {
                 label={"Confirm"}
                 isSpecial={true}
                 callback={actionAccept}
-                type={null}
               />
               <Button
                 label={"Decline"}
                 isSpecial={false}
                 callback={actionDecline}
-                type={null}
               />
             </div>
           </div>

@@ -95,3 +95,7 @@ export const sportTypeOptions = [
     { value: SportType.RUGBY, label: "Rugby" },
     { value: SportType.OTHER, label: "Other" },
 ];
+
+
+export const getPlaceholderImage = (signature) =>
+    `https://i0.wp.com/cdn.auth0.com/avatars/${signature}.png?ssl=1`;

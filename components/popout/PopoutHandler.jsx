@@ -1,7 +1,7 @@
 // "use client";
 import ProfileMenu from "./ProfileMenu";
 import NotificationsMenu from "./NotificationsMenu";
-// import PopupForm from "./PopupForm";
+import PopupForm from "./PopupForm";
 import ConfirmAction from "./ConfirmAction";
 import WindowFilter from "./WindowFilter";
 
@@ -12,7 +12,7 @@ export default function PopoutHandler() {
       <WindowFilter />
       <ProfileMenu />
       <NotificationsMenu />
-      {/* <PopupForm form={form} /> */}
+      <PopupForm />
       <ConfirmAction />
     </>
   );

@@ -19,8 +19,11 @@ import CardStyle from "@styles/card-layout.module.css";
 export default async function page() {
   const session = await getSession();
 
+  // console.warn(session);
+  if (!session) return <h1>Not Found</h1>;
+
   const appUser = await prisma.user.findUnique({
-    where: { email: session?.user.email },
+    where: { email: session?.user.email as string },
     include: {
       club: {
         include: {
@@ -44,8 +47,6 @@ export default async function page() {
     month: "numeric",
     day: "numeric",
   };
-
-  console.log(appUser);
 
   if (!appUser) return <h1>Not Found</h1>;
 

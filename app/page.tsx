@@ -6,10 +6,12 @@ import { UserNotifyContextType } from "@contexts/NotificationContext";
 import { getSession } from "@auth0/nextjs-auth0";
 
 import Home from "./home-page";
+import { redirect } from "next/navigation";
 export default async function page() {
   const session = await getSession();
 
-  console.log(session);
+  console.warn("session", session);
+  if (!session) redirect("/api/auth/login");
 
   const appUser = await prisma.user.findUnique({
     where: {
@@ -24,7 +26,7 @@ export default async function page() {
     },
   });
 
-  console.log(appUser);
+  // console.log(appUser);
 
   return <Home appUser={appUser} />;
 }

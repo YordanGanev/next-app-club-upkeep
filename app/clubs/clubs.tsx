@@ -18,7 +18,7 @@ export default function ClubsClient({ appUser }: { appUser: any }) {
 
   NotificationUpdate(appUser, setNotifyInvites, setNotifyOptions);
 
-  let form = {
+  const form = {
     fetch: {
       url: "/api/club",
       method: "POST",
@@ -37,5 +37,5 @@ export default function ClubsClient({ appUser }: { appUser: any }) {
     ],
   };
 
-  return <WizzardButton extra={null} state={null} />;
+  return <WizzardButton form={form} extra={null} />;
 }

@@ -14,7 +14,6 @@ import "./globals.css";
 import { Inter } from "next/font/google";
 
 import Style from "./responsiveLayout.module.css";
-import Head from "next/head";
 
 const inter = Inter({ subsets: ["latin"] });
 

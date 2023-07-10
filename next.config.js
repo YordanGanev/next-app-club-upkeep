@@ -5,11 +5,9 @@ const nextConfig = {
             ssr: true,
         },
     },
-};
-
-module.exports = nextConfig;
-
-module.exports = {
+    experimental: {
+        serverActions: true,
+    },
     images: {
         remotePatterns: [{
                 protocol: "https",
@@ -31,4 +29,6 @@ module.exports = {
             },
         ],
     },
-}
+};
+
+module.exports = nextConfig;

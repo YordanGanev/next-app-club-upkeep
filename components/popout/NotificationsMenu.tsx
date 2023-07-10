@@ -19,8 +19,6 @@ export default function NotificationsMenu() {
   const { notification, setNotifyState, setNotifyOptions } =
     useContext(NotificationContext);
 
-  console.log("notification", notification);
-
   const router = useRouter();
   const pathname = usePathname();
 
@@ -86,7 +84,6 @@ export default function NotificationsMenu() {
                     <p>{inv.type}</p>
                     <div className={Style.buttons}>
                       <Button
-                        type={null}
                         label="Decline"
                         isSpecial={false}
                         callback={() => {
@@ -95,7 +92,6 @@ export default function NotificationsMenu() {
                         }}
                       />
                       <Button
-                        type={null}
                         label="Accept"
                         isSpecial={true}
                         callback={() => {

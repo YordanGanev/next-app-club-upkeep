@@ -54,8 +54,9 @@ export const useForm = (initObj) => {
             setState({});
             return;
         }
-
+        
         e.persist();
+
         //console.log(e.target.value);
         setState((state) => ({...state, [e.target.name]: e.target.value }));
         console.log(state);

@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState } from "react";
 
 type PopoutContextType = {
   actionVisible: boolean | null;
@@ -37,16 +37,16 @@ type ConfirmActionType = {
 export type InputType = {
   type: string;
   name: string;
-  value: any | null;
-  key: string | null;
-  label: string | null;
-  placeholder: string | null;
-  onChange: ((e: any) => void) | null;
-  required: boolean | null;
-  disabled: boolean | null;
-  format: string | null;
-  options: any[] | null;
-  handleChange: ((e: any) => void) | null;
+  value?: any | null;
+  key?: string | null;
+  label?: string | null;
+  placeholder?: string | null;
+  onChange?: ((e: any) => void) | null;
+  required?: boolean | null;
+  disabled?: boolean | null;
+  format?: string | null;
+  options?: any[] | null;
+  handleChange?: ((e: any) => void) | null;
 };
 
 export type FormType = {
@@ -57,8 +57,10 @@ export type FormType = {
     headers: {
       "Content-Type": string;
     };
+    master_data?: any;
   };
-  title: string;
+  title?: string;
+  submitLabel?: string;
   inputs: InputType[];
 };
 
@@ -118,7 +120,7 @@ function PopoutContextProvider({ children }: { children: React.ReactNode }) {
     useState<PopoutBackgroundType>(windowFilterDefault);
 
   // Form
-  const [formState, setFormState] = useState<FormType>(formDefault);
+  const [formState, _setFormState] = useState<FormType>(formDefault);
 
   const [formVisible, setFormVisible] = useState<boolean>(false);
 
@@ -150,16 +152,15 @@ function PopoutContextProvider({ children }: { children: React.ReactNode }) {
 
   function formShow() {
     setFormVisible(true);
-    setFilterOpts({
-      blockClick: true,
-      blur: false,
-      darken: true,
-    });
   }
 
   function formHide() {
     setFormVisible(false);
-    setFilterOpts(windowFilterDefault);
+  }
+
+  function setFormState(form: FormType) {
+    _setFormState(form);
+    formShow();
   }
 
   return (
