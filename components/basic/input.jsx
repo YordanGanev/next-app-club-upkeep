@@ -15,7 +15,6 @@ function Input({ inputProps, handleChange }) {
     case "asyncSelect":
       return (
         <Async
-          key={`async-${inputProps?.name}`}
           required={inputProps?.required}
           placeholder={inputProps?.placeholder}
           loadOptions={inputProps?.loadOptions}
@@ -37,7 +36,7 @@ function Input({ inputProps, handleChange }) {
     case "Select":
       return (
         <Select
-          key={`async-${inputProps?.name}`}
+          name={inputProps?.name}
           required={inputProps?.required}
           placeholder={inputProps?.placeholder}
           onChange={(option) => {
@@ -76,13 +75,7 @@ function Input({ inputProps, handleChange }) {
     //     />
     //   );
     default:
-      return (
-        <input
-          {...inputProps}
-          key={`select-${inputProps?.key}`}
-          onChange={handleChange}
-        />
-      );
+      return <input {...inputProps} onChange={handleChange} />;
   }
 }
 
