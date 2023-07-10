@@ -40,11 +40,10 @@ export default function PopupForm() {
         <div className={`${Style.wrapper} form`}>
           <form
             className={Style.form}
-            // onSubmit={(e: any) => formSubmitHandler(e)}
             action={(data: FormData) => {
               addClub(data);
               formHide();
-              handleChange(null);
+              handleChange(null); // reset input values
             }}
           >
             <div className={Style.header}>

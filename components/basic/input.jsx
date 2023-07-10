@@ -1,50 +1,53 @@
-// import Async, { useAsync } from "react-select/async";
+"use client";
+import Async, { useAsync } from "react-select/async";
 
-// import Select from "react-select";
+import Select from "react-select";
+
+import "@styles/multiselect.css";
+
 // import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 // import { TimeField } from "@mui/x-date-pickers/TimeField";
 
 // const selectStyles = {};
-"use client";
 
 function Input({ inputProps, handleChange }) {
   switch (inputProps?.type) {
-    // case "asyncSelect":
-    //   return (
-    //     <Async
-    //       key={`async-${inputProps?.name}`}
-    //       required={inputProps?.required}
-    //       placeholder={inputProps?.placeholder}
-    //       loadOptions={inputProps?.loadOptions}
-    //       isMulti={true}
-    //       onChange={(ValueType) => {
-    //         // console.error(ValueType);
+    case "asyncSelect":
+      return (
+        <Async
+          key={`async-${inputProps?.name}`}
+          required={inputProps?.required}
+          placeholder={inputProps?.placeholder}
+          loadOptions={inputProps?.loadOptions}
+          isMulti={true}
+          onChange={(ValueType) => {
+            // console.error(ValueType);
 
-    //         let selectedValues = ValueType.map((opt) => opt.value);
+            let selectedValues = ValueType.map((opt) => opt.value);
 
-    //         handleChange(null, {
-    //           name: inputProps?.name,
-    //           value: selectedValues,
-    //         });
-    //       }}
-    //       className="multi-select-container"
-    //       classNamePrefix="multi-select"
-    //     />
-    //   );
-    // case "Select":
-    //   return (
-    //     <Select
-    //       key={`async-${inputProps?.name}`}
-    //       required={inputProps?.required}
-    //       placeholder={inputProps?.placeholder}
-    //       onChange={(option) => {
-    //         handleChange(null, { name: inputProps?.name, value: option.value });
-    //       }}
-    //       options={inputProps?.options}
-    //       className="multi-select-container"
-    //       classNamePrefix="multi-select"
-    //     ></Select>
-    //   );
+            handleChange(null, {
+              name: inputProps?.name,
+              value: selectedValues,
+            });
+          }}
+          className="multi-select-container"
+          classNamePrefix="multi-select"
+        />
+      );
+    case "Select":
+      return (
+        <Select
+          key={`async-${inputProps?.name}`}
+          required={inputProps?.required}
+          placeholder={inputProps?.placeholder}
+          onChange={(option) => {
+            handleChange(null, { name: inputProps?.name, value: option.value });
+          }}
+          options={inputProps?.options}
+          className="multi-select-container"
+          classNamePrefix="multi-select"
+        ></Select>
+      );
     // case "Date":
     //   return (
     //     <DatePicker

@@ -1,9 +1,9 @@
 import React from "react";
 
 import { getSession } from "@auth0/nextjs-auth0";
+import { redirect } from "next/navigation";
 
 import { prisma } from "@utils/db";
-import { UserNotifyContextType } from "@contexts/NotificationContext";
 
 // Components
 import Image from "next/image";
@@ -15,6 +15,11 @@ import { faPeopleGroup } from "@fortawesome/free-solid-svg-icons";
 // Style
 import Style from "./clubs.module.css";
 import CardStyle from "@styles/card-layout.module.css";
+
+export const metadata = {
+  title: "Clubs",
+  description: "Manage your clubs",
+};
 
 export default async function page() {
   const session = await getSession();
@@ -48,7 +53,7 @@ export default async function page() {
     day: "numeric",
   };
 
-  if (!appUser) return <h1>Not Found</h1>;
+  if (!appUser) return redirect("explore/about");
 
   return (
     <>

@@ -1,0 +1,36 @@
+/* Style for multi-select */
+
+.multi-select-container {
+    border: none;
+    margin: .5rem;
+}
+
+.multi-select__control {
+    background-color: var(--themePrimary) !important;
+}
+
+.multi-select__menu {
+    color: var(--white) !important;
+    background-color: var(--themePrimary) !important;
+}
+
+.multi-select__input {
+    color: var(--white) !important;
+}
+
+.multi-select__single-value {
+    color: var(--white) !important;
+}
+
+.multi-select__multi-value__remove {
+    background-color: var(--neutralTertiary);
+}
+
+.multi-select__multi-value__remove>svg>path {
+    color: var(--themePrimary);
+}
+
+.multi-select__option--is-focused {
+    filter: brightness(1.2) !important;
+    background-color: var(--themeLight) !important;
+}
