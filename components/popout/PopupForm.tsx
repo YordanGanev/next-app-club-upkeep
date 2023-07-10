@@ -11,8 +11,6 @@ import Style from "./styles/PopupForm.module.css";
 
 import { usePathname } from "next/navigation";
 
-import { addClub } from "@utils/actions";
-
 export default function PopupForm() {
   const { formState, formVisible, formHide } = useContext(PopoutContext);
 
@@ -41,7 +39,9 @@ export default function PopupForm() {
           <form
             className={Style.form}
             action={(data: FormData) => {
-              addClub(data);
+              if (formState.onSubmitAction)
+                formState.onSubmitAction(data, formState.fetch.master_data);
+
               formHide();
               handleChange(null); // reset input values
             }}

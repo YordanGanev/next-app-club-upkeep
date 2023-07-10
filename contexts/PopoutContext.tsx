@@ -34,6 +34,8 @@ type ConfirmActionType = {
   callback: () => void;
 };
 
+type FormOnSubmitAction = (data: FormData, master_data: {} | undefined) => void;
+
 export type InputType = {
   type: string;
   name: string;
@@ -62,6 +64,7 @@ export type FormType = {
   title?: string;
   submitLabel?: string;
   inputs: InputType[];
+  onSubmitAction?: FormOnSubmitAction;
 };
 
 const confirmActionDefault = {

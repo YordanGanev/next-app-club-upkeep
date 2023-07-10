@@ -7,6 +7,8 @@ import { Club, Team } from "@prisma/client";
 
 import WizzardButton from "@components/basic/wizButton";
 
+import { addClub } from "@utils/actions";
+
 import {
   NotificationContext,
   NotificationUpdate,
@@ -35,6 +37,7 @@ export default function ClubsClient({ appUser }: { appUser: any }) {
         placeholder: "Club Name",
       },
     ],
+    onSubmitAction: addClub,
   };
 
   return <WizzardButton form={form} extra={null} />;

@@ -2,6 +2,7 @@
 
 import { useContext } from "react";
 import { SportType } from "@prisma/client";
+import { addTeam } from "@/utils/actions";
 
 import {
   NotificationContext,
@@ -54,6 +55,7 @@ function ClubTeams({ appUser, clubId }: { appUser: any; clubId: string }) {
         options: sportTypeOptions,
       },
     ],
+    onSubmitAction: addTeam,
   };
 
   return <WizzardButton form={form} extra={null} />;
