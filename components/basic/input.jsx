@@ -19,9 +19,8 @@ function Input({ inputProps, handleChange }) {
           placeholder={inputProps?.placeholder}
           loadOptions={inputProps?.loadOptions}
           isMulti={true}
+          name={inputProps?.name}
           onChange={(ValueType) => {
-            // console.error(ValueType);
-
             let selectedValues = ValueType.map((opt) => opt.value);
 
             handleChange(null, {

@@ -1,44 +1,13 @@
+"use client";
 // pages/index.js
 import { useUser } from "@auth0/nextjs-auth0/client";
-
-import { useRouter } from "next/router";
 
 import AppHeader from "./styles/AppHeader.module.css";
 import Link from "next/link";
 import Image from "next/image";
 
-export default function HeadBar({ profileMenu, notification }) {
+export default function HeadBar() {
   const { user, error, isLoading } = useUser();
-  let { notify } = notification || {};
-  const router = useRouter();
-
-  function handleProfileMenuCb(e) {
-    e.preventDefault();
-
-    if (!profileMenu?.set) return;
-
-    if (profileMenu?.visible) return;
-
-    profileMenu.set(true);
-  }
-
-  function handleNotificationCb(e) {
-    e.preventDefault();
-
-    if (!notification.set) return;
-
-    if (notification.visible) return;
-
-    notification.set(true);
-
-    if (!notification.new) return;
-
-    fetch(`/api/user/${notification.options[0].userId}/invite`, {
-      method: "DELETE",
-    }).then(notification.setInvites(0));
-  }
-
-  if (notify && notification?.options?.length === 0) notify = false;
 
   if (isLoading) {
     return (

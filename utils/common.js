@@ -5,17 +5,22 @@ export const ManageClubTabs = [
     { slug: "about", title: "About" },
 ]
 
-export const ManageTeamTabs = [
+export const PlayerManageTeamTabs = [
     { slug: "players", title: "Players" },
     { slug: "medical", title: "Medicals" },
     { slug: "events", title: "Events" },
     { slug: "about", title: "About" },
 ];
 
-export const StaffTeamTab = {
+export const StaffManageTeamTabs = [    { slug: "players", title: "Players" },
+{ slug: "medical", title: "Medicals" },
+{ slug: "events", title: "Events" },
+{ slug: "about", title: "About" },
+{
     slug: "staff",
     title: "Staff",
-}
+},
+];
 
 export const UserAccess = {
     owner: "owner",

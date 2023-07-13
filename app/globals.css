@@ -59,7 +59,7 @@
   --navHeight: calc(100vh - var(--headerHeight) - calc(10px + 1rem));
   --navHeight: calc(100dvh - var(--headerHeight) - calc(10px + 1rem));
   /*=== Layout sizes ===*/
-  --paddingWizButton: 40px;
+  --paddingWizButton: 50px;
   /*=== Media queries ===*/
   --mqMobile: 600px;
   --mqTablet: 900px;
@@ -103,16 +103,16 @@ button {
 
 /* Buttons  */
 
-.global-button[border="remove"] {
+.global-button.border-remove {
   border: 2px solid var(--errorColor);
 }
 
-.global-button[border="disabled"] {
+.global-button.border-disabled {
   border: 2px solid var(--neutralPrimaryAlt);
   color: var(--neutralPrimaryAlt);
 }
 
-.global-button[border="normal"] {
+.global-button.border-normal {
   border: 2px solid var(--extraLighterAlt);
 }
 

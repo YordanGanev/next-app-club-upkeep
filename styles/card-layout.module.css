@@ -1,19 +1,17 @@
 .wrapper {
     max-width: var(--max-width);
-    margin: 1em auto;
+    margin: 0 auto;
 }
 
 .wrapperWizButton {
-    max-width: calc(var(--max-width) + var(--paddingWizButton));
-    margin: 1em auto;
     padding-right: var(--paddingWizButton);
 }
 
 .container {
+    padding: .5em;
     display: grid;
     gap: 1em;
     grid-template-columns: repeat( auto-fill, minmax(20rem, 1fr));
-    padding-right: 60px;
 }
 
 .card {
@@ -22,7 +20,7 @@
 }
 
 .card>a {
-    padding: 1em;
+    padding: .75em;
     display: flex;
     gap: .5rem;
     align-items: center;

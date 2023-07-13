@@ -25,7 +25,7 @@ export default async function page() {
   const session = await getSession();
 
   // console.warn(session);
-  if (!session) return <h1>Not Found</h1>;
+  if (!session) redirect("/about");
 
   const appUser = await prisma.user.findUnique({
     where: { email: session?.user.email as string },
@@ -53,11 +53,11 @@ export default async function page() {
     day: "numeric",
   };
 
-  if (!appUser) return redirect("explore/about");
+  if (!appUser) redirect("/about");
 
   return (
     <>
-      <div className={CardStyle.wrapperWizButton}>
+      <div className={`${CardStyle.wrapperWizButton} ${CardStyle.wrapper}`}>
         {appUser?.club.length === 0 && (
           <div className={Style.info}>
             <h2>No Clubs</h2>

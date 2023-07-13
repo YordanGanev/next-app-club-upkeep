@@ -11,7 +11,7 @@ export default async function page() {
   const session = await getSession();
 
   console.warn("session", session);
-  if (!session) redirect("/api/auth/login");
+  if (!session) redirect("/about");
 
   const appUser = await prisma.user.findUnique({
     where: {

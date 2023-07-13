@@ -18,6 +18,7 @@ import ClubTeams from "./club-teams";
 
 import Style from "../../clubs.module.css";
 import CardStyle from "@styles/card-layout.module.css";
+import { redirect } from "next/navigation";
 
 export const metadata = {
   title: "Teams | Club",
@@ -30,7 +31,7 @@ export default async function ManageClubPage({
   params: { id: string };
 }) {
   const session = await getSession();
-  if (!session) return <h1>Not Found</h1>;
+  if (!session) redirect("/about");
 
   const appUser = await prisma.user.findUnique({
     where: { email: session?.user.email as string },
@@ -43,7 +44,7 @@ export default async function ManageClubPage({
     },
   });
 
-  if (!appUser) return <h1>Not Found</h1>;
+  if (!appUser) redirect("/about");
 
   const club = await prisma.club.findUnique({
     where: { id: params.id },
@@ -61,7 +62,7 @@ export default async function ManageClubPage({
     },
   });
 
-  if (!club) return <h1>Not Found</h1>;
+  if (!club) redirect("/about");
 
   if (club.ownerId != appUser.id) return <h1>Invalid data</h1>;
 
@@ -145,40 +146,3 @@ export default async function ManageClubPage({
     </>
   );
 }
-
-// export const getServerSideProps = withPageAuthRequired({
-//   // returnTo: '/unauthorized',
-
-//     // console.log("clubId", clubId);
-
-//     // access the user session if needed
-//     const session = await getSession(ctx.req, ctx.res);
-
-//     let appUser = await prisma.user.findUnique(
-//       AppUserQuerySSR(session.user.email)
-//     );
-
-//     let club = await prisma.club.findUnique({
-//       where: { id: clubId },
-//       include: {
-//         teams: {
-//           include: {
-//             _count: { select: { staff: true, player: true } },
-//           },
-//         },
-//       },
-//     });
-//     // if ( appUser.birthdate ) // Fixes the date input w/ format "YYYY-MM-DD"
-//     //   appUser.birthdate = appUser.birthdate.toISOString().substring(0, 10);
-//     return {
-//       props: {
-//         club,
-//         appUser: {
-//           name: appUser.name,
-//           picture: appUser.picture,
-//           invite: appUser.invite,
-//         },
-//       },
-//     };
-//   },
-// });

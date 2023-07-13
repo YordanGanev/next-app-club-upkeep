@@ -1,0 +1,130 @@
+.wrapper {
+    display: grid;
+    grid-template-columns: 50px 1fr;
+    /* gap: .75rem; */
+    gap: 1rem;
+}
+
+.wrapper>img {
+    border-radius: 50%;
+}
+
+.main {
+    display: grid;
+    grid-template-columns: 1fr fit-content(10ch);
+    height: 50px;
+}
+
+.main > div {
+    overflow: hidden;
+}
+
+.main>div>p {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.main>div>p:first-of-type {
+    font-weight: bold;
+}
+
+.main>div>p:last-of-type {
+    opacity: .8;
+}
+
+.invite img, 
+.invite p {
+    filter: brightness(.5);
+}
+
+/*
+------------------------------------------
+*/ 
+.content {}
+
+.content .note {
+    font-weight: bold;
+    opacity: .8;
+}
+
+.warn {
+    display: inline-block;
+    padding: 0 .25em;
+}
+.warn svg path {
+    color: var(--warningColor);
+}
+
+.date {
+    /* display: grid; */
+    /* grid-template-columns: fit-content(9ch) 1fr; */
+    /* gap: .5rem; */
+    padding-bottom: .5rem;
+}
+
+.deleteMedical i {
+    color: var(--neutralPrimaryAlt);
+}
+
+.deleteMedical {
+    width: 3ch;
+    /* color: var(--errorColor); */
+}
+
+.stats>div>i {
+    font-size: large;
+    color: var(--extraWhite);
+}
+
+.stats>div {
+    display: grid;
+    grid-template-columns: 3ch 1fr 1fr;
+    padding: .2rem;
+    align-items: center;
+}
+
+.content input[type="checkbox"],
+.extendRecords {
+    display: none;
+}
+
+.content input:checked + .extendRecords {
+    display: block;
+    padding-top: .75rem;
+}
+
+.extendTitle {
+    padding: .25rem;
+    border: 1px solid var(--neutralPrimaryAlt);
+    border-radius: .5rem;
+    font-weight: bold;
+    font-size: small;
+    color: var(--neutralPrimaryAlt);
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.light {
+    opacity: .8;
+}
+
+/*
+------------------------------------------
+*/
+.medicalDate {
+    font-weight: bold;
+    padding: .5rem 0;
+    width: 100%;
+    border-bottom: 1px solid var(--neutralPrimaryAlt);
+}
+
+.medicalStats {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: .5rem;
+    padding: .5rem 1rem .5rem 0;
+}

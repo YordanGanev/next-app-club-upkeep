@@ -9,19 +9,13 @@ type TabType = {
   title: string;
 };
 
-export default function TabNav({
-  tabs,
-  callback,
-}: {
-  tabs: TabType[];
-  callback?: void;
-}) {
+export default function TabNav({ tabs }: { tabs: TabType[] }) {
   const pathname = usePathname();
 
   const basePath = pathname.slice(0, pathname.lastIndexOf("/") + 1);
   const currentTab = pathname.slice(pathname.lastIndexOf("/") + 1);
 
-  console.warn(basePath, currentTab);
+  // console.warn(basePath, currentTab);
   return (
     <div className={Style.wrapper}>
       <div className={Style.tabs}>
@@ -30,11 +24,6 @@ export default function TabNav({
             <Link
               className={currentTab === tab.slug ? Style.active : ""}
               key={tab.slug}
-              //   href={`/clubs/${uid}/${tab.slug}`}
-              // href={router.asPath.replace(
-              //   /\/[a-zA-Z0-9?=&]+$/g,
-              //   `/${tab.slug}`
-              // )}
               href={basePath + tab.slug}
             >
               {tab.title}
