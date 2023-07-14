@@ -1,19 +1,9 @@
 import React from "react";
 
 import { UserProvider } from "@auth0/nextjs-auth0/client";
-import { LocalizationProvider } from "@mui/x-date-pickers";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-
-import NotificationProvider from "@contexts/NotificationContext";
-import PopoutContextProvider from "@/contexts/PopoutContext";
-
-import Navigation from "@components/layout/navigation";
-import PopoutHandler from "@components/popout/PopoutHandler";
 
 import "./globals.css";
 import { Inter } from "next/font/google";
-
-import Style from "./responsiveLayout.module.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -30,20 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <UserProvider>
-        <NotificationProvider>
-          <PopoutContextProvider>
-            {/* <body className={inter.className}> */}
-            <body>
-              <div className={Style.wrapper}>
-                <div className={Style.data}>
-                  <Navigation />
-                  <main className={Style.main}>{children}</main>
-                </div>
-              </div>
-              <PopoutHandler />
-            </body>
-          </PopoutContextProvider>
-        </NotificationProvider>
+        <body>{children}</body>
       </UserProvider>
     </html>
   );

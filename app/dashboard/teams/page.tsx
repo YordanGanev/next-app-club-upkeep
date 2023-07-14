@@ -1,40 +1,29 @@
+import React from "react";
+
 import { getSession } from "@auth0/nextjs-auth0";
+import { redirect } from "next/navigation";
 
 import { prisma } from "@utils/db";
-import { getPlaceholderImage } from "@utils/common";
 
 import Image from "next/image";
 import Link from "next/link";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faUser,
-  faUserTie,
-  faUsersSlash,
-} from "@fortawesome/free-solid-svg-icons";
+import { faUser, faUserTie } from "@fortawesome/free-solid-svg-icons";
 
-import TabNav from "@components/layout/tabNav";
-import ClubTeams from "./club-teams";
+import TeamsClient from "./teams-client";
 
-import Style from "../../clubs.module.css";
+import Style from "./teams.module.css";
 import CardStyle from "@styles/card-layout.module.css";
-import { redirect } from "next/navigation";
 
-export const metadata = {
-  title: "Teams | Club",
-  description: "Manage your club's teams",
-};
-
-export default async function ManageClubPage({
-  params,
-}: {
-  params: { id: string };
-}) {
+export default async function page() {
   const session = await getSession();
+
   if (!session) redirect("/about");
 
   const appUser = await prisma.user.findUnique({
-    where: { email: session?.user.email as string },
+    where: {
+      email: session.user.email as string,
+    },
     include: {
       invite: {
         include: {
@@ -46,25 +35,39 @@ export default async function ManageClubPage({
 
   if (!appUser) redirect("/about");
 
-  const club = await prisma.club.findUnique({
-    where: { id: params.id },
-    include: {
-      teams: {
-        include: {
-          _count: {
-            select: {
-              staff: true,
-              player: true,
+  const teams = await prisma.team.findMany({
+    where: {
+      OR: [
+        {
+          club: {
+            ownerId: appUser.id,
+          },
+        },
+        {
+          player: {
+            some: {
+              userId: appUser.id,
             },
           },
+        },
+        {
+          staff: {
+            some: {
+              id: appUser.id,
+            },
+          },
+        },
+      ],
+    },
+    include: {
+      _count: {
+        select: {
+          player: true,
+          staff: true,
         },
       },
     },
   });
-
-  if (!club) redirect("/about");
-
-  if (club.ownerId != appUser.id) return <h1>Invalid data</h1>;
 
   const options: Intl.DateTimeFormatOptions = {
     year: "numeric",
@@ -72,39 +75,38 @@ export default async function ManageClubPage({
     day: "numeric",
   };
 
-  // Setup tabs to be displayed
-  const ManageClubTabs = [
-    { slug: "teams", title: "Teams" },
-    { slug: "about", title: "About" },
-  ];
-
   return (
     <>
-      <TabNav tabs={ManageClubTabs} />
-      <div className={CardStyle.wrapperWizButton}>
-        {club?.teams?.length == 0 && (
-          <div className={Style.empty}>
-            <div>
-              <FontAwesomeIcon icon={faUsersSlash} />
-            </div>
-            <div>No teams yet</div>
+      <div className={CardStyle.wrapper}>
+        {teams.length === 0 && (
+          <div className={Style.info}>
+            <h2>No Teams</h2>
+            <p>
+              You are not part of any teams. You can create a team or join an
+              existing one.
+            </p>
+            <p>
+              Check your notifications for invites or create a new team in club
+              you own.
+            </p>
           </div>
         )}
         <div className={CardStyle.container}>
-          {club?.teams?.map((team) => {
+          {teams.map((team) => {
+            console.log(team);
             return (
               <div className={CardStyle.card} key={team.id}>
-                <Link href={`/teams/${team.id}`}>
+                <Link href={`dashboard/teams/${team.id}`}>
                   <Image
-                    src={getPlaceholderImage(
-                      team.name.slice(0, 2).toLowerCase()
-                    )}
+                    src={team.picture}
                     alt="defaultclubpng"
                     width="100"
                     height="100"
                   />
+
                   <div>
                     <h2>{team.name}</h2>
+
                     <div>
                       <span className={CardStyle.statsLabel}> Created </span>
                       {new Date(team.createdAt).toLocaleDateString(
@@ -142,7 +144,7 @@ export default async function ManageClubPage({
           })}
         </div>
       </div>
-      <ClubTeams appUser={appUser} clubId={club.id} />
+      <TeamsClient appUser={appUser} />
     </>
   );
 }

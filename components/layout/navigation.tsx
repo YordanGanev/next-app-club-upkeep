@@ -37,7 +37,7 @@ export default function Navigation() {
 
   const [mobileMenuHide, setMobileView] = useState(true);
 
-  const main = pathname.split("/")[1];
+  const main = pathname.split("/")[2];
 
   const items = [
     { slug: "clubs", icon: faFlagCheckered },
@@ -82,7 +82,7 @@ export default function Navigation() {
                 <FontAwesomeIcon icon={faBars} />
               </i>
             </div>
-            <Link href="/">
+            <Link href="/dashboard">
               <Image
                 src="/icon.png"
                 alt="Club Upkeep Logo"
@@ -104,7 +104,7 @@ export default function Navigation() {
                 <div key={item.slug} className={Style.linkContainer}>
                   <Link
                     className={`${Style.link} ${current ? Style.select : null}`}
-                    href={"/" + item.slug}
+                    href={`/dashboard/${item.slug}`}
                   >
                     <i>
                       <FontAwesomeIcon icon={item.icon} />
