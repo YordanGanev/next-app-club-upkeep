@@ -13,6 +13,8 @@ import {
 
 import Link from "next/link";
 import Image from "next/image";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUserGear } from "@fortawesome/free-solid-svg-icons";
 
 import TabNav from "@components/layout/tabNav";
 import CancelInviteButton from "@/components/action/CancelInviteButton";
@@ -120,7 +122,9 @@ export default async function TeamStaffPage({
       <div className={`${Style.wrapper} ${Style.wizBtn}`}>
         {team?.staff?.length === 0 && invites.length === 0 && (
           <div className={Style.empty}>
-            <i className="fa-solid fa-user-gear"></i>
+            <div>
+              <FontAwesomeIcon icon={faUserGear} />
+            </div>
             <div>No staff members yet</div>
           </div>
         )}

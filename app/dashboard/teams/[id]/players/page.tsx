@@ -12,6 +12,8 @@ import {
 
 import Image from "next/image";
 import Link from "next/link";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUserLargeSlash } from "@fortawesome/free-solid-svg-icons";
 
 import RemovePlayerButton from "./del-player-button";
 import CancelInviteButton from "@components/action/CancelInviteButton";
@@ -151,7 +153,9 @@ export default async function PlayersPage({
       <div className={`${Style.wrapper} ${Style.wizBtn}`}>
         {players?.length === 0 && invites?.length === 0 && (
           <div className={Style.empty}>
-            <i className="fa-solid fa-user-large-slash"></i>
+            <div>
+              <FontAwesomeIcon icon={faUserLargeSlash} />
+            </div>
             <div>No players yet</div>
           </div>
         )}
