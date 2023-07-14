@@ -61,6 +61,10 @@ export default function Home({ appUser }: { appUser: UserNotifyContextType }) {
         <div>
           <Link href="/api/auth/logout">Logout</Link>
         </div>
+
+        <div>
+          <Link href="/dashboard">Dashboard</Link>
+        </div>
       </div>
     );
   }

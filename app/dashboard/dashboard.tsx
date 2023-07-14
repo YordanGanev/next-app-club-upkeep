@@ -11,8 +11,6 @@ import {
 
 import { PopoutContext } from "@contexts/PopoutContext";
 
-import { User as PrismaUser, Invite as PrismaInvite } from "@prisma/client";
-
 export default function Dashboard({
   appUser,
 }: {

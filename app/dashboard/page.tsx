@@ -8,7 +8,8 @@ import { getSession } from "@auth0/nextjs-auth0";
 import Dashboard from "./dashboard";
 
 import { redirect } from "next/navigation";
-export default async function page() {
+
+export default async function DashboardPage() {
   const session = await getSession();
 
   console.warn("session", session);
