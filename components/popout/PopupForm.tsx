@@ -19,7 +19,7 @@ export default function PopupForm() {
   const [values, handleChange] = useForm({});
   const ref = useOutsideClick(() => {
     // allow events page to use custom calendar selector
-    const current = pathname.split("/")[-1];
+    const current = pathname.split("/")[4];
 
     if (current !== "events") formHide();
   });
