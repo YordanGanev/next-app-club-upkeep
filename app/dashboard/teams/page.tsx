@@ -96,7 +96,7 @@ export default async function page() {
             console.log(team);
             return (
               <div className={CardStyle.card} key={team.id}>
-                <Link href={`dashboard/teams/${team.id}`}>
+                <Link href={`/dashboard/teams/${team.id}`}>
                   <Image
                     src={team.picture}
                     alt="defaultclubpng"
