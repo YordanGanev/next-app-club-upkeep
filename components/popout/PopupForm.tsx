@@ -19,7 +19,9 @@ export default function PopupForm() {
   const [values, handleChange] = useForm({});
   const ref = useOutsideClick(() => {
     // allow events page to use custom calendar selector
-    if (pathname !== "/teams/[uid]/events") formHide();
+    const current = pathname.split("/")[-1];
+
+    if (current !== "events") formHide();
   });
 
   // const [isUpdating, setUpdating] = useState(false); // if needed for slow update

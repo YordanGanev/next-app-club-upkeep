@@ -4,9 +4,10 @@ import Async, { useAsync } from "react-select/async";
 import Select from "react-select";
 
 import "@styles/multiselect.css";
+import "@styles/mui-react-date.css";
 
-// import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-// import { TimeField } from "@mui/x-date-pickers/TimeField";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { TimeField } from "@mui/x-date-pickers/TimeField";
 
 // const selectStyles = {};
 
@@ -46,33 +47,33 @@ function Input({ inputProps, handleChange }) {
           classNamePrefix="multi-select"
         ></Select>
       );
-    // case "Date":
-    //   return (
-    //     <DatePicker
-    //       {...inputProps}
-    //       onChange={(newDate) => {
-    //         handleChange(null, {
-    //           name: inputProps?.name,
-    //           value: newDate,
-    //         });
-    //       }}
-    //     />
-    //   );
-    // case "Time":
-    //   return (
-    //     <TimeField
-    //       format={inputProps?.format}
-    //       placeholder={inputProps?.placeholder}
-    //       required={inputProps?.required}
-    //       onChange={(time) => {
-    //         console.log(time);
-    //         handleChange(null, {
-    //           name: inputProps?.name,
-    //           value: time,
-    //         });
-    //       }}
-    //     />
-    //   );
+    case "Date":
+      return (
+        <DatePicker
+          {...inputProps}
+          onChange={(newDate) => {
+            handleChange(null, {
+              name: inputProps?.name,
+              value: newDate,
+            });
+          }}
+        />
+      );
+    case "Time":
+      return (
+        <TimeField
+          format={inputProps?.format}
+          placeholder={inputProps?.placeholder}
+          required={inputProps?.required}
+          onChange={(time) => {
+            console.log(time);
+            handleChange(null, {
+              name: inputProps?.name,
+              value: time,
+            });
+          }}
+        />
+      );
     default:
       return <input {...inputProps} onChange={handleChange} />;
   }
