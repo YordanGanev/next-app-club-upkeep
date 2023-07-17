@@ -41,17 +41,17 @@ export default function NotificationsMenu() {
     accept: boolean,
     { userId, teamId }: { userId: string; teamId: string }
   ) => {
-    await fetch("/api/invite/reply", {
-      method: accept ? "POST" : "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ userId, teamId }),
-    }).then(() => {
-      if (accept && pathname === "/teams") {
-        router.replace(pathname);
-      }
-    });
+    // await fetch("/api/invite/reply", {
+    //   method: accept ? "POST" : "DELETE",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify({ userId, teamId }),
+    // }).then(() => {
+    //   if (accept && pathname === "/teams") {
+    //     router.replace(pathname);
+    //   }
+    // });
   };
 
   // Display Empty div to keep component reference

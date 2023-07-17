@@ -21,13 +21,6 @@ export default function ClubsClient({ appUser }: { appUser: any }) {
   NotificationUpdate(appUser, setNotifyInvites, setNotifyOptions);
 
   const form = {
-    fetch: {
-      url: "/api/club",
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    },
     title: "Create Club",
     inputs: [
       {

@@ -7,8 +7,8 @@ export default async function ServerComponent() {
   const accessToken = await getAccessToken();
   const user = session?.user;
 
-  console.log("session", session);
-  console.log("user", user);
+  // console.log("session", session);
+  // console.log("user", user);
 
   const appUser = await prisma.user.findUnique({
     where: {

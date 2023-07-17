@@ -12,7 +12,6 @@ import { redirect } from "next/navigation";
 export default async function DashboardPage() {
   const session = await getSession();
 
-  console.warn("session", session);
   if (!session) redirect("/about");
 
   const appUser = await prisma.user.findUnique({

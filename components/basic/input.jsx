@@ -50,7 +50,10 @@ function Input({ inputProps, handleChange }) {
     case "Date":
       return (
         <DatePicker
-          {...inputProps}
+          // {...inputProps}
+          slotProps={{
+            textField: { name: inputProps.name, required: inputProps.required },
+          }}
           onChange={(newDate) => {
             handleChange(null, {
               name: inputProps?.name,
@@ -65,6 +68,7 @@ function Input({ inputProps, handleChange }) {
           format={inputProps?.format}
           placeholder={inputProps?.placeholder}
           required={inputProps?.required}
+          name={inputProps?.name}
           onChange={(time) => {
             console.log(time);
             handleChange(null, {

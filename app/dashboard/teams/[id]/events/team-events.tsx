@@ -4,11 +4,13 @@ import dayjs from "dayjs";
 import { EventType } from "@prisma/client";
 import { useParams, useSearchParams } from "next/navigation";
 import { useWindowSize } from "@utils/hooks";
-import { useContext, useRef } from "react";
+import { useContext, useEffect, useRef } from "react";
 import {
   NotificationContext,
   NotificationUpdate,
 } from "@contexts/NotificationContext";
+
+import { addEvent } from "@utils/actions";
 
 import WizzardButton from "@/components/basic/wizButton";
 
@@ -40,6 +42,8 @@ export default function TeamEventsPage({
 
   const { id } = useParams();
 
+  console.log(today, dayjs(today));
+
   const eventTypeOptions = [
     { value: EventType.TRAINING, label: "Training" },
     { value: EventType.LEAGUE_GAME, label: "League game" },
@@ -49,16 +53,15 @@ export default function TeamEventsPage({
     { value: EventType.MEDICAL, label: "Medical" },
   ];
 
+  useEffect(() => {
+    if (ref.current) console.log(ref.current);
+  }, []);
+
   const disableCalendarSize = 765;
 
   const form = {
     fetch: {
-      url: `/api/team/${id}/event`,
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      master_data: { offset: new Date().getTimezoneOffset() },
+      master_data: { teamId: team.id, offset: new Date().getTimezoneOffset() },
     },
     title: "Add event",
     inputs: [
@@ -77,7 +80,7 @@ export default function TeamEventsPage({
         minDate: dayjs(today),
         maxDate: dayjs(new Date(2034, 11, 31)),
         format: "DD/MM/YYYY",
-        inputRef: ref,
+        // inputRef: ref,
       },
       {
         type: "Time",
@@ -92,6 +95,7 @@ export default function TeamEventsPage({
         placeholder: "Notes (optional)",
       },
     ],
+    onSubmitAction: addEvent,
   };
 
   if (!window?.width) {

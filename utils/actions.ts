@@ -298,6 +298,29 @@ export async function removeStaff(teamId: string, userId: string) {
   });
 }
 
+export async function addEvent(
+  data: FormData,
+  master_data: { teamId: string; offset: number }
+) {
+  const session = await getSession();
+
+  if (!session) return;
+
+  const { teamId, offset } = master_data;
+
+  console.log(teamId, offset);
+
+  const type = data.get("type") as string;
+  const date = data.get("date") as string;
+  const time = data.get("time") as string;
+  const note = data.get("note") as string;
+
+  console.log("type", type);
+  console.log("date", date);
+  console.log("time", time);
+  console.log("note", note);
+}
+
 // Custom invoaction methods
 // Simulating api calls
 

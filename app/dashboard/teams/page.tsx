@@ -18,6 +18,7 @@ import CardStyle from "@styles/card-layout.module.css";
 export default async function page() {
   const session = await getSession();
 
+  console.log(session);
   if (!session) redirect("/about");
 
   const appUser = await prisma.user.findUnique({

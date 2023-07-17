@@ -10,7 +10,8 @@ import { redirect } from "next/navigation";
 export default async function page() {
   const session = await getSession();
 
-  console.warn("session", session);
+  console.log("session", session);
+
   if (!session) redirect("/about");
 
   const appUser = await prisma.user.findUnique({
@@ -25,8 +26,6 @@ export default async function page() {
       },
     },
   });
-
-  // console.log(appUser);
 
   return <Home appUser={appUser} />;
 }

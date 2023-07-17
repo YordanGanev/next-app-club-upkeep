@@ -10,7 +10,6 @@ import {
 } from "@contexts/NotificationContext";
 
 import { PopoutContext } from "@contexts/PopoutContext";
-import { DatePicker } from "@mui/x-date-pickers";
 
 export default function Dashboard({
   appUser,
@@ -59,9 +58,6 @@ export default function Dashboard({
         </div>
         <div>
           <Link href="/api/auth/logout">Logout</Link>
-        </div>
-        <div>
-          <DatePicker />
         </div>
       </div>
     );

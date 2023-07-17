@@ -56,10 +56,10 @@ export default function Navigation() {
     setNotifyInvites(0);
     console.log("setNotifyInvites", 0);
 
-    fetch(`/api/user/${notification.options[0].userId}/invite`, {
-      method: "DELETE",
-      cache: "no-cache",
-    }).then(() => setNotifyInvites(0));
+    // fetch(`/api/user/${notification.options[0].userId}/invite`, {
+    //   method: "DELETE",
+    //   cache: "no-cache",
+    // }).then(() => setNotifyInvites(0));
   };
 
   const addNotify = notification?.options?.length > 0;
