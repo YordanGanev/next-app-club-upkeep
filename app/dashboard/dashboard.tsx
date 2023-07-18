@@ -57,7 +57,7 @@ export default function Dashboard({
           </p>
         </div>
         <div>
-          <Link href="/api/auth/logout">Logout</Link>
+          <a href="/api/auth/logout">Logout</a>
         </div>
       </div>
     );

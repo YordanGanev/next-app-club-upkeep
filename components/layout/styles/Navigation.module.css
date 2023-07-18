@@ -37,6 +37,9 @@
 
 .main {
     flex: 1 1 auto;
+    gap: .5em;
+    display: flex;
+    flex-direction: column;
 }
 
 .notifications.add:hover>button,
@@ -46,13 +49,13 @@
 }
 
 .notifications>button,
-.main a {
+.main div {
     font-weight: 700;
-    padding: 1rem;
+    padding: 1em;
     border-radius: 2rem;
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 1em;
     width: min-content;
 }
 
@@ -155,6 +158,10 @@
     align-items: center;
 }
 
+.connecting {
+    overflow: hidden;
+}
+
 @media screen and (min-width: 500px) and (max-width: 1000px) {
     .wrapper {
         min-width: fit-content;
@@ -162,7 +169,7 @@
         border-right: none;
         border-bottom: 1px solid var(--themeLight);
     }
-    .wrapper>div {
+    .wrapper>a {
         align-items: center;
         justify-items: center;
     }
@@ -191,6 +198,7 @@
     
     .wrapper .main {
         overflow: visible;
+        align-items: center;
     }
 
     .wrapper.closed .main,
@@ -206,5 +214,4 @@
         aspect-ratio: 1;
         align-items: center;
     }
-    
 }

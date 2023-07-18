@@ -1,12 +1,10 @@
 import React from "react";
 import { prisma } from "@utils/db";
 
-import { UserNotifyContextType } from "@contexts/NotificationContext";
-
 import { getSession } from "@auth0/nextjs-auth0";
 
-import Home from "./home-page";
 import { redirect } from "next/navigation";
+import Link from "next/link";
 export default async function page() {
   const session = await getSession();
 
@@ -27,5 +25,34 @@ export default async function page() {
     },
   });
 
-  return <Home appUser={appUser} />;
+  if (!appUser)
+    return (
+      <>
+        <h1>no user</h1> <a href="/api/auth/login">Login</a>
+      </>
+    );
+
+  return (
+    <div>
+      <div>
+        <h1>Next.js 13 test</h1>
+        <p>Hello {appUser.name}</p>
+      </div>
+      <div>
+        <a href="/api/auth/logout">Logout</a>
+      </div>
+
+      <div>
+        <Link href="/dashboard" legacyBehavior>
+          <a>Dashboard</a>
+        </Link>
+      </div>
+
+      <div>
+        <Link href="/about" legacyBehavior>
+          <a>About</a>
+        </Link>
+      </div>
+    </div>
+  );
 }

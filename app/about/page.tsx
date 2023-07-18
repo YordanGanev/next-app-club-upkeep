@@ -1,15 +1,23 @@
 import Link from "next/link";
 import { getSession } from "@auth0/nextjs-auth0";
 
-export default function About() {
-  // const session = getSession();
-  // console.log("Session", session);
+export default async function About() {
+  const session = await getSession();
 
   return (
     <>
-      <Link href="/api/auth/login"> Login </Link>
+      <a href="/api/auth/login"> Login </a>
       <div>About</div>
-      <Link href="/"> Home </Link>
+      {session && (
+        <>
+          <div>Session</div>
+          <div>{session.user.name}</div>
+          <div>{session.user.email}</div>
+        </>
+      )}
+      <Link href="/" legacyBehavior>
+        <a>Home</a>
+      </Link>
     </>
   );
 }

@@ -23,15 +23,9 @@ export async function POST(request: Request) {
         data: { email, name, picture, nickname },
       });
 
-      return new NextResponse(
-        JSON.stringify({
-          message: `User with email: ${email} has been created successfully!`,
-        }),
-        {
-          status: 200,
-          headers: { "Content-Type": "application/json" },
-        }
-      );
+      return NextResponse.json({
+        message: `User with email: ${email} has been created successfully!`,
+      });
     }
   } catch (error: any) {
     return new NextResponse(

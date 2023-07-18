@@ -4,7 +4,7 @@ export default function Connecting({ message }: { message: string | null }) {
   return (
     <>
       <div className={Style.wrapper}>
-        <h2>{message}</h2>
+        {message && <h2>{message}</h2>}
         <div className={Style.load}> </div>
       </div>
     </>

@@ -97,48 +97,52 @@ export default async function page() {
             console.log(team);
             return (
               <div className={CardStyle.card} key={team.id}>
-                <Link href={`/dashboard/teams/${team.id}`}>
-                  <Image
-                    src={team.picture}
-                    alt="defaultclubpng"
-                    width="100"
-                    height="100"
-                  />
-
-                  <div>
-                    <h2>{team.name}</h2>
+                <Link href={`/dashboard/teams/${team.id}`} legacyBehavior>
+                  <a>
+                    <Image
+                      src={team.picture}
+                      alt="defaultclubpng"
+                      width="100"
+                      height="100"
+                    />
 
                     <div>
-                      <span className={CardStyle.statsLabel}> Created </span>
-                      {new Date(team.createdAt).toLocaleDateString(
-                        "en-UK",
-                        options
-                      )}
-                    </div>
-                    <div>
-                      <span className={CardStyle.statsLabel}> Updated </span>
-                      {new Date(team.updatedAt).toLocaleDateString(
-                        "en-UK",
-                        options
-                      )}
-                    </div>
-                    <div className={CardStyle.stats}>
+                      <h2>{team.name}</h2>
+
                       <div>
-                        <div className={CardStyle.icon}>
-                          <FontAwesomeIcon icon={faUser} />
-                          <span>{team._count.player}</span>
-                        </div>
-                        <span className={CardStyle.statsLabel}>Players</span>
+                        <span className={CardStyle.statsLabel}> Created </span>
+                        {new Date(team.createdAt).toLocaleDateString(
+                          "en-UK",
+                          options
+                        )}
                       </div>
                       <div>
-                        <div className={CardStyle.icon}>
-                          <FontAwesomeIcon icon={faUserTie} />
-                          <span>{team._count.staff + 1}</span>
+                        <span className={CardStyle.statsLabel}> Updated </span>
+                        {new Date(team.updatedAt).toLocaleDateString(
+                          "en-UK",
+                          options
+                        )}
+                      </div>
+                      <div className={CardStyle.stats}>
+                        <div>
+                          <div className={CardStyle.icon}>
+                            <FontAwesomeIcon icon={faUser} />
+                            <span>{team._count.player}</span>
+                          </div>
+                          <span className={CardStyle.statsLabel}>Players</span>
                         </div>
-                        <span className={CardStyle.statsLabel}>{"Staff"}</span>
+                        <div>
+                          <div className={CardStyle.icon}>
+                            <FontAwesomeIcon icon={faUserTie} />
+                            <span>{team._count.staff + 1}</span>
+                          </div>
+                          <span className={CardStyle.statsLabel}>
+                            {"Staff"}
+                          </span>
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  </a>
                 </Link>
               </div>
             );

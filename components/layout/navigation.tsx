@@ -56,10 +56,10 @@ export default function Navigation() {
     setNotifyInvites(0);
     console.log("setNotifyInvites", 0);
 
-    // fetch(`/api/user/${notification.options[0].userId}/invite`, {
-    //   method: "DELETE",
-    //   cache: "no-cache",
-    // }).then(() => setNotifyInvites(0));
+    fetch(`/api/user/${notification.options[0].userId}/invite`, {
+      method: "DELETE",
+      cache: "no-cache",
+    }).then(() => setNotifyInvites(0));
   };
 
   const addNotify = notification?.options?.length > 0;
@@ -82,13 +82,15 @@ export default function Navigation() {
                 <FontAwesomeIcon icon={faBars} />
               </i>
             </div>
-            <Link href="/dashboard">
-              <Image
-                src="/icon.png"
-                alt="Club Upkeep Logo"
-                width="40"
-                height="40"
-              />
+            <Link href="/dashboard" legacyBehavior>
+              <a>
+                <Image
+                  src="/icon.png"
+                  alt="Club Upkeep Logo"
+                  width="40"
+                  height="40"
+                />
+              </a>
             </Link>
             <h2> Club Upkeep </h2>
           </div>
@@ -101,17 +103,25 @@ export default function Navigation() {
               }
 
               return (
-                <div key={item.slug} className={Style.linkContainer}>
-                  <Link
-                    className={`${Style.link} ${current ? Style.select : null}`}
-                    href={`/dashboard/${item.slug}`}
-                  >
-                    <i>
-                      <FontAwesomeIcon icon={item.icon} />
-                    </i>
-                    <span>{item.slug}</span>
-                  </Link>
-                </div>
+                <Link
+                  key={`${item.slug}-nav-link`}
+                  href={`/dashboard/${item.slug}`}
+                  legacyBehavior
+                >
+                  <a className={Style.linkContainer}>
+                    <div
+                      key={item.slug}
+                      className={`${Style.link} ${
+                        current ? Style.select : null
+                      }`}
+                    >
+                      <i>
+                        <FontAwesomeIcon icon={item.icon} />
+                      </i>
+                      <span>{item.slug}</span>
+                    </div>
+                  </a>
+                </Link>
               );
             })}
           </div>
@@ -135,7 +145,7 @@ export default function Navigation() {
             </div>
 
             {isLoading && (
-              <div className={Style.profile}>
+              <div className={`${Style.connecting} ${Style.profile}`}>
                 <Connecting message={null} />
               </div>
             )}

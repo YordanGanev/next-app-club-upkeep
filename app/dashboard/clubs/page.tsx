@@ -69,40 +69,46 @@ export default async function page() {
           {appUser.club.map((c: any) => {
             return (
               <div className={CardStyle.card} key={c.id}>
-                <Link key={"link-" + c.id} href={`clubs/${c.id}`}>
-                  <Image
-                    src={c.picture}
-                    alt="defaultclubpng"
-                    width="100"
-                    height="100"
-                  />
-                  <div>
-                    <h2>{c.name}</h2>
+                <Link
+                  key={"link-" + c.id}
+                  href={`clubs/${c.id}`}
+                  legacyBehavior
+                >
+                  <a>
+                    <Image
+                      src={c.picture}
+                      alt="defaultclubpng"
+                      width="100"
+                      height="100"
+                    />
+                    <div>
+                      <h2>{c.name}</h2>
 
-                    <div>
-                      <span className={CardStyle.statsLabel}> Created </span>
-                      {new Date(c.createdAt).toLocaleDateString(
-                        "en-UK",
-                        options
-                      )}
-                    </div>
-                    <div>
-                      <span className={CardStyle.statsLabel}> Updated </span>
-                      {new Date(c.updatedAt).toLocaleDateString(
-                        "en-UK",
-                        options
-                      )}
-                    </div>
-                    <div className={CardStyle.stats}>
                       <div>
-                        <div className={CardStyle.icon}>
-                          <FontAwesomeIcon icon={faPeopleGroup} />
-                          <span>{c._count?.teams}</span>
+                        <span className={CardStyle.statsLabel}> Created </span>
+                        {new Date(c.createdAt).toLocaleDateString(
+                          "en-UK",
+                          options
+                        )}
+                      </div>
+                      <div>
+                        <span className={CardStyle.statsLabel}> Updated </span>
+                        {new Date(c.updatedAt).toLocaleDateString(
+                          "en-UK",
+                          options
+                        )}
+                      </div>
+                      <div className={CardStyle.stats}>
+                        <div>
+                          <div className={CardStyle.icon}>
+                            <FontAwesomeIcon icon={faPeopleGroup} />
+                            <span>{c._count?.teams}</span>
+                          </div>
+                          <span className={CardStyle.statsLabel}>Teams</span>
                         </div>
-                        <span className={CardStyle.statsLabel}>Teams</span>
                       </div>
                     </div>
-                  </div>
+                  </a>
                 </Link>
               </div>
             );

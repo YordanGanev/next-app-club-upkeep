@@ -52,7 +52,7 @@ export async function POST(request: Request) {
       },
     });
 
-    return new NextResponse(JSON.stringify(users), { status: 200 });
+    return NextResponse.json(users);
   } catch (e) {
     console.log(request.method, request.url);
     console.error(e);

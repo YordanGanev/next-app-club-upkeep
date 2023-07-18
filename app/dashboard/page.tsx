@@ -1,18 +1,17 @@
-import React from "react";
 import { prisma } from "@utils/db";
-
-import { UserNotifyContextType } from "@contexts/NotificationContext";
-
 import { getSession } from "@auth0/nextjs-auth0";
-
 import Dashboard from "./dashboard";
-
-import { redirect } from "next/navigation";
 
 export default async function DashboardPage() {
   const session = await getSession();
 
-  if (!session) redirect("/about");
+  if (!session)
+    return (
+      <>
+        <h1>No session Dashboard</h1>
+        <a href="/api/auth/login">Login</a>
+      </>
+    );
 
   const appUser = await prisma.user.findUnique({
     where: {
@@ -26,6 +25,14 @@ export default async function DashboardPage() {
       },
     },
   });
+
+  if (!appUser)
+    return (
+      <>
+        <h1>No appUser found</h1>
+        <a href="/api/auth/login">Login</a>
+      </>
+    );
 
   return <Dashboard appUser={appUser} />;
 }

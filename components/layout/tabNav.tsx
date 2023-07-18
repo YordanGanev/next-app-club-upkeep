@@ -21,12 +21,10 @@ export default function TabNav({ tabs }: { tabs: TabType[] }) {
       <div className={Style.tabs}>
         {tabs?.map((tab: TabType) => {
           return (
-            <Link
-              className={currentTab === tab.slug ? Style.active : ""}
-              key={tab.slug}
-              href={basePath + tab.slug}
-            >
-              {tab.title}
+            <Link key={tab.slug} href={basePath + tab.slug} legacyBehavior>
+              <a className={currentTab === tab.slug ? Style.active : ""}>
+                {tab.title}
+              </a>
             </Link>
           );
         })}
