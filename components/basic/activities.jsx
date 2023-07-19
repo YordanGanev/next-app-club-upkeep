@@ -1,15 +1,23 @@
-import { useRouter } from "next/router";
-import Style from "./styles/Activities.module.css";
+import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { useEffect, useState, useContext } from "react";
 
 import Image from "next/image";
-import Head from "next/head";
-// import Button from "next/button";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faCalendarAlt,
+  faFileCircleCheck,
+  faArrowLeft,
+  faCircleCheck,
+} from "@fortawesome/free-solid-svg-icons";
+import {
+  faHourglassHalf,
+  faCalendarTimes,
+} from "@fortawesome/free-regular-svg-icons";
 
-import { queryPushDate, EventActivities } from "utils/common";
-import { queryDateHook } from "utils/hooks";
+import { queryDate, EventActivities, createQueryDate } from "@utils/common";
 
-import { ConfirmActionContext } from "contexts/ConfirmActionContext";
+import { PopoutContext } from "@contexts/PopoutContext";
+
 /* Custom date picker component */
 import PropTypes from "prop-types";
 
@@ -17,6 +25,10 @@ import Button from "@mui/material/Button";
 import dayjs from "dayjs";
 
 import { DatePicker, StaticDatePicker } from "@mui/x-date-pickers";
+
+// Just to add pseudo elements
+import "@styles/pseudo-el-fa-icons.css";
+import Style from "./styles/Activities.module.css";
 
 function ButtonField(props) {
   const {
@@ -39,7 +51,7 @@ function ButtonField(props) {
     >
       {label ?? "Pick a date"}
 
-      <i className="fas fa-calendar-alt"></i>
+      <FontAwesomeIcon icon={faCalendarAlt} />
     </Button>
   );
 }
@@ -88,12 +100,14 @@ ButtonDatePicker.propTypes = {
 export default function Activities({ events, editable = false }) {
   const [ticks, setTickers] = useState([]);
 
-  const { ConfirmActionSetup } = useContext(ConfirmActionContext);
+  const { setAction } = useContext(PopoutContext);
 
   const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
 
-  const { view } = router.query;
-  const date = queryDateHook(router);
+  const view = searchParams.get("view");
+  const date = queryDate(searchParams);
 
   const eventTimePassed = "Archived";
 
@@ -139,10 +153,10 @@ export default function Activities({ events, editable = false }) {
 
       let time = eventTimePassed;
       // let icon = "fa-regular fa-hourglass-empty";
-      let icon = "fa-solid fa-file-circle-check";
+      let icon = faFileCircleCheck;
 
       if (timeLeft > 0) {
-        icon = "fa-regular fa-hourglass-half";
+        icon = faHourglassHalf;
         time =
           days == 0
             ? `${hours}h ${minutes}m ${seconds}s`
@@ -165,7 +179,7 @@ export default function Activities({ events, editable = false }) {
     return () => {
       clearInterval(intervalId);
     };
-  }, [router.query]);
+  }, []);
 
   return (
     <>
@@ -175,11 +189,13 @@ export default function Activities({ events, editable = false }) {
             <>
               <button
                 onClick={() => {
-                  delete router.query?.view;
-                  router.push({ query: router.query });
+                  const params = new URLSearchParams(searchParams);
+                  params.delete("view");
+
+                  router.push(`${pathname}?${params.toString()}`);
                 }}
               >
-                <i className="fa-solid fa-arrow-left"></i> Back
+                <FontAwesomeIcon icon={faArrowLeft} /> Back
               </button>
               <div className={Style.date}>
                 {date.toLocaleDateString("en-US", options)}{" "}
@@ -197,7 +213,14 @@ export default function Activities({ events, editable = false }) {
                   newDate.$y != data.getYear()
                 ) {
                   tick();
-                  queryPushDate(router, newDate.$y, newDate.$M, newDate.$D);
+                  const query = createQueryDate(
+                    searchParams,
+                    newDate.$y,
+                    newDate.$M,
+                    newDate.$D
+                  );
+
+                  router.push(`${pathname}?${query}`);
                 }
               }}
             ></ButtonDatePicker>
@@ -206,7 +229,7 @@ export default function Activities({ events, editable = false }) {
 
         {listEvents.length == 0 && (
           <div className={Style.noEvents}>
-            <i className="fa-regular fa-calendar-times"></i>
+            <FontAwesomeIcon icon={faCalendarTimes} />
             <div>No events that day</div>
           </div>
         )}
@@ -217,15 +240,21 @@ export default function Activities({ events, editable = false }) {
               <input type="checkbox" id={e.id} />
               <label
                 htmlFor={e.id}
-                className={Style.listTitle}
-                activity={EventActivities[e.type].name.toLowerCase()}
+                className={`${
+                  Style.listTitle
+                } has-icon activity-${EventActivities[
+                  e.type
+                ].name.toLowerCase()}`}
               >
-                <i className={EventActivities[e.type].icon}></i>
+                <FontAwesomeIcon icon={EventActivities[e.type].icon} />
                 {EventActivities[e.type].name}
               </label>
               <div
-                border={EventActivities[e.type].name.toLowerCase()}
-                className={Style.listExtend}
+                className={`${
+                  Style.listExtend
+                } activity-brd brd-${EventActivities[
+                  e.type
+                ].name.toLowerCase()}`}
               >
                 <div className={Style.eventTime}>
                   <div className={Style.eventTimeText}>
@@ -239,12 +268,12 @@ export default function Activities({ events, editable = false }) {
                   </div>
                   <div>
                     {ticks[idx]?.time}
-                    <i className={ticks[idx]?.icon}></i>
+                    <FontAwesomeIcon icon={ticks[idx]?.icon} />
                   </div>
                 </div>
                 {e.note.length > 0 && (
                   <div className={Style.eventNote}>
-                    <i className="fa-solid fa-circle-info"></i>
+                    <FontAwesomeIcon icon={faCircleCheck} />
                     {e.note}
                   </div>
                 )}
@@ -262,12 +291,15 @@ export default function Activities({ events, editable = false }) {
                   )}
                   {ticks[idx]?.time !== eventTimePassed && editable && (
                     <div className={Style.eventBoard}>
-                      {/* <button border="view">Edit</button> */}
                       <button
-                        border="remove"
+                        className={`border-remove`}
                         onClick={() => {
-                          ConfirmActionSetup("Delete event", () => {
-                            deleteEvent(e.teamId, e.id);
+                          setAction({
+                            title: "Delete event",
+                            message: "Delete event",
+                            callback: () => {
+                              deleteEvent(e.teamId, e.id);
+                            },
                           });
                         }}
                       >

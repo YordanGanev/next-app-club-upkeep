@@ -37,15 +37,12 @@ export const EventActivities = {
     TACTICS: { name: "Tactics", icon: "fa-regular fa-clipboard" },
 };
 
-export const createQueryString = (
-    (name: string, value: string) => {
-      const params = new URLSearchParams(searchParams)
-      params.set(name, value)
- 
-      return params.toString()
-    },
-    [searchParams]
-  )
+export const createQueryString = (name: string, value: string) => {
+    const params = new URLSearchParams(searchParams)
+    params.set(name, value)
+
+    return params.toString()
+}
 
 
 export const queryPushDate = (router, year, month, day, view = null) => {

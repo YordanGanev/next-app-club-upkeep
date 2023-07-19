@@ -48,6 +48,7 @@
 }
 
 .title>button {
+    font-family: "Font Awesome 6 Free";
     padding: 1rem;
     width: fit-content;
     border-radius: 2rem;
@@ -66,13 +67,14 @@
 }
 
 .listTitle::after {
+    display: inline-block;
+    text-rendering: auto;
     font: var(--fa-font-solid);
     content: "\f077";
     position: absolute;
     right: .5rem;
     top: 50%;
     transform: translateY(-50%);
-    /* background-color: red; */
 }
 
 .list>input[type="checkbox"]:checked~.listTitle::after {
@@ -101,8 +103,8 @@
     font-weight: 700;
 }
 
-.eventTime i {
-    padding-left: .5rem;
+.eventTime svg {
+    padding-left: .5em;
 }
 
 .eventNote {
@@ -151,11 +153,11 @@
     border-radius: 50%;
 }
 
-.eventBoard button[border="view"] {
+.eventBoard button.border-view {
     border: 2px solid var(--extraLighterAlt);
 }
 
-.eventBoard button[border="remove"] {
+.eventBoard button.border-remove {
     border: 2px solid var(--errorColor);
 }
 

@@ -2,8 +2,6 @@ import { prisma } from "@utils/db";
 import { redirect } from "next/navigation";
 import { getSession } from "@auth0/nextjs-auth0";
 
-import { UserNotifyContextType } from "@contexts/NotificationContext";
-
 import { PlayerManageTeamTabs, StaffManageTeamTabs } from "@utils/common";
 
 import TabNav from "@components/layout/tabNav";

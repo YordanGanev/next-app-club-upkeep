@@ -143,19 +143,7 @@
 }
 
 .newNotify {
-    color: var(--white);
-    height: 14px;
-    width: 14px;
-    position: absolute;
-    top: -6px;
-    right: -3px;
-    background-color: var(--extraTertiary);
-    border-radius: 50%;
-    font-size: 60%;
-    font-weight: 900;
-    display: grid;
-    text-align: center;
-    align-items: center;
+    scale: 1.5;
 }
 
 .connecting {

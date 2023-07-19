@@ -42,8 +42,9 @@ export default function PopupForm() {
             className={Style.form}
             action={(data: FormData) => {
               if (formState.onSubmitAction)
-                formState.onSubmitAction(data, formState.fetch.master_data);
-
+                if (formState.fetch?.master_data)
+                  formState.onSubmitAction(data, formState.fetch.master_data);
+                else formState.onSubmitAction(data, undefined);
               formHide();
               handleChange(null); // reset input values
             }}

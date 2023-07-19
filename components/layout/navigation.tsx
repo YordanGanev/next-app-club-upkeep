@@ -132,14 +132,16 @@ export default function Navigation() {
               }`}
             >
               <button onClick={handleNotification}>
-                <i>
+                <span className="fa-layers">
                   <FontAwesomeIcon
                     icon={addNotify === true ? faBell : farBell}
                   />
                   {notification?.new > 0 && (
-                    <div className={Style.newNotify}>{notification?.new}</div>
+                    <span className={`${Style.newNotify} fa-layers-counter`}>
+                      {notification?.new > 9 ? "9+" : notification?.new}
+                    </span>
                   )}
-                </i>
+                </span>
                 <span> Notifications </span>
               </button>
             </div>
