@@ -13,8 +13,8 @@ import {
 import { addEvent } from "@utils/actions";
 
 import WizzardButton from "@/components/basic/wizButton";
+import Calendar, { calendarFilterEvents } from "@components/basic/calendar";
 
-// import Calendar from "@components/basic/calendar";
 // import Activities from "@components/basic/activities";
 
 import Style from "../../teams.module.css";
@@ -113,21 +113,17 @@ export default function TeamEventsPage({
 
   return (
     <>
-      <h1>{id}</h1>
-
       <div className={Style.wrapper}>
-        {/* {window?.width > disableCalendarSize && view !== "list" && (
+        {window?.width > disableCalendarSize && view !== "list" && (
           <Calendar events={calendarFilterEvents(team.events)} />
         )}
+        {/*
         {(view === "list" || window?.width <= disableCalendarSize) && (
           <Activities
             events={events}
             editable={access == UserAccess.staff || access == UserAccess.owner}
           />
         )} */}
-        {window?.width > disableCalendarSize && view !== "list" && (
-          <h2>Calendar</h2>
-        )}
         {(view === "list" || window?.width <= disableCalendarSize) && (
           <h2>Activity</h2>
         )}

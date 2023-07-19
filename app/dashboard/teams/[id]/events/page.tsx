@@ -99,7 +99,6 @@ export default async function EventPage({
     <>
       <TabNav tabs={true ? StaffManageTeamTabs : PlayerManageTeamTabs} />
       <TeamEventsPage team={team} writeAccess={true} appUser={appUser} />
-      <h1>Events</h1>
     </>
   );
 }

@@ -37,6 +37,16 @@ export const EventActivities = {
     TACTICS: { name: "Tactics", icon: "fa-regular fa-clipboard" },
 };
 
+export const createQueryString = (
+    (name: string, value: string) => {
+      const params = new URLSearchParams(searchParams)
+      params.set(name, value)
+ 
+      return params.toString()
+    },
+    [searchParams]
+  )
+
 
 export const queryPushDate = (router, year, month, day, view = null) => {
     router.query["year"] = year;
@@ -49,6 +59,20 @@ export const queryPushDate = (router, year, month, day, view = null) => {
         query: router.query,
     });
 }
+
+
+export const queryPushDate12 = (router, year, month, day, view = null) => {
+    router.query["year"] = year;
+    router.query["month"] = month;
+    router.query["day"] = day;
+
+    if (view) router.query["view"] = view;
+
+    router.push({
+        query: router.query,
+    });
+}
+
 
 // Cancel player or staff invite
 export const cancelInvite = async (router, userId, teamId) => {

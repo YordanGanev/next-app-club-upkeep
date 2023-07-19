@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef } from "react";
-import { queryPushDate } from "./common";
 
 
 export const useWindowSize = () => {
@@ -91,7 +90,7 @@ export const useOutsideClick = (callback) => {
     return ref;
 };
 
-export const queryDateHook = (router) => {
+export const queryDateHook12 = (router) => {
 
     const { day, month, year } = router.query;
 
@@ -102,7 +101,8 @@ export const queryDateHook = (router) => {
     useEffect(() => {
         if (day && month && year) return;
 
-        queryPushDate(router, date.getFullYear(), date.getMonth(), date.getDate());
+        // import { queryPushDate } from "./common";
+        // queryPushDate(router, date.getFullYear(), date.getMonth(), date.getDate());
     }, []);
 
     return date;

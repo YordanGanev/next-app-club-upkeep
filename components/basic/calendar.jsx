@@ -1,13 +1,29 @@
+"use client";
+
 import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
-import Style from "./styles/Calendar.module.css";
 
 import dayjs from "dayjs";
 
 import { DatePicker } from "@mui/x-date-pickers";
 
-import { queryPushDate, EventActivities } from "utils/common";
-import { queryDateHook } from "utils/hooks";
+import {
+  EventActivities,
+  createQueryString,
+  createQueryDate,
+  queryDate,
+} from "utils/common";
+
+import { usePathname, useSearchParams, useRouter } from "next/navigation";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import {
+  faChevronLeft,
+  faChevronRight,
+} from "@fortawesome/free-solid-svg-icons";
+
+import Style from "./styles/Calendar.module.css";
+import "@styles/activity-list.css";
 
 const weekdayStrings = [
   "Monday",
@@ -52,15 +68,32 @@ export const calendarFilterEvents = (events) => {
     }
   });
 
-  // console.warn(filteredEvents);
+  console.warn(filteredEvents);
   return Object.values(filteredEvents).flat(); // Convert back to an array
 };
 
 export default function Calendar({ events }) {
   const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
 
-  // const { date } = queryDateHook(router);
-  const date = queryDateHook(router);
+  const date = queryDate(searchParams);
+
+  useEffect(() => {
+    if (
+      !searchParams.get("year") ||
+      !searchParams.get("month") ||
+      !searchParams.get("day")
+    ) {
+      const query = createQueryDate(
+        searchParams,
+        date.getFullYear(),
+        date.getMonth(),
+        date.getDate()
+      );
+      router.push(`${pathname}?${query}`);
+    }
+  }, []);
 
   const fill = (days, date) => {
     const current = new Date();
@@ -83,13 +116,14 @@ export default function Calendar({ events }) {
           key={`${date.getFullYear()}-${date.getMonth()}-${i}`}
           className={currentDay === i ? Style.currentDay : null}
           onClick={() => {
-            queryPushDate(
-              router,
+            const query = createQueryDate(
+              searchParams,
               date.getFullYear(),
               date.getMonth(),
               i,
               "list"
             );
+            router.push(`${pathname}?${query}`);
           }}
         >
           <div className={Style.date}>{i}</div>
@@ -131,13 +165,14 @@ export default function Calendar({ events }) {
         <button
           key={`btn-${i}-day`}
           onClick={() => {
-            queryPushDate(
-              router,
+            const query = createQueryString(
+              searchParams,
               offsetMonth.getFullYear(),
               offsetMonth.getMonth(),
               i,
               "list"
             );
+            router.push(`${pathname}?${query}`);
           }}
           className={Style.unactiveMonth}
         >
@@ -177,10 +212,11 @@ export default function Calendar({ events }) {
       return (
         <div
           key={`${event.id}-${event.type}`}
-          className={Style.activity}
-          activity={EventActivities[event.type].name.toLowerCase()}
+          className={`${Style.activity} activity-${EventActivities[
+            event.type
+          ].name.toLowerCase()}`}
         >
-          <i className={EventActivities[event.type].icon}></i>
+          <FontAwesomeIcon icon={EventActivities[event.type].icon} />
           <span> {EventActivities[event.type].name}</span>
         </div>
       );
@@ -202,15 +238,16 @@ export default function Calendar({ events }) {
               className={Style.dir}
               onClick={() => {
                 date.setMonth(date.getMonth() - 1);
-                queryPushDate(
-                  router,
+                const query = createQueryDate(
+                  searchParams,
                   date.getFullYear(),
                   date.getMonth(),
                   date.getDate()
                 );
+                router.push(`${pathname}?${query}`);
               }}
             >
-              <i className="fa-solid fa-chevron-left"></i>
+              <FontAwesomeIcon icon={faChevronLeft} />
             </button>
             <div className={`${Style.selectDate} title`}>
               <DatePicker
@@ -218,14 +255,22 @@ export default function Calendar({ events }) {
                 value={dayjs(new Date(date))}
                 onChange={(value) => {
                   console.log(value);
-                  console.warn(router.query.year, value.$y);
-                  console.warn(router.query.month, value.$M);
+                  console.warn(searchParams.get("year"), value.$y);
+                  console.warn(searchParams.get("month"), value.$M);
 
                   if (
-                    router.query.year != value.$y ||
-                    router.query.month != value.$M
-                  )
-                    queryPushDate(router, value.$y, value.$M, 1);
+                    searchParams.get("year") != value.$y ||
+                    searchParams.get("month") != value.$M
+                  ) {
+                    const query = createQueryDate(
+                      searchParams,
+                      value.$y,
+                      value.$M,
+                      1
+                    );
+
+                    router.push(`${pathname}?${query}`);
+                  }
                 }}
                 minDate={dayjs(new Date(2023, 0, 1))}
                 maxDate={dayjs(new Date(2034, 11, 31))}
@@ -236,15 +281,17 @@ export default function Calendar({ events }) {
               className={Style.dir}
               onClick={() => {
                 date.setMonth(date.getMonth() + 1);
-                queryPushDate(
-                  router,
+                const query = createQueryDate(
+                  searchParams,
                   date.getFullYear(),
                   date.getMonth(),
                   date.getDate()
                 );
+
+                router.push(`${pathname}?${query}`);
               }}
             >
-              <i className="fa-solid fa-chevron-right"></i>
+              <FontAwesomeIcon icon={faChevronRight} />
             </button>
           </div>
           <div className={Style.header}>

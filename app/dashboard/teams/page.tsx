@@ -14,11 +14,12 @@ import TeamsClient from "./teams-client";
 
 import Style from "./teams.module.css";
 import CardStyle from "@styles/card-layout.module.css";
+// import "@styles/mui-react-date.css";
 
 export default async function page() {
   const session = await getSession();
 
-  console.log(session);
+  // console.log(session);
   if (!session) redirect("/about");
 
   const appUser = await prisma.user.findUnique({

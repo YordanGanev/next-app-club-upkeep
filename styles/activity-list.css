@@ -1,0 +1,71 @@
+/*
+------------------------------------------
+--------CALENDAR-ACTIVITY-THEME-----------
+------------------------------------------
+*/
+
+div.activity-training,
+label.activity-training {
+    background-color: var(--activityTraining);
+}
+
+div.activity-tourney,
+label.activity-tourney {
+    background-color: var(--activityTournament);
+}
+
+div.activity-league,
+label.activity-league {
+    background-color: var(--activityLeague);
+}
+
+div.activity-medical,
+label.activity-medical {
+    background-color: var(--activityMedical);
+}
+
+div.activity-meeting,
+label.activity-meeting {
+    background-color: var(--activityMeeting);
+}
+
+div.activity-tactics,
+label.activity-tactics {
+    background-color: var(--activityTactics);
+}
+
+
+/*
+------------------------------------------
+--------CALENDAR-ACTIVITY-THEME-----------
+------------------------------------------
+*/
+
+div.brd-training {
+    border: 1px solid var(--activityTraining);
+}
+
+div.brd-tourney {
+    border: 1px solid var(--activityTournament);
+}
+
+div.brd-league {
+    border: 1px solid var(--activityLeague);
+}
+
+div.brd-medical {
+    border: 1px solid var(--activityMedical);
+}
+
+div.brd-meeting {
+    border: 1px solid var(--activityMeeting);
+}
+
+div.brd-tactics {
+    border: 1px solid var(--activityTactics);
+}
+
+div.activity-brd {
+    border-top: 0;
+    border-right: 0;
+}
