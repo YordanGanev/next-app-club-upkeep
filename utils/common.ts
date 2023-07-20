@@ -8,7 +8,6 @@ import {
   faStethoscope,
 } from "@fortawesome/free-solid-svg-icons";
 import { faHandshake, faClipboard } from "@fortawesome/free-regular-svg-icons";
-import { AppRouterInstance } from "next/dist/shared/lib/app-router-context";
 
 export const ManageClubTabs = [
   { slug: "teams", title: "Teams" },
@@ -72,9 +71,9 @@ export const queryDate = (searchParams: ReadonlyURLSearchParams) => {
 
 export const createQueryDate = (
   searchParams: ReadonlyURLSearchParams,
-  year: any, //number,
-  month: any, //number,
-  day: any, //number,
+  year: number,
+  month: number,
+  day: number,
   view: "list" | "calendar" | null = null
 ) => {
   const params = new URLSearchParams(searchParams.toString());
