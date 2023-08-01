@@ -99,6 +99,17 @@ a {
 
 button {
   all: unset;
+  cursor: pointer;
+}
+
+li {
+  list-style: none;
+}
+
+/* */
+.dashboard-content-wrapper {
+  max-width: var(--max-width);
+  margin: 0 auto;
 }
 
 /* Buttons  */
@@ -117,7 +128,6 @@ button {
 }
 
 .global-button {
-  cursor: pointer;
   padding: .5rem;
   border-radius: 1rem;
   height: min-content;
@@ -126,6 +136,11 @@ button {
   align-self: center;
   font-weight: bold;
   font-size: small;
+}
+
+.global-button:hover,
+.global-button:focus {
+  filter: brightness(.7);
 }
 
 label.global-button {

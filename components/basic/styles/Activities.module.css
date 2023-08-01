@@ -157,7 +157,7 @@
     border: 2px solid var(--extraLighterAlt);
 }
 
-.eventBoard button.border-remove {
+.eventBoard button.borderRemove {
     border: 2px solid var(--errorColor);
 }
 

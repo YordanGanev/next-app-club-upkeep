@@ -1,6 +1,6 @@
 .header {
     background-color: var(--themeDarkAlt);
-    padding: var(--headerYPaddings) 15px;
+    padding: var(--headerYPaddings) 1em;
     width: 100vw;
 }
 
@@ -8,9 +8,13 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    max-width: 1200px;
     min-width: calc(var(--profilePicWidth) + var(--iconWidth) + 20px);
     min-height: var(--headerHeight);
     max-height: var(--headerHeight);
+    
+    margin: 0 auto;
 }
 
 
@@ -26,65 +30,26 @@
     display: flex;
 }
 
+/* Profile picture */
 
-/* >> */
-
-
-/* Notification */
-
-.notification {
-    position: relative;
-    padding: 6px;
-}
-
-.notification[notify] {
-    cursor: pointer;
-}
-
-.notification>i {
-    color: var(--themeLight);
-}
-
-.notification[notify]>i {
-    color: var(--white);
-}
-
-.notification>div {
-    /* color: var(--themeDarkAlt); */
-    color: var(--white);
-    height: 14px;
-    width: 14px;
-    position: absolute;
-    top: 0px;
-    right: 0px;
-    background-color: var(--extraTertiary);
-    border-radius: 50%;
-    font-size: 60%;
-    font-weight: 900;
-    display: grid;
-    text-align: center;
+.user {
+    display: flex;
     align-items: center;
+    gap: 1em;
 }
-
-
-/* Profile picture and dropdown */
 
 .userImage {
     align-items: center;
     height: var(--profilePicWidth);
-    width: calc(var(--profilePicWidth) + 15px);
+    width: var(--profilePicWidth);
     position: relative;
     cursor: pointer;
+    display: inline;
 }
 
-.userImage:hover,
-.userImage:focus,
-.notification[notify]:hover,
-.notification[notify]:focus {
-    outline: 2px solid var(--themePrimary);
-    outline-offset: 3px;
-    /* outline-style: ; */
-    filter: brightness(1.2);
+.wrapper a:hover,
+.wrapper a:focus {
+    filter: brightness(.7);
 }
 
 .userImage>img {
@@ -94,71 +59,18 @@
     border: 1px solid var(--themeDarkAlt);
 }
 
-.userImage::after {
-    content: "";
-    width: 0;
-    height: 0;
-    position: absolute;
-    right: 0px;
-    top: 50%;
-    border: 6px solid transparent;
-    border-top-color: var(--white);
-}
-
 
 /* Profile */
 
-.showProfileMenu,
-.userProfileMenu {
-    display: none;
-}
-
-.userProfileMenu {
-    background-color: var(--themeLighter);
-    border: 1px solid var(--themeDarkAlt);
-    border-radius: 2px;
-    width: 200px;
-    position: absolute;
-    top: var(--headerHeight);
-    right: 0;
-}
-
-.userProfileMenu>ul {
-    list-style: none;
-}
-
-.userInfo {
-    border-bottom: 1px solid var(--themeDarkAlt);
-    padding: 0.2rem 1rem;
-}
-
-.userMenu {
-    background-color: var(--themeLighter);
-}
-
-.userMenu ul {
-    list-style: none;
-}
-
-.userMenu li {
-    padding: 0.3rem 1rem;
-}
-
-.userMenu li:hover {
-    background-color: var(--themeLighterAlt);
-}
-
-
-/* >> Login*/
 
 .loginGroup {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 1em;
 }
 
 .sign {
-    padding: 0.5rem;
-    border-radius: 0.75rem;
+    padding: 0.5em;
+    border-radius: 5em;
     border: 1px solid var(--white);
 }

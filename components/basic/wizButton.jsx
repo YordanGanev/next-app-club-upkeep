@@ -18,7 +18,6 @@ export default function WizzardButton({ form, extra }) {
             onClick={(e) => {
               button.callback(e);
             }}
-            onFocus={(e) => console.log(e)}
           >
             <i className={button?.icon}></i>
           </button>

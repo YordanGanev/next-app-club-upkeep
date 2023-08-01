@@ -52,15 +52,16 @@ export type InputType = {
 };
 
 export type FormType = {
-  fetch: {
-    url: string;
+  fetch?: {
+    url?: string;
     method?: string;
     cached?: boolean;
-    headers: {
+    headers?: {
       "Content-Type": string;
     };
     master_data?: any;
   };
+  persist?: boolean;
   title?: string;
   submitLabel?: string;
   inputs: InputType[];
@@ -81,12 +82,6 @@ const windowFilterDefault = {
 };
 
 const formDefault = {
-  fetch: {
-    url: "",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  },
   title: "",
   inputs: [],
 };

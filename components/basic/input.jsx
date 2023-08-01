@@ -9,8 +9,6 @@ import "@styles/mui-react-date.css";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { TimeField } from "@mui/x-date-pickers/TimeField";
 
-// const selectStyles = {};
-
 function Input({ inputProps, handleChange }) {
   switch (inputProps?.type) {
     case "asyncSelect":
@@ -50,7 +48,6 @@ function Input({ inputProps, handleChange }) {
     case "Date":
       return (
         <DatePicker
-          // {...inputProps}
           slotProps={{
             textField: { name: inputProps.name, required: inputProps.required },
           }}

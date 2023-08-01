@@ -143,7 +143,9 @@
 }
 
 .newNotify {
-    scale: 1.5;
+    right: -0.5em;
+    top: -.5em;
+    transform: scale(.6);
 }
 
 .connecting {

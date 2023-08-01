@@ -106,10 +106,6 @@ export default async function TeamMedicalPage({
     });
   }
 
-  if (access === UserAccess.owner || access === UserAccess.staff) {
-    WriteAccess = true;
-  }
-
   const players = team.player;
   const options: Intl.DateTimeFormatOptions = {
     year: "numeric",

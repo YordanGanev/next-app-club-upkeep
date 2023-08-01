@@ -111,7 +111,7 @@ export default async function PlayersPage({
     });
   }
 
-  console.log(access);
+  // console.log(access);
 
   const loadOptions = async (inputValue: any) => {
     try {
@@ -184,12 +184,22 @@ export default async function PlayersPage({
                     <p>{name}</p>
                     <p>{email}</p>
                   </div>
-                  <RemovePlayerButton
-                    id={p.id}
-                    className="global-button border-remove"
-                  >
-                    {p.user?.email ? "Remove" : "Delete"}
-                  </RemovePlayerButton>
+                  {WriteAccess && (
+                    <RemovePlayerButton
+                      id={p.id}
+                      className="global-button border-remove"
+                    >
+                      {p.user?.email ? "Remove" : "Delete"}
+                    </RemovePlayerButton>
+                  )}
+                  {appUser.id === p.user?.id && (
+                    <RemovePlayerButton
+                      id={p.id}
+                      className="global-button border-remove"
+                    >
+                      Leave
+                    </RemovePlayerButton>
+                  )}
                 </div>
 
                 <div className={ListView.content}>

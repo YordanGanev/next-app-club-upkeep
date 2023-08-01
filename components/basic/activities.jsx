@@ -15,7 +15,7 @@ import {
 } from "@fortawesome/free-regular-svg-icons";
 
 import { queryDate, EventActivities, createQueryDate } from "@utils/common";
-
+import { deleteEvent } from "@utils/actions";
 import { PopoutContext } from "@contexts/PopoutContext";
 
 /* Custom date picker component */
@@ -24,7 +24,7 @@ import PropTypes from "prop-types";
 import Button from "@mui/material/Button";
 import dayjs from "dayjs";
 
-import { DatePicker, StaticDatePicker } from "@mui/x-date-pickers";
+import { DatePicker } from "@mui/x-date-pickers";
 
 // Just to add pseudo elements
 import "@styles/pseudo-el-fa-icons.css";
@@ -117,21 +117,6 @@ export default function Activities({ events, editable = false }) {
     month: "long", // full name of the month
     day: "numeric", // numeric day of the month
   };
-
-  async function deleteEvent(teamId, id) {
-    console.log("delete event", id);
-
-    const resp = await fetch(`/api/team/${teamId}/event`, {
-      method: "DELETE",
-      header: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ teamId, id }),
-    }).then((res) => {
-      console.log(res.json());
-      router.replace(router.asPath);
-    });
-  }
 
   const listEvents = events
     .filter((e) => {
@@ -292,7 +277,7 @@ export default function Activities({ events, editable = false }) {
                   {ticks[idx]?.time !== eventTimePassed && editable && (
                     <div className={Style.eventBoard}>
                       <button
-                        className={`border-remove`}
+                        className={Style.borderRemove}
                         onClick={() => {
                           setAction({
                             title: "Delete event",

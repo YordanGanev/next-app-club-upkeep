@@ -5,7 +5,7 @@ import { getPlaceholderImage } from "@utils/common";
 import { getSession } from "@auth0/nextjs-auth0";
 
 import { redirect } from "next/navigation";
-import { InviteType, SportType } from "@prisma/client";
+import { EventType, InviteType, SportType } from "@prisma/client";
 
 export async function addClub(data: FormData) {
   const session = await getSession();
@@ -65,6 +65,16 @@ export async function addTeam(
       },
     },
   });
+}
+
+export async function updateUser(data: FormData) {
+  const session = await getSession();
+
+  if (!session) return;
+
+  console.log(data);
+
+  //TODO add to prisma
 }
 
 export async function addMedicalRecord(
@@ -267,6 +277,37 @@ export async function cancelInvite(teamId: string, userId: string) {
   }
 }
 
+export async function acceptInvite(teamId: string, userId: string) {
+  const session = await getSession();
+
+  if (!session) return;
+
+  const invite = await prisma.invite.delete({
+    where: {
+      teamId_userId: { teamId, userId },
+    },
+  });
+
+  if (invite.type === InviteType.PLAYER) {
+    const player = await prisma.player.create({
+      data: { userId, teamId },
+    });
+  } else if (invite.type === InviteType.STAFF) {
+    const user = await prisma.user.update({
+      where: {
+        id: userId,
+      },
+      data: {
+        team: {
+          connect: {
+            id: teamId,
+          },
+        },
+      },
+    });
+  }
+}
+
 export async function removePlayer(id: string) {
   const session = await getSession();
 
@@ -319,10 +360,57 @@ export async function addEvent(
   console.log("date", date);
   console.log("time", time);
   console.log("note", note);
+
+  const dateInput = new Date(date);
+
+  const [hours, mins] = time.split(":");
+
+  console.log(dateInput, hours, mins);
+
+  dateInput.setHours(Number(hours));
+  dateInput.setMinutes(Number(mins));
+
+  const event = await prisma.team.update({
+    where: {
+      id: teamId,
+    },
+    data: {
+      events: {
+        create: {
+          type: type as EventType,
+          date: dateInput,
+          note,
+        },
+      },
+    },
+  });
 }
 
 // Custom invoaction methods
 // Simulating api calls
+
+export async function deleteEvent(eventId: string, teamId: string) {
+  const session = await getSession();
+
+  if (!session) return;
+
+  const event = await prisma.event.findUnique({
+    where: {
+      id: eventId,
+    },
+    select: {
+      teamId: true,
+    },
+  });
+
+  if (event?.teamId !== teamId) return;
+
+  const deleted = await prisma.event.delete({
+    where: {
+      id: eventId,
+    },
+  });
+}
 
 export async function deleteMedicalRecord(id: string) {
   "use server";

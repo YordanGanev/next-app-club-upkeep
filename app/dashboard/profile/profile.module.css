@@ -1,0 +1,67 @@
+.profileWrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 2em;
+    width: 100%;
+    padding: 1em 0em;
+}
+
+.profileWrapper > div > img {
+    border-radius: 50%;
+}
+
+.profileWrapper > div > h2 {
+    margin-bottom: 1rem;
+}
+
+.date {
+    padding: 0.5rem 0rem;
+    font-size: 0.8rem;
+}
+
+/* ------------ */
+
+.formWrapper {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.formWrapper > h3 {
+    justify-self: left;
+}
+
+.form {
+    border-radius: 1rem;
+    width: 100%;
+    max-width: 600px;
+}
+
+.form > div {
+    display: flex;
+    flex-direction: column;
+}
+
+.form > div > label {
+    margin-top: 0.5rem;
+    margin-left: 0.5rem;
+    margin-top: 1rem;
+    font-size: 1rem;
+}
+
+.form > div > input,
+.form > div > select,
+.form > div > button {
+    margin: 0.5rem;
+    background-color: var(--neutralPrimary);
+    padding: 0.5rem;
+    border-color: var(--neutralPrimaryAlt);
+    border-radius: 0.5rem;
+    font-size: 1.2rem;
+}
+.form input:focus {
+    outline: none;
+}

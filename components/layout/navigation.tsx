@@ -5,6 +5,7 @@ import Image from "next/image";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
+  faHome,
   faBars,
   faFlagCheckered,
   faPeopleGroup,
@@ -82,7 +83,7 @@ export default function Navigation() {
                 <FontAwesomeIcon icon={faBars} />
               </i>
             </div>
-            <Link href="/dashboard" legacyBehavior>
+            <Link href="/about" legacyBehavior>
               <a>
                 <Image
                   src="/icon.png"
@@ -95,6 +96,20 @@ export default function Navigation() {
             <h2> Club Upkeep </h2>
           </div>
           <div className={Style.main}>
+            <Link href={`/dashboard`} legacyBehavior>
+              <a className={Style.linkContainer}>
+                <div
+                  className={`${Style.link} ${
+                    main === undefined ? Style.select : null
+                  }`}
+                >
+                  <i>
+                    <FontAwesomeIcon icon={faHome} />
+                  </i>
+                  <span>Home</span>
+                </div>
+              </a>
+            </Link>
             {items.map((item) => {
               let current = false;
 

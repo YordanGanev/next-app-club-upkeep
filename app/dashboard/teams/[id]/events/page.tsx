@@ -2,7 +2,11 @@ import { prisma } from "@utils/db";
 import { redirect } from "next/navigation";
 import { getSession } from "@auth0/nextjs-auth0";
 
-import { PlayerManageTeamTabs, StaffManageTeamTabs } from "@utils/common";
+import {
+  PlayerManageTeamTabs,
+  StaffManageTeamTabs,
+  UserAccess,
+} from "@utils/common";
 
 import TabNav from "@components/layout/tabNav";
 import TeamEventsPage from "./team-events";
@@ -92,11 +96,28 @@ export default async function EventPage({
       },
     },
   });
+  if (!team) redirect("/about");
+
+  let access = UserAccess.player;
+  let WriteAccess = false;
+
+  const { club, staff } = team;
+  if (club.ownerId === appUser.id) {
+    access = UserAccess.owner;
+    WriteAccess = true;
+  } else {
+    staff?.forEach((member) => {
+      if (member.id === appUser.id) {
+        access = UserAccess.staff;
+        WriteAccess = true;
+      }
+    });
+  }
 
   return (
     <>
-      <TabNav tabs={true ? StaffManageTeamTabs : PlayerManageTeamTabs} />
-      <TeamEventsPage team={team} writeAccess={true} appUser={appUser} />
+      <TabNav tabs={WriteAccess ? StaffManageTeamTabs : PlayerManageTeamTabs} />
+      <TeamEventsPage team={team} writeAccess={WriteAccess} appUser={appUser} />
     </>
   );
 }

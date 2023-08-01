@@ -12,7 +12,8 @@ import {
 
 import { addEvent } from "@utils/actions";
 
-import WizzardButton from "@/components/basic/wizButton";
+import Connecting from "@components/basic/connecting";
+import WizzardButton from "@components/basic/wizButton";
 import Calendar, { calendarFilterEvents } from "@components/basic/calendar";
 import Activities from "@components/basic/activities";
 
@@ -41,7 +42,7 @@ export default function TeamEventsPage({
 
   const { id } = useParams();
 
-  console.log(today, dayjs(today));
+  // console.log(today, dayjs(today));
 
   const eventTypeOptions = [
     { value: EventType.TRAINING, label: "Training" },
@@ -63,6 +64,7 @@ export default function TeamEventsPage({
       master_data: { teamId: team.id, offset: new Date().getTimezoneOffset() },
     },
     title: "Add event",
+    persist: true,
     inputs: [
       {
         type: "Select",
@@ -100,11 +102,7 @@ export default function TeamEventsPage({
   if (!window?.width) {
     return (
       <>
-        <h1>{id}</h1>
-        <div className={Style.wrapper}>
-          <h1>Calendar</h1>
-          <h1>Activity</h1>
-        </div>
+        <Connecting message={null} />
         {writeAccess && <WizzardButton form={form} extra={null} />}
       </>
     );

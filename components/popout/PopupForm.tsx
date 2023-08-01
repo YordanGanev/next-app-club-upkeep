@@ -9,19 +9,19 @@ import Button from "@components/basic/button";
 
 import Style from "./styles/PopupForm.module.css";
 
-import { usePathname } from "next/navigation";
-
 export default function PopupForm() {
   const { formState, formVisible, formHide } = useContext(PopoutContext);
 
-  const pathname = usePathname();
-
   const [values, handleChange] = useForm({});
+
   const ref = useOutsideClick(() => {
-    // allow events page to use custom calendar selector
-    const current = pathname.split("/")[4];
-    // console.log(pathname);
-    if (current !== "events") formHide();
+    console.log("Click Outside", formState.persist);
+    console.log(formState);
+
+    if (formState.persist) return;
+    if (true) return; // temp fix presist?
+
+    formHide();
   });
 
   // const [isUpdating, setUpdating] = useState(false); // if needed for slow update

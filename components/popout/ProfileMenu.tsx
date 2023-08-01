@@ -38,22 +38,24 @@ export default function ProfileMenu() {
           </div>
           <div className={Style.userMenu}>
             <ul>
-              <Link key="kProfile" href="/profile">
-                <li>
-                  <i>
-                    <FontAwesomeIcon icon={faUser} />
-                  </i>{" "}
-                  Profile
-                </li>
+              <Link key="kProfile" href="/dashboard/profile" legacyBehavior>
+                <a>
+                  <li>
+                    <i>
+                      <FontAwesomeIcon icon={faUser} />
+                    </i>
+                    Profile
+                  </li>
+                </a>
               </Link>
-              <Link key="kProfileSignOut" href="/api/auth/logout">
+              <a href="/api/auth/logout">
                 <li>
                   <i>
                     <FontAwesomeIcon icon={faRightFromBracket} />
                   </i>
                   Sign out
                 </li>
-              </Link>
+              </a>
             </ul>
           </div>
         </div>
