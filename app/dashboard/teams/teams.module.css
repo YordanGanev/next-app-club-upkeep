@@ -70,11 +70,13 @@
     text-overflow: ellipsis;
 }
 
-
+.wizBtn {
+    padding-right: 4.5rem;
+}
 /* mobile view */
-
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 1000px) {
     .wizBtn {
+        padding-right: .75rem;
         padding-bottom: 6rem;
     }
 }

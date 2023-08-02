@@ -33,16 +33,11 @@ export default function TeamEventsPage({
 
   NotificationUpdate(appUser, setNotifyInvites, setNotifyOptions);
 
-  const ref = useRef();
   const today = new Date();
   const window = useWindowSize();
   const searchParams = useSearchParams();
 
   const view = searchParams.get("view");
-
-  const { id } = useParams();
-
-  // console.log(today, dayjs(today));
 
   const eventTypeOptions = [
     { value: EventType.TRAINING, label: "Training" },
@@ -52,10 +47,6 @@ export default function TeamEventsPage({
     { value: EventType.MEETING, label: "Meeting" },
     { value: EventType.MEDICAL, label: "Medical" },
   ];
-
-  useEffect(() => {
-    if (ref.current) console.log(ref.current);
-  }, []);
 
   const disableCalendarSize = 765;
 

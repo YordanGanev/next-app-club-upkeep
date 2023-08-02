@@ -16,14 +16,6 @@ import { faUserPlus } from "@fortawesome/free-solid-svg-icons";
 
 import WizzardButton from "@components/basic/wizButton";
 
-const InvitesUser = Prisma.validator<Prisma.InviteArgs>()({
-  include: {
-    user: true,
-  },
-});
-
-type InviteUser_t = Prisma.InviteGetPayload<typeof InvitesUser>;
-
 export default function TeamPlayersClient({
   appUser,
   writeAccess,

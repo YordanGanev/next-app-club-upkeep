@@ -16,7 +16,7 @@ export default function WizzardButton({ form, extra }) {
             key={button?.icon}
             tabIndex={2}
             className={Style.extra}
-            onClick={(e) => {
+            onClick={() => {
               setFormState(button?.form);
             }}
           >
