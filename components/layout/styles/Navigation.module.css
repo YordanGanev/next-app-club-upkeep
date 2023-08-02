@@ -11,12 +11,6 @@
     box-sizing: border-box
 }
 
-.wrapper i,
-.user i {
-    text-align: center;
-    width: 24px;
-}
-
 .linkContainer,
 .profile {
     cursor: pointer;
@@ -89,10 +83,6 @@
     border-bottom: 1px solid var(--themeLight);
 }
 
-.main i {
-    font-weight: 700;
-}
-
 .link {
     text-transform: capitalize;
 }
@@ -163,6 +153,10 @@
         align-items: center;
         justify-items: center;
     }
+    
+    .wrapper svg {
+        width: 1em;
+    }
 
     .profile ,
     .header {
@@ -172,8 +166,12 @@
     .wrapper span,
     .header>h2,
     .profile>span,
-    .profile>i {
+    .profile>svg {
         display: none;
+    }
+
+    .notifications .iconNotify {
+        display: inline-block ;
     }
 }
 

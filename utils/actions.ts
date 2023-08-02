@@ -31,10 +31,6 @@ export async function addClub(data: FormData) {
       },
     },
   });
-
-  if (!user) {
-    return;
-  }
 }
 
 export async function addTeam(
@@ -171,10 +167,6 @@ export async function invitePlayer(
       },
     },
   });
-
-  // console.log(email, master_data);
-
-  return;
 }
 
 export async function inviteStaff(
@@ -220,10 +212,6 @@ export async function inviteStaff(
       },
     },
   });
-
-  // console.log(email, master_data);
-
-  return;
 }
 
 export async function createPlayer(data: FormData) {
@@ -325,18 +313,22 @@ export async function removeStaff(teamId: string, userId: string) {
 
   if (!session) return;
 
-  const team = await prisma.team.update({
+  console.log(teamId, userId);
+
+  const user = await prisma.user.update({
     where: {
-      id: teamId,
+      id: userId,
     },
     data: {
-      staff: {
-        delete: {
-          id: userId,
+      team: {
+        disconnect: {
+          id: teamId,
         },
       },
     },
   });
+
+  console.log(user);
 }
 
 export async function addEvent(
@@ -418,15 +410,11 @@ export async function deleteMedicalRecord(id: string) {
 
   if (!session) return;
 
-  console.log(id);
-
   const find = await prisma.medical.findUnique({
     where: {
       id,
     },
   });
-
-  console.log(find);
 
   const medical = await prisma.medical.delete({
     where: {
@@ -439,7 +427,6 @@ export async function incrementUnseenInvites(text: string) {
   const session = await getSession();
 
   if (!session) return;
-  console.log(text);
 
   const user = await prisma.user.update({
     where: {

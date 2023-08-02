@@ -1,7 +1,7 @@
 "use client";
 
 // Functionality
-import { useState, useContext } from "react";
+import { useContext } from "react";
 
 import { Club, Team } from "@prisma/client";
 

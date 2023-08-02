@@ -15,6 +15,7 @@ export default async function ServerComponent() {
   const session = await getSession();
   // const accessToken = await getAccessToken();
   const user = session?.user;
+  console.log("profile");
 
   // console.log("session", session);
   // console.log("user", user);

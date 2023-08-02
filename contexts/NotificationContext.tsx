@@ -35,6 +35,7 @@ export const NotificationUpdate = (
   const { unseenInvites, invite } = appUser || {};
 
   useEffect(() => {
+    console.log("Update notifications", invite, unseenInvites);
     if (unseenInvites) {
       setUnseen(unseenInvites);
     }
@@ -59,7 +60,7 @@ function NotificationProvider({ children }: { children: React.ReactNode }) {
 
   const [notification, setNotification] = useState<NotificationType>(init);
 
-  function setNotifyInvites(invites: any) {
+  function setNotifyInvites(invites: number) {
     setNotification((current: any) => ({
       ...current,
       new: invites,

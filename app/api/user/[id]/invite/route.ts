@@ -16,7 +16,7 @@ export async function DELETE(
       select: { id: true, unseenInvites: true },
     });
 
-    return new NextResponse(JSON.stringify(user), { status: 200 });
+    return NextResponse.json(user);
   } catch (e) {
     console.log(request.method, request.url);
     console.error(e);
@@ -39,7 +39,7 @@ export async function POST(
       select: { id: true, unseenInvites: true },
     });
 
-    return new NextResponse(JSON.stringify(user), { status: 200 });
+    return NextResponse.json(user);
   } catch (e) {
     console.log(request.url);
     console.error(e);

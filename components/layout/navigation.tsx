@@ -25,11 +25,12 @@ import { NotificationContext } from "@contexts/NotificationContext";
 import { PopoutContext } from "@/contexts/PopoutContext";
 
 import Style from "./styles/Navigation.module.css";
+import DynamicLink from "@components/basic/dynamic-link";
 
 export default function Navigation() {
   const pathname = usePathname();
 
-  const { user, error, isLoading } = useUser();
+  const { user, isLoading } = useUser();
 
   const { notification, setNotifyState, setNotifyInvites } =
     useContext(NotificationContext);
@@ -64,7 +65,6 @@ export default function Navigation() {
   };
 
   const addNotify = notification?.options?.length > 0;
-  notification?.new;
 
   return (
     <>
@@ -79,11 +79,9 @@ export default function Navigation() {
                 setMobileView(!mobileMenuHide);
               }}
             >
-              <i>
-                <FontAwesomeIcon icon={faBars} />
-              </i>
+              <FontAwesomeIcon icon={faBars} />
             </div>
-            <Link href="/about" legacyBehavior>
+            <Link href="/about" prefetch={false} legacyBehavior>
               <a>
                 <Image
                   src="/icon.png"
@@ -96,20 +94,16 @@ export default function Navigation() {
             <h2> Club Upkeep </h2>
           </div>
           <div className={Style.main}>
-            <Link href={`/dashboard`} legacyBehavior>
-              <a className={Style.linkContainer}>
-                <div
-                  className={`${Style.link} ${
-                    main === undefined ? Style.select : null
-                  }`}
-                >
-                  <i>
-                    <FontAwesomeIcon icon={faHome} />
-                  </i>
-                  <span>Home</span>
-                </div>
-              </a>
-            </Link>
+            <DynamicLink href={`/dashboard`} className={Style.linkContainer}>
+              <div
+                className={`${Style.link} ${
+                  main === undefined ? Style.select : null
+                }`}
+              >
+                <FontAwesomeIcon icon={faHome} />
+                <span>Home</span>
+              </div>
+            </DynamicLink>
             {items.map((item) => {
               let current = false;
 
@@ -118,25 +112,19 @@ export default function Navigation() {
               }
 
               return (
-                <Link
+                <DynamicLink
                   key={`${item.slug}-nav-link`}
                   href={`/dashboard/${item.slug}`}
-                  legacyBehavior
+                  className={Style.linkContainer}
                 >
-                  <a className={Style.linkContainer}>
-                    <div
-                      key={item.slug}
-                      className={`${Style.link} ${
-                        current ? Style.select : null
-                      }`}
-                    >
-                      <i>
-                        <FontAwesomeIcon icon={item.icon} />
-                      </i>
-                      <span>{item.slug}</span>
-                    </div>
-                  </a>
-                </Link>
+                  <div
+                    key={item.slug}
+                    className={`${Style.link} ${current ? Style.select : null}`}
+                  >
+                    <FontAwesomeIcon icon={item.icon} />
+                    <span>{item.slug}</span>
+                  </div>
+                </DynamicLink>
               );
             })}
           </div>
@@ -147,12 +135,14 @@ export default function Navigation() {
               }`}
             >
               <button onClick={handleNotification}>
-                <span className="fa-layers">
+                <span className={`${Style.iconNotify} fa-layers`}>
                   <FontAwesomeIcon
                     icon={addNotify === true ? faBell : farBell}
                   />
-                  {notification?.new > 0 && (
-                    <span className={`${Style.newNotify} fa-layers-counter`}>
+                  {addNotify && notification?.new > 0 && (
+                    <span
+                      className={`${Style.newNotify} ${Style.iconNotify} fa-layers-counter`}
+                    >
                       {notification?.new > 9 ? "9+" : notification?.new}
                     </span>
                   )}
@@ -180,9 +170,7 @@ export default function Navigation() {
                 <span>
                   {user.name === user.email ? user.nickname : user.name}
                 </span>
-                <i>
-                  <FontAwesomeIcon icon={faEllipsis} />
-                </i>
+                <FontAwesomeIcon icon={faEllipsis} />
               </button>
             )}
           </div>

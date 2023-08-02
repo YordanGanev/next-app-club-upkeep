@@ -4,6 +4,7 @@ import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faUserTie } from "@fortawesome/free-solid-svg-icons";
 
+import DynamicLink from "@components/basic/dynamic-link";
 import CardStyle from "@styles/card-layout.module.css";
 
 export default function ListTeams({ teams }: { teams: any[] | undefined }) {
@@ -18,57 +19,56 @@ export default function ListTeams({ teams }: { teams: any[] | undefined }) {
       <div className={CardStyle.container}>
         {!teams && null}
         {teams.map((team) => {
-          console.log(team);
           return (
             <div className={CardStyle.card} key={team.id}>
-              <Link href={`/dashboard/teams/${team.id}`} legacyBehavior>
-                <a>
-                  <Image
-                    src={team.picture}
-                    alt="defaultclubpng"
-                    width="100"
-                    height="100"
-                  />
+              <DynamicLink href={`/dashboard/teams/${team.id}`}>
+                <Image
+                  src={team.picture}
+                  alt="defaultclubpng"
+                  width="100"
+                  height="100"
+                />
+
+                <div>
+                  <h2>{team.name}</h2>
 
                   <div>
-                    <h2>{team.name}</h2>
-
+                    <span className={CardStyle.statsLabel}> Created </span>
+                    {new Date(team.createdAt).toLocaleDateString(
+                      "en-UK",
+                      options
+                    )}
+                  </div>
+                  <div>
+                    <span className={CardStyle.statsLabel}> Updated </span>
+                    {new Date(team.updatedAt).toLocaleDateString(
+                      "en-UK",
+                      options
+                    )}
+                  </div>
+                  <div className={CardStyle.stats}>
                     <div>
-                      <span className={CardStyle.statsLabel}> Created </span>
-                      {new Date(team.createdAt).toLocaleDateString(
-                        "en-UK",
-                        options
-                      )}
+                      <div className={CardStyle.icon}>
+                        <FontAwesomeIcon icon={faUser} />
+                        <span>{team._count.player}</span>
+                      </div>
+                      <span className={CardStyle.statsLabel}>Players</span>
                     </div>
                     <div>
-                      <span className={CardStyle.statsLabel}> Updated </span>
-                      {new Date(team.updatedAt).toLocaleDateString(
-                        "en-UK",
-                        options
-                      )}
-                    </div>
-                    <div className={CardStyle.stats}>
-                      <div>
-                        <div className={CardStyle.icon}>
-                          <FontAwesomeIcon icon={faUser} />
-                          <span>{team._count.player}</span>
-                        </div>
-                        <span className={CardStyle.statsLabel}>Players</span>
+                      <div className={CardStyle.icon}>
+                        <FontAwesomeIcon icon={faUserTie} />
+                        <span>{team._count.staff + 1}</span>
                       </div>
-                      <div>
-                        <div className={CardStyle.icon}>
-                          <FontAwesomeIcon icon={faUserTie} />
-                          <span>{team._count.staff + 1}</span>
-                        </div>
-                        <span className={CardStyle.statsLabel}>{"Staff"}</span>
-                      </div>
+                      <span className={CardStyle.statsLabel}>{"Staff"}</span>
                     </div>
                   </div>
-                </a>
-              </Link>
+                </div>
+              </DynamicLink>
             </div>
           );
         })}
       </div>
     );
+
+  return null;
 }

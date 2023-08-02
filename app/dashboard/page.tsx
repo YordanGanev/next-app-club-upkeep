@@ -9,8 +9,14 @@ import ListEvents from "@components/basic/list-events";
 
 import Style from "./dash.module.css";
 
+export const dynamic = "force-dynamic";
+export const dynamicParams = true;
+export const revalidate = 0;
+
 export default async function DashboardPage() {
   const session = await getSession();
+
+  console.log("dashboard");
 
   if (!session)
     return (
@@ -71,8 +77,6 @@ export default async function DashboardPage() {
 
   const team_ids = teams.map((team) => team.id);
 
-  // console.log("team_ids", team_ids);
-
   const currentDate = new Date();
 
   const upcomingEvents = await prisma.event.findMany({
@@ -97,8 +101,6 @@ export default async function DashboardPage() {
       },
     },
   });
-
-  // console.log(upcomingEvents);
 
   return (
     <>

@@ -7,20 +7,18 @@ import Image from "next/image";
 import Style from "./styles/Notifications.module.css";
 
 import Button from "@components/basic/button";
-import { useRouter, usePathname } from "next/navigation";
 
 import { useContext } from "react";
 
 import { NotificationContext } from "@contexts/NotificationContext";
+
+import { acceptInvite, cancelInvite } from "@utils/actions";
 
 export default function NotificationsMenu() {
   const { user, isLoading } = useUser();
 
   const { notification, setNotifyState, setNotifyOptions } =
     useContext(NotificationContext);
-
-  const router = useRouter();
-  const pathname = usePathname();
 
   const ref = useOutsideClick(() => {
     setNotifyState(false);
@@ -41,17 +39,8 @@ export default function NotificationsMenu() {
     accept: boolean,
     { userId, teamId }: { userId: string; teamId: string }
   ) => {
-    // await fetch("/api/invite/reply", {
-    //   method: accept ? "POST" : "DELETE",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({ userId, teamId }),
-    // }).then(() => {
-    //   if (accept && pathname === "/teams") {
-    //     router.replace(pathname);
-    //   }
-    // });
+    if (!accept) cancelInvite(teamId, userId);
+    else acceptInvite(teamId, userId);
   };
 
   // Display Empty div to keep component reference

@@ -1,19 +1,21 @@
+import React from "react";
+import { cache } from "react";
+
 import { getSession } from "@auth0/nextjs-auth0";
 import { redirect } from "next/navigation";
 
 import { prisma } from "@utils/db";
+import { getUser } from "./get-user";
 
 import TeamsClient from "./teams-client";
 import ListTeams from "@components/basic/list-teams";
 
 import Style from "./teams.module.css";
 import CardStyle from "@styles/card-layout.module.css";
-// import "@styles/mui-react-date.css";
 
 export default async function page() {
   const session = await getSession();
 
-  // console.log(session);
   if (!session) redirect("/about");
 
   const appUser = await prisma.user.findUnique({
