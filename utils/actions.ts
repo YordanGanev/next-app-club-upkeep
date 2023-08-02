@@ -214,16 +214,32 @@ export async function inviteStaff(
   });
 }
 
-export async function createPlayer(data: FormData) {
+export async function createPlayer(
+  data: FormData,
+  master_data: { teamId: string }
+) {
   const session = await getSession();
 
   if (!session) return;
 
-  const email = data.get("email") as string;
+  const name = data.get("name") as string;
 
-  const picture = getPlaceholderImage(email.slice(0, 2).toLowerCase());
+  const picture = getPlaceholderImage(name.slice(0, 2).toLowerCase());
 
-  return;
+  const player = await prisma.player.create({
+    data: {
+      name: name,
+      picture,
+      Team: {
+        connect: {
+          id: master_data.teamId,
+        },
+      },
+    },
+  });
+
+  console.log(player, name, picture);
+  //TODO add to prisma
 }
 
 export async function cancelInvite(teamId: string, userId: string) {

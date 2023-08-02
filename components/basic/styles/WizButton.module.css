@@ -35,26 +35,6 @@
     position: relative;
 }
 
-.wrapper:focus-within>.extra,
-.wrapper:hover>.extra {
-    background-color: var(--extraTertiary);
-    height: 2.5rem;
-    width: 2.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: .5rem;
-}
-
-.extra>i {
-    display: none;
-    color: var(--white);
-}
-
-.wrapper:focus-within>.extra>i,
-.wrapper:hover>.extra>i {
-    display: block;
-}
 
 .wizButton:focus,
 .extra:focus {
@@ -90,5 +70,43 @@
 @media screen and (max-width: 500px) {
     .wrapper {
         bottom: 1.5rem;
+    }
+    
+    .extra {
+        background-color: var(--extraTertiary);
+        height: 2.5rem;
+        width: 2.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: .5rem;
+    }
+
+    .extra>svg {
+        display: block;
+    }
+}
+
+/* desktop */
+@media screen and (min-width: 501px) {
+    .wrapper:focus-within>.extra,
+    .wrapper:hover>.extra {
+        background-color: var(--extraTertiary);
+        height: 2.5rem;
+        width: 2.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: .5rem;
+    }
+
+    .extra>svg {
+        display: none;
+        color: var(--white);
+    }
+
+    .wrapper:focus-within>.extra>svg,
+    .wrapper:hover>.extra>svg {
+        display: block;
     }
 }

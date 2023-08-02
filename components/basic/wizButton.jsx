@@ -3,6 +3,7 @@ import Style from "./styles/WizButton.module.css";
 
 import { useContext, useEffect } from "react";
 import { PopoutContext } from "@/contexts/PopoutContext";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function WizzardButton({ form, extra }) {
   const { setFormState } = useContext(PopoutContext);
@@ -16,10 +17,10 @@ export default function WizzardButton({ form, extra }) {
             tabIndex={2}
             className={Style.extra}
             onClick={(e) => {
-              button.callback(e);
+              setFormState(button?.form);
             }}
           >
-            <i className={button?.icon}></i>
+            <FontAwesomeIcon icon={button?.icon} />
           </button>
         );
       })}

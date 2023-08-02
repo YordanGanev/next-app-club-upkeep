@@ -10,7 +10,9 @@ import {
   UserNotifyContextType,
 } from "@/contexts/NotificationContext";
 
-import { invitePlayer } from "@utils/actions";
+import { invitePlayer, createPlayer } from "@utils/actions";
+
+import { faUserPlus } from "@fortawesome/free-solid-svg-icons";
 
 import WizzardButton from "@components/basic/wizButton";
 
@@ -84,5 +86,37 @@ export default function TeamPlayersClient({
     onSubmitAction: invitePlayer,
   };
 
-  return <>{writeAccess && <WizzardButton form={form} extra={null} />}</>;
+  const createPlayerForm = {
+    fetch: {
+      master_data: {
+        teamId,
+      },
+    },
+    title: "New Player",
+    inputs: [
+      {
+        type: "input",
+        name: "name",
+        required: true,
+        placeholder: "Player name",
+      },
+    ],
+    onSubmitAction: createPlayer,
+  };
+
+  return (
+    <>
+      {writeAccess && (
+        <WizzardButton
+          form={form}
+          extra={[
+            {
+              icon: faUserPlus,
+              form: createPlayerForm,
+            },
+          ]}
+        />
+      )}
+    </>
+  );
 }
