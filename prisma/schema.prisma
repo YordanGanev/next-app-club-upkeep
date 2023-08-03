@@ -41,18 +41,19 @@ model Club {
 }
 
 model Team {
-  id        String    @id @default(uuid())
-  clubId    String
-  picture   String    @default("/default_team.png")
-  sport     SportType
-  name      String    @unique
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  events    Event[]
-  invite    Invite[]
-  player    Player[]
-  club      Club      @relation(fields: [clubId], references: [id], onDelete: Cascade)
-  staff     User[]    @relation("TeamToUser")
+  id           String        @id @default(uuid())
+  clubId       String
+  picture      String        @default("/default_team.png")
+  sport        SportType
+  name         String        @unique
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  events       Event[]
+  invite       Invite[]
+  player       Player[]
+  club         Club          @relation(fields: [clubId], references: [id], onDelete: Cascade)
+  staff        User[]        @relation("TeamToUser")
+  achievements Achievement[]
 }
 
 model Player {
@@ -106,6 +107,16 @@ model Invite {
   @@unique([teamId, userId])
 }
 
+model Achievement {
+  id          String          @id @default(uuid())
+  type        AchievementType
+  competition String
+  description String?
+  date        DateTime
+  teamId      String
+  team        Team            @relation(fields: [teamId], references: [id])
+}
+
 enum EventType {
   TRAINING
   LEAGUE_GAME
@@ -129,4 +140,12 @@ enum SportType {
 enum InviteType {
   PLAYER
   STAFF
+}
+
+enum AchievementType {
+  FIRST_PLACE
+  SECOND_PLACE
+  THIRD_PLACE
+  MVP
+  SPECIAL
 }

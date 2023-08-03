@@ -254,9 +254,9 @@ export default function Calendar({ events }) {
                 views={["month", "year"]}
                 value={dayjs(new Date(date))}
                 onChange={(value) => {
-                  console.log(value);
-                  console.warn(searchParams.get("year"), value.$y);
-                  console.warn(searchParams.get("month"), value.$M);
+                  //console.log(value);
+                  //console.warn(searchParams.get("year"), value.$y);
+                  //console.warn(searchParams.get("month"), value.$M);
 
                   if (
                     searchParams.get("year") != value.$y ||

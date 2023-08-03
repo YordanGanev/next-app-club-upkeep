@@ -33,7 +33,7 @@ export default async function page({
   let date: Date;
 
   if (searchParams?.day && searchParams?.month && searchParams?.year) {
-    console.log(searchParams);
+    // console.log(searchParams);
     day = searchParams.day;
     month = searchParams.month;
     year = searchParams.year;
@@ -97,12 +97,7 @@ export default async function page({
     events = events.concat(team.events);
   });
 
-  console.log(events);
+  // console.log(events);
 
-  return (
-    <>
-      <h1>Schedule</h1>
-      <SchedulePage appUser={appUser} events={events} />
-    </>
-  );
+  return <SchedulePage appUser={appUser} events={events} />;
 }

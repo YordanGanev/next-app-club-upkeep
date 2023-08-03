@@ -1,0 +1,79 @@
+/* flex ratio 1:8:2 icon:info:date */
+.achievement {
+    display: flex;
+    gap: 1em;
+    justify-items: center;
+    align-items: center;
+}
+
+.achievement + .achievement {
+    margin-top: 2em;
+}
+
+.icon {
+    flex: 1;
+    padding: .25em;
+}
+
+
+.info {
+    flex: 8;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2em;
+}
+
+.info div {
+    display: flex;
+    gap: 1em;
+    align-items: center;
+}
+
+.bold {
+    font-weight: 700;
+}
+
+.swag {
+    text-align: center;
+    font-weight: 700;
+    opacity: .7;
+    width: 9em;
+}
+
+.info > .date {
+    display: none;
+}
+
+.date {
+    flex: 2;
+}
+
+
+/* mobile */
+@media screen and (max-width: 500px) {
+    .achievement + .achievement{
+        padding-top: 1em;
+        border-top: 1px solid var(--neutralLighter);
+    }
+    .date {
+        display: none;
+    }
+    .info > .date {
+        display: flex;
+    }
+
+    .swag {
+        width: max-content;
+    }
+
+    .info div {
+        flex-direction: column;
+        gap: .5em;
+
+    text-align: center;
+    }
+    .icon {
+        flex: 2;
+        font-size: 3em;
+    }
+}

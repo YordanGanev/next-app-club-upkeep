@@ -1,0 +1,8 @@
+.wrapper {
+    padding: 1rem;
+    text-align: center;
+    font-size: larger;
+    font-weight: 700;
+    color: var(--themeLight);
+    opacity: .7;
+}

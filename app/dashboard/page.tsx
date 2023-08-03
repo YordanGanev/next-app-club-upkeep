@@ -7,7 +7,11 @@ import Dashboard from "./dashboard";
 import ListTeams from "@components/basic/list-teams";
 import ListEvents from "@components/basic/list-events";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCalendarXmark } from "@fortawesome/free-solid-svg-icons";
+
 import Style from "./dash.module.css";
+import StyleMissing from "@styles/missing.module.css";
 
 export const dynamic = "force-dynamic";
 export const dynamicParams = true;
@@ -107,13 +111,28 @@ export default async function DashboardPage() {
       <div className={`dashboard-content-wrapper ${Style.wrapper}`}>
         <section>
           <h2>Upcoming events</h2>
-          <ListEvents events={upcomingEvents} />
+          {upcomingEvents.length === 0 && (
+            <div className={StyleMissing.wrapper}>
+              <div>
+                <FontAwesomeIcon icon={faCalendarXmark} />
+              </div>
+              <div>No events to attend</div>
+            </div>
+          )}
+          {upcomingEvents.length > 0 && <ListEvents events={upcomingEvents} />}
         </section>
 
         <section>
           <h2>Recent teams</h2>
-
-          <ListTeams teams={teams || {}} />
+          {teams.length === 0 && (
+            <div className={StyleMissing.wrapper}>
+              <div>
+                <FontAwesomeIcon icon={faCalendarXmark} />
+              </div>
+              <div>Not member of any team yet</div>
+            </div>
+          )}
+          {teams.length > 0 && <ListTeams teams={teams} />}
         </section>
 
         <Dashboard appUser={appUser} />

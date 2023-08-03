@@ -48,6 +48,10 @@ export type InputType = {
   disabled?: boolean | null;
   format?: string | null;
   options?: any[] | null;
+  minDate?: any | null;
+  maxDate?: any | null;
+  inputRef?: any | null;
+  view?: any | null;
   handleChange?: ((e: any) => void) | null;
 };
 

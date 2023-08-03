@@ -1,0 +1,18 @@
+.FIRST_PLACE path {
+    color: gold ;
+}
+
+.SEDOND_PLACE path {
+    color: silver; 
+}
+
+.THIRD_PLACE path {
+    color: #cd7f32;
+}
+
+.MVP path {
+    color: #f74c4c;
+}
+.SPECIAL path {
+    color: #60d400;
+}

@@ -1,8 +1,5 @@
 .wrapper {
     position: relative;
-    max-width: var(--max-width);
-    margin: auto;
     display: grid;
     gap: 1.5rem;
-    padding: .75rem;
 }

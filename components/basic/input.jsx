@@ -48,6 +48,12 @@ function Input({ inputProps, handleChange }) {
     case "Date":
       return (
         <DatePicker
+          maxDate={inputProps?.maxDate}
+          minDate={inputProps?.minDate}
+          required={inputProps?.required}
+          placeholder={inputProps?.placeholder}
+          format={inputProps?.format}
+          views={inputProps?.views}
           slotProps={{
             textField: { name: inputProps.name, required: inputProps.required },
           }}
@@ -67,7 +73,7 @@ function Input({ inputProps, handleChange }) {
           required={inputProps?.required}
           name={inputProps?.name}
           onChange={(time) => {
-            console.log(time);
+            // console.log(time);
             handleChange(null, {
               name: inputProps?.name,
               value: time,

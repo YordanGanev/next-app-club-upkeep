@@ -1,4 +1,4 @@
-import { SportType } from "@prisma/client";
+import { SportType, Achievement, AchievementType } from "@prisma/client";
 import { ReadonlyURLSearchParams } from "next/navigation";
 
 import {
@@ -18,15 +18,17 @@ export const PlayerManageTeamTabs = [
   { slug: "players", title: "Players" },
   { slug: "medical", title: "Medicals" },
   { slug: "events", title: "Events" },
+  { slug: "achievements", title: "Achievements" },
   { slug: "about", title: "About" },
 ];
 
 export const StaffManageTeamTabs = [
   { slug: "players", title: "Players" },
+  { slug: "staff", title: "Staff" },
   { slug: "medical", title: "Medicals" },
   { slug: "events", title: "Events" },
   { slug: "about", title: "About" },
-  { slug: "staff", title: "Staff" },
+  { slug: "achievements", title: "Achievements" },
 ];
 
 export const UserAccess = {
@@ -140,6 +142,14 @@ export const sportTypeOptions = [
   { value: SportType.FIELD_HOKEY, label: "Field Hokey" },
   { value: SportType.RUGBY, label: "Rugby" },
   { value: SportType.OTHER, label: "Other" },
+];
+
+export const achievementTypeOptions = [
+  { value: AchievementType.FIRST_PLACE, label: "1st place" },
+  { value: AchievementType.SECOND_PLACE, label: "2nd place" },
+  { value: AchievementType.THIRD_PLACE, label: "3rd place" },
+  { value: AchievementType.MVP, label: "MVP award" },
+  { value: AchievementType.SPECIAL, label: "Special award" },
 ];
 
 export const getPlaceholderImage = (signature: string) =>

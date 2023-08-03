@@ -28,36 +28,7 @@ export default function Dashboard({
   if (error) return <div>{error.message}</div>;
 
   if (user) {
-    return (
-      <div>
-        <div>
-          <h1
-            onClick={() => {
-              setFilterOpts({
-                darken: !filterOpts.darken,
-                blockClick: !filterOpts.blockClick,
-                blur: !filterOpts.darken,
-              });
-            }}
-          >
-            Next.js 13 test
-          </h1>
-          <p
-            onClick={() => {
-              setAction({
-                title: "Confirm Action",
-                message: "Confirm action",
-                callback: () => {
-                  console.log("callback");
-                },
-              });
-            }}
-          >
-            Hello {user.name}
-          </p>
-        </div>
-      </div>
-    );
+    return <></>;
   }
 
   return <a href="/api/auth/login">Login</a>;

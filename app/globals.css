@@ -110,6 +110,7 @@ li {
 .dashboard-content-wrapper {
   max-width: var(--max-width);
   margin: 0 auto;
+  padding: .75rem;
 }
 
 /* Buttons  */

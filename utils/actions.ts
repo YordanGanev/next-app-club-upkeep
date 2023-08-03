@@ -5,7 +5,13 @@ import { getPlaceholderImage } from "@utils/common";
 import { getSession } from "@auth0/nextjs-auth0";
 
 import { redirect } from "next/navigation";
-import { EventType, InviteType, SportType } from "@prisma/client";
+import {
+  Achievement,
+  AchievementType,
+  EventType,
+  InviteType,
+  SportType,
+} from "@prisma/client";
 
 export async function addClub(data: FormData) {
   const session = await getSession();
@@ -242,6 +248,92 @@ export async function createPlayer(
   //TODO add to prisma
 }
 
+export async function addEvent(
+  data: FormData,
+  master_data: { teamId: string; offset: number }
+) {
+  const session = await getSession();
+
+  if (!session) return;
+
+  const { teamId, offset } = master_data;
+
+  console.log(teamId, offset);
+
+  const type = data.get("type") as string;
+  const date = data.get("date") as string;
+  const time = data.get("time") as string;
+  const note = data.get("note") as string;
+
+  console.log("type", type);
+  console.log("date", date);
+  console.log("time", time);
+  console.log("note", note);
+
+  const dateInput = new Date(date);
+
+  const [hours, mins] = time.split(":");
+
+  console.log(dateInput, hours, mins);
+
+  dateInput.setHours(Number(hours));
+  dateInput.setMinutes(Number(mins));
+
+  const event = await prisma.team.update({
+    where: {
+      id: teamId,
+    },
+    data: {
+      events: {
+        create: {
+          type: type as EventType,
+          date: dateInput,
+          note,
+        },
+      },
+    },
+  });
+}
+
+export async function addAchievement(
+  data: FormData,
+  master_data: { teamId: string }
+) {
+  const session = await getSession();
+
+  if (!session) return;
+
+  const { teamId } = master_data;
+
+  const type = data.get("type") as AchievementType;
+  const competition = data.get("competition") as string;
+  const description = data.get("description") as string;
+  const date = data.get("date") as string;
+
+  const dateInput = new Date(date);
+
+  // console.log(type, competition, description, date, dateInput);
+
+  const achievement = await prisma.team.update({
+    where: {
+      id: teamId,
+    },
+    data: {
+      achievements: {
+        create: {
+          type,
+          competition,
+          description,
+          date: dateInput,
+        },
+      },
+    },
+  });
+}
+
+// Custom invoaction methods
+// Simulating api calls
+
 export async function cancelInvite(teamId: string, userId: string) {
   const session = await getSession();
 
@@ -346,56 +438,6 @@ export async function removeStaff(teamId: string, userId: string) {
 
   console.log(user);
 }
-
-export async function addEvent(
-  data: FormData,
-  master_data: { teamId: string; offset: number }
-) {
-  const session = await getSession();
-
-  if (!session) return;
-
-  const { teamId, offset } = master_data;
-
-  console.log(teamId, offset);
-
-  const type = data.get("type") as string;
-  const date = data.get("date") as string;
-  const time = data.get("time") as string;
-  const note = data.get("note") as string;
-
-  console.log("type", type);
-  console.log("date", date);
-  console.log("time", time);
-  console.log("note", note);
-
-  const dateInput = new Date(date);
-
-  const [hours, mins] = time.split(":");
-
-  console.log(dateInput, hours, mins);
-
-  dateInput.setHours(Number(hours));
-  dateInput.setMinutes(Number(mins));
-
-  const event = await prisma.team.update({
-    where: {
-      id: teamId,
-    },
-    data: {
-      events: {
-        create: {
-          type: type as EventType,
-          date: dateInput,
-          note,
-        },
-      },
-    },
-  });
-}
-
-// Custom invoaction methods
-// Simulating api calls
 
 export async function deleteEvent(eventId: string, teamId: string) {
   const session = await getSession();
