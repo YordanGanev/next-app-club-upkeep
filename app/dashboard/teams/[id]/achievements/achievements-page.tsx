@@ -63,7 +63,7 @@ export default function AchievementsPage({
         name: "date",
         required: true,
         value: dayjs(today),
-        minDate: dayjs(new Date(2000, 11, 31)),
+        minDate: dayjs(new Date(2000, 1, 1)),
         maxDate: dayjs(today),
         views: ["month", "year"],
       },

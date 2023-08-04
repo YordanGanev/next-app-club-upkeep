@@ -12,19 +12,18 @@
     border-radius: 50%;
 }
 
-.profileWrapper > div > h2 {
+.email {
     margin-bottom: 1rem;
+    font-size: 1.3em;
 }
 
 .date {
     padding: 0.5rem 0rem;
-    font-size: 0.8rem;
 }
 
 /* ------------ */
 
 .formWrapper {
-    padding: 1rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -32,12 +31,33 @@
 
 .formWrapper > h3 {
     justify-self: left;
+    padding-left: 0;
 }
 
-.form {
+.infoWrapper {
+    margin: 0 auto;
+}
+
+.form,
+.infoWrapper {
     border-radius: 1rem;
     width: 100%;
     max-width: 600px;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    padding: 1em 0em 2em;
+}
+
+.info>span {
+    padding: 1em 1em;
+    border-top: 1px solid var(--neutralPrimary);
+}
+
+.info .date {
+    display: none;
 }
 
 .form > div {
@@ -62,6 +82,35 @@
     border-radius: 0.5rem;
     font-size: 1.2rem;
 }
-.form input:focus {
-    outline: none;
+
+.form button {
+    text-align: center;
+} 
+
+.form button:hover,
+.form button:focus {
+    filter: brightness(1.2);
+}
+
+.form button:disabled {
+    filter: brightness(.5);
+}
+
+@media screen and (max-width: 500px) {
+    .profileWrapper {
+        flex-direction: column;
+        gap: .5em;
+    }
+
+    .profileText {
+        text-align: center;
+    }
+
+    .profileText .date {
+        display: none;
+    }
+
+    .info .date {
+        display: block;
+    }
 }

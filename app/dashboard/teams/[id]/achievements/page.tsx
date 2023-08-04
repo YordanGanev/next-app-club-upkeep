@@ -19,14 +19,6 @@ import AchievementsPage from "./achievements-page";
 import "@styles/achievement-icon-color.css";
 import Style from "./achievements.module.css";
 
-export const AchievementMap = {
-  FIRST_PLACE: { name: "Champion", icon: faMedal },
-  SECOND_PLACE: { name: "2nd place", icon: faMedal },
-  THIRD_PLACE: { name: "3rd place", icon: faMedal },
-  MVP: { name: "MVP award", icon: faTrophy },
-  SPECIAL: { name: "Special award", icon: faAward },
-};
-
 export default async function page({
   params: { id },
 }: {
@@ -80,6 +72,14 @@ export default async function page({
   });
 
   if (!team) redirect("/dashboard/teams");
+
+  const AchievementMap = {
+    FIRST_PLACE: { name: "Champion", icon: faMedal },
+    SECOND_PLACE: { name: "2nd place", icon: faMedal },
+    THIRD_PLACE: { name: "3rd place", icon: faMedal },
+    MVP: { name: "MVP award", icon: faTrophy },
+    SPECIAL: { name: "Special award", icon: faAward },
+  };
 
   return (
     <>

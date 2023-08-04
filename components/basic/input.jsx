@@ -6,6 +6,7 @@ import Select from "react-select";
 import "@styles/multiselect.css";
 import "@styles/mui-react-date.css";
 
+import dayjs from "dayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { TimeField } from "@mui/x-date-pickers/TimeField";
 
@@ -57,6 +58,9 @@ function Input({ inputProps, handleChange }) {
           slotProps={{
             textField: { name: inputProps.name, required: inputProps.required },
           }}
+          // fix for getting props from postgress from user table
+          // initial value is not in the right format
+          defaultValue={dayjs(new Date(inputProps?.value))}
           onChange={(newDate) => {
             handleChange(null, {
               name: inputProps?.name,

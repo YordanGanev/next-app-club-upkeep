@@ -74,9 +74,23 @@ export async function updateUser(data: FormData) {
 
   if (!session) return;
 
-  console.log(data);
+  const name = data.get("name") as string;
+  const date = data.get("birthdate") as string;
 
-  //TODO add to prisma
+  const [day, month, year] = date.split("/");
+  const birthdate = new Date(`${year}-${month}-${day}`);
+
+  // await new Promise((resolve) => setTimeout(resolve, 3000));
+
+  const user = await prisma.user.update({
+    where: {
+      email: session.user.email,
+    },
+    data: {
+      name,
+      birthdate: new Date(birthdate),
+    },
+  });
 }
 
 export async function addMedicalRecord(

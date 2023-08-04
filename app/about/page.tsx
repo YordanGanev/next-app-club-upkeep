@@ -1,5 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
+
+import DynamicLink from "@components/basic/dynamic-link";
 import { getSession } from "@auth0/nextjs-auth0";
 
 import HeadBar from "@components/layout/headerBar";
@@ -45,9 +47,9 @@ export default async function About() {
                     Quisquam, voluptatum.
                   </p>
 
-                  <Link href={"/dashboard"} legacyBehavior>
-                    <a className="link-button">Back to dashboard</a>
-                  </Link>
+                  <DynamicLink href={"/dashboard"} className="link-button">
+                    Back to dashboard
+                  </DynamicLink>
                 </div>
               </>
             )}
