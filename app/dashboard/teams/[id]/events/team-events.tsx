@@ -2,13 +2,8 @@
 
 import dayjs from "dayjs";
 import { EventType } from "@prisma/client";
-import { useParams, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { useWindowSize } from "@utils/hooks";
-import { useContext, useEffect, useRef } from "react";
-import {
-  NotificationContext,
-  NotificationUpdate,
-} from "@contexts/NotificationContext";
 
 import { addEvent } from "@utils/actions";
 
@@ -20,19 +15,12 @@ import Activities from "@components/basic/activities";
 import Style from "../../teams.module.css";
 
 export default function TeamEventsPage({
-  appUser,
   writeAccess,
   team,
 }: {
-  appUser: any;
   writeAccess: boolean;
   team: any;
 }) {
-  const { setNotifyInvites, setNotifyOptions } =
-    useContext(NotificationContext);
-
-  NotificationUpdate(appUser, setNotifyInvites, setNotifyOptions);
-
   const today = new Date();
   const window = useWindowSize();
   const searchParams = useSearchParams();
@@ -72,7 +60,6 @@ export default function TeamEventsPage({
         minDate: dayjs(today),
         maxDate: dayjs(new Date(2034, 11, 31)),
         format: "DD/MM/YYYY",
-        // inputRef: ref,
       },
       {
         type: "Time",

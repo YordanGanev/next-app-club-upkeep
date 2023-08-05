@@ -1,7 +1,9 @@
 import { prisma } from "@utils/db";
-import TabNav from "@/components/layout/tabNav";
 import { getSession } from "@auth0/nextjs-auth0";
 import { PlayerManageTeamTabs, StaffManageTeamTabs } from "@utils/common";
+
+import TabNav from "@/components/layout/tabNav";
+import NotificationsUpdate from "@components/basic/NotificationsUpdate";
 
 export default async function page({ params }: { params: { id: string } }) {
   const session = await getSession();
@@ -51,6 +53,8 @@ export default async function page({ params }: { params: { id: string } }) {
     <>
       <TabNav tabs={WriteAccess ? StaffManageTeamTabs : PlayerManageTeamTabs} />
       <h1>About</h1>
+
+      <NotificationsUpdate appUser={appUser} />
     </>
   );
 }

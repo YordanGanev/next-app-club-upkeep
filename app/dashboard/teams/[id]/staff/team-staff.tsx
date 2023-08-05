@@ -1,45 +1,18 @@
 "use client";
-
-import { useContext } from "react";
-
-import { Prisma } from "@prisma/client";
-
-import {
-  NotificationContext,
-  NotificationUpdate,
-  UserNotifyContextType,
-} from "@/contexts/NotificationContext";
-
 import { UserAccess } from "@/utils/common";
 import { inviteStaff } from "@utils/actions";
 
 import WizzardButton from "@components/basic/wizButton";
-import { userAgent } from "next/server";
-
-const InvitesUser = Prisma.validator<Prisma.InviteArgs>()({
-  include: {
-    user: true,
-  },
-});
-
-type InviteUser_t = Prisma.InviteGetPayload<typeof InvitesUser>;
 
 export default function TeamStaffClient({
-  appUser,
-  access,
+  invites,
+  writeAccess,
   teamId,
 }: {
-  appUser: UserNotifyContextType;
-  access: keyof typeof UserAccess;
+  invites: any;
+  writeAccess: boolean;
   teamId: string;
 }) {
-  const { setNotifyInvites, setNotifyOptions } =
-    useContext(NotificationContext);
-
-  NotificationUpdate(appUser, setNotifyInvites, setNotifyOptions);
-
-  const invites = appUser?.invite;
-
   const loadOptions = async (inputValue: string) => {
     try {
       const response = await fetch("/api/user/search", {
@@ -86,11 +59,5 @@ export default function TeamStaffClient({
     onSubmitAction: inviteStaff,
   };
 
-  return (
-    <>
-      {(access === UserAccess.staff || access === UserAccess.owner) && (
-        <WizzardButton form={form} extra={null} />
-      )}
-    </>
-  );
+  return <>{writeAccess && <WizzardButton form={form} extra={null} />}</>;
 }

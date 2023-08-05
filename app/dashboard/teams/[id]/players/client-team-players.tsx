@@ -1,15 +1,5 @@
 "use client";
 
-import { useContext } from "react";
-
-import { Prisma } from "@prisma/client";
-
-import {
-  NotificationContext,
-  NotificationUpdate,
-  UserNotifyContextType,
-} from "@/contexts/NotificationContext";
-
 import { invitePlayer, createPlayer } from "@utils/actions";
 
 import { faUserPlus } from "@fortawesome/free-solid-svg-icons";
@@ -17,21 +7,14 @@ import { faUserPlus } from "@fortawesome/free-solid-svg-icons";
 import WizzardButton from "@components/basic/wizButton";
 
 export default function TeamPlayersClient({
-  appUser,
+  invites,
   writeAccess,
   teamId,
 }: {
-  appUser: UserNotifyContextType;
+  invites: any;
   writeAccess: boolean;
   teamId: string;
 }) {
-  const { setNotifyInvites, setNotifyOptions } =
-    useContext(NotificationContext);
-
-  NotificationUpdate(appUser, setNotifyInvites, setNotifyOptions);
-
-  const invites = appUser?.invite;
-
   const loadOptions = async (inputValue: string) => {
     try {
       const response = await fetch("/api/user/search", {

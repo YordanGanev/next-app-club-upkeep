@@ -2,7 +2,6 @@ import { getSession } from "@auth0/nextjs-auth0";
 import { redirect } from "next/navigation";
 import { InviteType } from "@prisma/client";
 
-import { UserNotifyContextType } from "@contexts/NotificationContext";
 import { prisma } from "@utils/db";
 import {
   UserAccess,
@@ -11,17 +10,17 @@ import {
 } from "@utils/common";
 
 import Image from "next/image";
-import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserLargeSlash } from "@fortawesome/free-solid-svg-icons";
 
 import RemovePlayerButton from "./del-player-button";
 import CancelInviteButton from "@components/action/CancelInviteButton";
-import TeamPlayersClient from "./teams-players";
 import TabNav from "@components/layout/tabNav";
+import TeamPlayersClient from "./client-team-players";
 
 import Style from "../../teams.module.css";
 import ListView from "@styles/user-profile.module.css";
+import NotificationsUpdate from "@/components/basic/NotificationsUpdate";
 
 export default async function PlayersPage({
   params,
@@ -31,6 +30,8 @@ export default async function PlayersPage({
   const session = await getSession();
 
   if (!session) redirect("/about");
+
+  const { id } = params;
 
   const appUser = await prisma.user.findUnique({
     where: {
@@ -49,7 +50,7 @@ export default async function PlayersPage({
 
   const team = await prisma.team.findUnique({
     where: {
-      id: params.id,
+      id,
     },
     include: {
       club: true,
@@ -78,7 +79,7 @@ export default async function PlayersPage({
     },
   });
 
-  if (!team) redirect("/about");
+  if (!team) redirect("/dashboard/teams");
 
   const invites = await prisma.invite.findMany({
     where: { teamId: team?.id },
@@ -110,34 +111,6 @@ export default async function PlayersPage({
       }
     });
   }
-
-  // console.log(access);
-
-  const loadOptions = async (inputValue: any) => {
-    try {
-      const response = await fetch("/api/user/search", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          filter: invites.map((i) => i.user.email),
-          teamid: team.id,
-          search: inputValue,
-        }),
-      });
-      const data = await response.json();
-      //console.log(data);
-
-      return data?.map((person: { email: string }) => {
-        return {
-          value: person.email, // id
-          label: person.email,
-        };
-      });
-    } catch (error) {
-      console.error(error);
-      return [];
-    }
-  };
 
   const options: Intl.DateTimeFormatOptions = {
     year: "numeric",
@@ -257,10 +230,12 @@ export default async function PlayersPage({
       </div>
 
       <TeamPlayersClient
-        appUser={appUser}
+        teamId={id}
         writeAccess={WriteAccess}
-        teamId={team.id}
+        invites={appUser.invite}
       />
+
+      <NotificationsUpdate appUser={appUser} />
     </>
   );
 }

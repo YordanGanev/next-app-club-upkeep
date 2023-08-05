@@ -1,15 +1,16 @@
-import React from "react";
-import { prisma } from "@utils/db";
-
-import { UserNotifyContextType } from "@contexts/NotificationContext";
 import { getSession } from "@auth0/nextjs-auth0";
 import { redirect } from "next/navigation";
+
+import { Prisma } from "@prisma/client";
+
+import { prisma } from "@utils/db";
+import { addMedicalRecord } from "@utils/actions";
+import { UserNotifyContextType } from "@contexts/NotificationContext";
 import {
   UserAccess,
   PlayerManageTeamTabs,
   StaffManageTeamTabs,
 } from "@utils/common";
-// import { deleteMedicalRecord } from "@utils/actions";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -21,13 +22,33 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 import Image from "next/image";
-import Link from "next/link";
+import NotificationsUpdate from "@/components/basic/NotificationsUpdate";
 import TabNav from "@components/layout/tabNav";
+import WizzardButton from "@components/basic/wizButton";
 import DeleteMedicalButton from "./del-medical-button";
-import TeamMedicalClient from "./team-medical";
 
 import Style from "../../teams.module.css";
 import ListView from "@styles/user-profile.module.css";
+
+const Player_User = Prisma.validator<Prisma.PlayerArgs>()({
+  select: {
+    user: {
+      select: {
+        id: true,
+        name: true,
+        nickname: true,
+        email: true,
+        picture: true,
+      },
+    },
+    id: true,
+    medical: true,
+    name: true,
+    picture: true,
+  },
+});
+
+type Player_User_t = Prisma.PlayerGetPayload<typeof Player_User>;
 
 export default async function TeamMedicalPage({
   params,
@@ -112,6 +133,45 @@ export default async function TeamMedicalPage({
     month: "long",
     day: "numeric",
   };
+  const form = {
+    fetch: {
+      master_data: { teamId: team.id },
+    },
+    title: "Add Medical Record",
+    inputs: [
+      {
+        type: "Select",
+        name: "id",
+        required: true,
+        placeholder: "Select player",
+        options: players?.map((p: Player_User_t) => {
+          if (p.user)
+            return {
+              value: p.id,
+              label:
+                p.user.name === p.user.email ? p.user.nickname : p.user.name,
+            };
+          return {
+            value: p.id,
+            label: p.name,
+          };
+        }),
+      },
+      {
+        type: "number",
+        name: "weight",
+        required: true,
+        placeholder: "Weight kg",
+      },
+      {
+        type: "number",
+        name: "height",
+        required: true,
+        placeholder: "Height cm",
+      },
+    ],
+    onSubmitAction: addMedicalRecord,
+  };
 
   return (
     <>
@@ -129,18 +189,15 @@ export default async function TeamMedicalPage({
           let picture: string;
           let name;
           let email;
-          let isUser;
 
           if (p.user?.email && p.medical.length > 0) {
             picture = p.user.picture;
             name = p.user.name === p.user.email ? p.user.nickname : p.user.name;
             email = p.user.email;
-            isUser = true;
           } else if (p.medical.length > 0) {
             picture = p.picture as string;
             name = p.name;
             email = "Static player";
-            isUser = false;
           } else {
             return null;
           }
@@ -246,12 +303,8 @@ export default async function TeamMedicalPage({
           );
         })}
       </div>
-      <TeamMedicalClient
-        appUser={appUser}
-        writeAccess={WriteAccess}
-        players={WriteAccess ? players : undefined}
-        teamId={team.id}
-      />
+      <WizzardButton form={form} extra={null} />
+      <NotificationsUpdate appUser={appUser} />
     </>
   );
 }

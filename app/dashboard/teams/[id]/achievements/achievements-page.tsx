@@ -1,32 +1,18 @@
 "use client";
-
-// import { PrismaClient } from "@prisma/client";
 import dayjs from "dayjs";
-import { Achievement } from "@prisma/client";
+
 import { useParams } from "next/navigation";
-import { useContext } from "react";
 
 import { achievementTypeOptions } from "@utils/common";
 import { addAchievement } from "@utils/actions";
-import {
-  NotificationContext,
-  NotificationUpdate,
-} from "@contexts/NotificationContext";
 
 import WizzardButton from "@components/basic/wizButton";
 
-export default function AchievementsPage({
-  appUser,
+export default function AchievementsClient({
   writeAccess,
 }: {
-  appUser: any;
   writeAccess: boolean;
 }) {
-  const { setNotifyInvites, setNotifyOptions } =
-    useContext(NotificationContext);
-
-  NotificationUpdate(appUser, setNotifyInvites, setNotifyOptions);
-
   const params = useParams();
 
   const { id } = params;

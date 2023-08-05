@@ -4,6 +4,8 @@ import { prisma } from "@utils/db";
 import { getSession } from "@auth0/nextjs-auth0";
 
 import SchedulePage from "./schedule-page";
+import NotificationsUpdate from "@/components/basic/NotificationsUpdate";
+import { redirect } from "next/navigation";
 
 export default async function page({
   searchParams,
@@ -12,7 +14,7 @@ export default async function page({
 }) {
   const session = await getSession();
 
-  if (!session) return <h1>No session</h1>;
+  if (!session) redirect("about");
 
   const appUser = await prisma.user.findUnique({
     where: {
@@ -73,8 +75,8 @@ export default async function page({
       events: {
         where: {
           date: {
-            gte: new Date(date.getFullYear(), date.getMonth(), 1),
-            lt: new Date(date.getFullYear(), date.getMonth() + 1, 1),
+            gte,
+            lt,
           },
         },
         include: {
@@ -89,15 +91,16 @@ export default async function page({
     },
   });
 
-  // console.log(req_events);
-
   let events: any[] = [];
 
   req_events.forEach((team) => {
     events = events.concat(team.events);
   });
 
-  // console.log(events);
-
-  return <SchedulePage appUser={appUser} events={events} />;
+  return (
+    <>
+      <SchedulePage events={events} />
+      <NotificationsUpdate appUser={appUser} />
+    </>
+  );
 }

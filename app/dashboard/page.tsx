@@ -1,9 +1,8 @@
-import { prisma } from "@utils/db";
 import { getSession } from "@auth0/nextjs-auth0";
-
 import { redirect } from "next/navigation";
+import { prisma } from "@utils/db";
 
-import Dashboard from "./dashboard";
+import NotificationsUpdate from "@/components/basic/NotificationsUpdate";
 import ListTeams from "@components/basic/list-teams";
 import ListEvents from "@components/basic/list-events";
 
@@ -13,14 +12,8 @@ import { faCalendarXmark } from "@fortawesome/free-solid-svg-icons";
 import Style from "./dash.module.css";
 import StyleMissing from "@styles/missing.module.css";
 
-export const dynamic = "force-dynamic";
-export const dynamicParams = true;
-export const revalidate = 0;
-
 export default async function DashboardPage() {
   const session = await getSession();
-
-  console.log("dashboard");
 
   if (!session)
     return (
@@ -135,7 +128,7 @@ export default async function DashboardPage() {
           {teams.length > 0 && <ListTeams teams={teams} />}
         </section>
 
-        <Dashboard appUser={appUser} />
+        <NotificationsUpdate appUser={appUser} />
       </div>
     </>
   );

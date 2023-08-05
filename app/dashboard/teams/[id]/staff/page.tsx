@@ -23,6 +23,7 @@ import TeamStaffClient from "./team-staff";
 
 import Style from "../../teams.module.css";
 import ListView from "@styles/user-profile.module.css";
+import NotificationsUpdate from "@/components/basic/NotificationsUpdate";
 
 const UserAccess = {
   owner: "owner",
@@ -82,7 +83,7 @@ export default async function TeamStaffPage({
     },
   });
 
-  if (!team) redirect("/about");
+  if (!team) redirect("/dashboard/teams");
 
   const invites = await prisma.invite.findMany({
     where: { teamId: team?.id },
@@ -202,7 +203,13 @@ export default async function TeamStaffPage({
           );
         })}
       </div>
-      <TeamStaffClient appUser={appUser} access={access} teamId={team.id} />
+
+      <TeamStaffClient
+        invites={appUser.invite}
+        writeAccess={WriteAccess}
+        teamId={team.id}
+      />
+      <NotificationsUpdate appUser={appUser} />
     </>
   );
 }

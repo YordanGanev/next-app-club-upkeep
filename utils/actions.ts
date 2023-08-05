@@ -80,8 +80,6 @@ export async function updateUser(data: FormData) {
   const [day, month, year] = date.split("/");
   const birthdate = new Date(`${year}-${month}-${day}`);
 
-  // await new Promise((resolve) => setTimeout(resolve, 3000));
-
   const user = await prisma.user.update({
     where: {
       email: session.user.email,

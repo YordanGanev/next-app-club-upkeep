@@ -1,15 +1,15 @@
-import React from "react";
-
 import { getSession } from "@auth0/nextjs-auth0";
 import { redirect } from "next/navigation";
 
 import { prisma } from "@utils/db";
+import { addClub } from "@utils/actions";
 
 // Components
 import Image from "next/image";
 
+import WizzardButton from "@components/basic/wizButton";
 import DynamicLink from "@components/basic/dynamic-link";
-import ClubsClient from "./clubs";
+import NotificationsUpdate from "@/components/basic/NotificationsUpdate";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPeopleGroup } from "@fortawesome/free-solid-svg-icons";
 
@@ -47,13 +47,26 @@ export default async function page() {
     },
   });
 
+  if (!appUser) redirect("/about");
+
   const options: Intl.DateTimeFormatOptions = {
     year: "numeric",
     month: "numeric",
     day: "numeric",
   };
 
-  if (!appUser) redirect("/about");
+  const form = {
+    title: "Create Club",
+    inputs: [
+      {
+        type: "text",
+        name: "name",
+        required: true,
+        placeholder: "Club Name",
+      },
+    ],
+    onSubmitAction: addClub,
+  };
 
   return (
     <>
@@ -109,7 +122,8 @@ export default async function page() {
           })}
         </div>
       </div>
-      <ClubsClient appUser={appUser} />
+      <WizzardButton form={form} extra={null} />
+      <NotificationsUpdate appUser={appUser} />
     </>
   );
 }

@@ -20,6 +20,7 @@ export default function RemoveStaffButton({
 
   return (
     <button
+      disabled={isPending}
       className={className}
       onClick={() => {
         setAction({

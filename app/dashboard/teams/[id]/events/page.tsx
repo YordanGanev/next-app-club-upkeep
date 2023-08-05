@@ -2,13 +2,10 @@ import { prisma } from "@utils/db";
 import { redirect } from "next/navigation";
 import { getSession } from "@auth0/nextjs-auth0";
 
-import {
-  PlayerManageTeamTabs,
-  StaffManageTeamTabs,
-  UserAccess,
-} from "@utils/common";
+import { PlayerManageTeamTabs, StaffManageTeamTabs } from "@utils/common";
 
 import TabNav from "@components/layout/tabNav";
+import NotificationsUpdate from "@/components/basic/NotificationsUpdate";
 import TeamEventsPage from "./team-events";
 
 export default async function EventPage({
@@ -36,7 +33,7 @@ export default async function EventPage({
   });
 
   if (!appUser) redirect("/about");
-  console.log(appUser);
+  // console.log(appUser);
 
   let day, month, year;
   let date: Date;
@@ -54,14 +51,9 @@ export default async function EventPage({
   const gte = new Date(date.getFullYear(), date.getMonth(), 1);
   const lt = new Date(date.getFullYear(), date.getMonth() + 1, 1);
 
-  console.log(date.toDateString(), gte, lt);
+  // console.log(date.toDateString(), gte, lt);
 
-  if (isNaN(date.getTime()) || !gte || !lt)
-    return (
-      <>
-        <h1>Events\\\\\</h1>
-      </>
-    );
+  if (isNaN(date.getTime()) || !gte || !lt) redirect("/dashboard/teams");
 
   const team = await prisma.team.findUnique({
     where: {
@@ -96,19 +88,16 @@ export default async function EventPage({
       },
     },
   });
-  if (!team) redirect("/about");
+  if (!team) redirect("/dashboard/teams");
 
-  let access = UserAccess.player;
   let WriteAccess = false;
 
   const { club, staff } = team;
   if (club.ownerId === appUser.id) {
-    access = UserAccess.owner;
     WriteAccess = true;
   } else {
     staff?.forEach((member) => {
       if (member.id === appUser.id) {
-        access = UserAccess.staff;
         WriteAccess = true;
       }
     });
@@ -117,7 +106,8 @@ export default async function EventPage({
   return (
     <>
       <TabNav tabs={WriteAccess ? StaffManageTeamTabs : PlayerManageTeamTabs} />
-      <TeamEventsPage team={team} writeAccess={WriteAccess} appUser={appUser} />
+      <TeamEventsPage team={team} writeAccess={WriteAccess} />
+      <NotificationsUpdate appUser={appUser} />
     </>
   );
 }
