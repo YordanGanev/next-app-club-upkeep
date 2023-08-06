@@ -21,7 +21,7 @@ export default function TeamPlayersClient({
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          filter: invites?.map((i: any) => i.user.email),
+          filter: invites?.map((i: any) => i.user?.email),
           teamId,
           search: inputValue,
         }),

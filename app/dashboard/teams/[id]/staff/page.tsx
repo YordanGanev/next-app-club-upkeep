@@ -86,7 +86,7 @@ export default async function TeamStaffPage({
   if (!team) redirect("/dashboard/teams");
 
   const invites = await prisma.invite.findMany({
-    where: { teamId: team?.id },
+    where: { teamId: team?.id, type: InviteType.STAFF },
     include: {
       user: {
         select: {
@@ -163,7 +163,6 @@ export default async function TeamStaffPage({
           );
         })}
         {invites.map((i) => {
-          if (i.type !== InviteType.STAFF) return null;
           return (
             <div
               className={`${ListView.wrapper} ${ListView.invite}`}

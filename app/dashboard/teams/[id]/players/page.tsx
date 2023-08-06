@@ -82,7 +82,7 @@ export default async function PlayersPage({
   if (!team) redirect("/dashboard/teams");
 
   const invites = await prisma.invite.findMany({
-    where: { teamId: team?.id },
+    where: { teamId: team?.id, type: InviteType.PLAYER },
     include: {
       user: {
         select: {
@@ -187,7 +187,6 @@ export default async function PlayersPage({
         })}
 
         {invites.map((i) => {
-          if (i.type !== InviteType.PLAYER) return null;
           const name =
             i.user.name !== i.user.email ? i.user.name : i.user.nickname;
 
