@@ -10,9 +10,9 @@ datasource db {
 model User {
   id            String    @id @default(uuid())
   picture       String    @default("/default.png")
-  name          String?
-  nickname      String?   @unique
-  email         String?   @unique
+  name          String
+  nickname      String    @unique
+  email         String    @unique
   verified      Boolean   @default(false)
   orgId         Int?
   birthdate     DateTime? @db.Date
