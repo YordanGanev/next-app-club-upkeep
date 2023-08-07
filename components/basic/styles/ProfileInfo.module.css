@@ -1,0 +1,32 @@
+/* ------------ */
+.wrapper {
+    margin: 0 auto;
+    border-radius: 1rem;
+    width: 100%;
+    max-width: 600px;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    padding: 1em 0em 2em;
+}
+
+.info>span {
+    padding: 1em 1em;
+    border-top: 1px solid var(--neutralPrimary);
+}
+
+.info>span:last-of-type {
+    border-bottom: 1px solid var(--neutralPrimary);
+}
+
+.info .responsive {
+    display: none;
+}
+
+@media screen and (max-width: 500px) {
+    .info .responsive {
+        display: block;
+    }
+}

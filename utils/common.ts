@@ -27,8 +27,8 @@ export const StaffManageTeamTabs = [
   { slug: "staff", title: "Staff" },
   { slug: "medical", title: "Medicals" },
   { slug: "events", title: "Events" },
-  { slug: "about", title: "About" },
   { slug: "achievements", title: "Achievements" },
+  { slug: "about", title: "About" },
 ];
 
 export const UserAccess = {

@@ -1,15 +1,15 @@
 import { getSession, getAccessToken } from "@auth0/nextjs-auth0";
 import { prisma } from "@utils/db";
 
-import Image from "next/image";
 import { redirect } from "next/navigation";
-
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 
 import ProfileForm from "./profile-form";
 
 import Style from "./profile.module.css";
+import Profile from "@/components/basic/profile";
+import ProfileInfo, {
+  ProfileInfoListType,
+} from "@/components/basic/ProfileInfo";
 
 export default async function ServerComponent() {
   const session = await getSession();
@@ -69,84 +69,79 @@ export default async function ServerComponent() {
     options
   );
 
-  const name = appUser.name === appUser.email ? appUser.nickname : appUser.name;
+  const name: string =
+    appUser.name === appUser.email ? appUser.nickname : appUser.name;
+
+  const infoList: ProfileInfoListType = [
+    { note: user.email_verified ? "Email verified" : "Email not verified" },
+    { note: `Joinned ${createdAt}` },
+    { note: `Last edit ${updatedAt}` },
+    {
+      note:
+        appUser._count.club > 0
+          ? `${appUser._count.club} club${
+              appUser._count.club != 1 ? "s" : ""
+            } owned`
+          : "No clubs owned",
+    },
+    {
+      note:
+        totalTeamsOwned > 0
+          ? `${totalTeamsOwned} team${totalTeamsOwned != 1 ? "s" : ""} owned`
+          : "No teams owned",
+    },
+    {
+      note:
+        appUser._count.player > 0
+          ? `Player in ${appUser._count.player}  team${
+              appUser._count.player != 1 ? "s" : ""
+            } `
+          : "Not a player for a team",
+    },
+    {
+      note:
+        appUser._count.team > 0
+          ? `Staff in ${appUser._count.team} team${
+              appUser._count.team != 1 ? "s" : ""
+            }`
+          : "Not staff member for a team",
+    },
+  ];
+
+  if (appUser.birthdate !== null) {
+    const birthdateItem = new Date(appUser.birthdate).toLocaleDateString(
+      "en-GB",
+      options
+    );
+
+    // Place birthdate after email verified
+    infoList.splice(1, 0, {
+      note: `Birthdate ${birthdateItem}`,
+      responsive: true,
+    });
+  }
 
   return (
     <>
       <div className={`dashboard-content-wrapper`}>
         <div className={Style.profileWrapper}>
-          <div className={Style.profileImage}>
-            <Image
-              src={appUser.picture}
-              alt={`${appUser.name}-img`}
-              width="96"
-              height="96"
-            />
-          </div>
-          <div className={Style.profileText}>
-            <h2>{name}</h2>
-            <p className={Style.email}>{appUser.email}</p>
-            {appUser.birthdate !== null && (
-              <div className={Style.date}>
-                <p>
-                  Birthdate{" "}
-                  {new Date(appUser.birthdate).toLocaleDateString(
+          <Profile
+            picture={appUser.picture}
+            title={name}
+            subtitle={appUser.email}
+            description={
+              appUser.birthdate !== null
+                ? `Birthdate ${new Date(appUser.birthdate).toLocaleDateString(
                     "en-US",
                     options
-                  )}
-                </p>
-              </div>
-            )}
-          </div>
+                  )}`
+                : undefined
+            }
+            responsive={true}
+          />
         </div>
 
-        <div className={Style.infoWrapper}>
-          <h3>User Information</h3>
-          <div className={Style.info}>
-            <span>
-              {user.email_verified ? "Email verified" : "Email not verified"}
-            </span>
-            {appUser.birthdate !== null && (
-              <span className={Style.date}>
-                Birthdate{" "}
-                {new Date(appUser.birthdate).toLocaleDateString(
-                  "en-GB",
-                  options
-                )}
-              </span>
-            )}
-            <span>Joinned {createdAt}</span>
-            <span>Last edit {updatedAt}</span>
-            <span>
-              {appUser._count.club > 0
-                ? `${appUser._count.club} club${
-                    appUser._count.club != 1 ? "s" : ""
-                  } owned`
-                : "No clubs owned"}
-            </span>
-            <span>
-              {totalTeamsOwned > 0
-                ? `${totalTeamsOwned} team${
-                    totalTeamsOwned != 1 ? "s" : ""
-                  } owned`
-                : "No teams owned"}
-            </span>
-            <span>
-              {appUser._count.player > 0
-                ? `Player in ${appUser._count.player}  team${
-                    appUser._count.player != 1 ? "s" : ""
-                  } `
-                : "Not a player for a team"}
-            </span>
-            <span>
-              {appUser._count.team > 0
-                ? `Staff in ${appUser._count.team} team${
-                    appUser._count.team != 1 ? "s" : ""
-                  }`
-                : "Not staff member for a team"}
-            </span>
-          </div>
-        </div>
+        <ProfileInfo title="User Information" list={infoList} />
 
         <ProfileForm appUser={appUser} />
       </div>
