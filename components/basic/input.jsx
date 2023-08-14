@@ -3,8 +3,8 @@ import Async, { useAsync } from "react-select/async";
 
 import Select from "react-select";
 
-import "@styles/multiselect.css";
-import "@styles/mui-react-date.css";
+import "@/styles/multiselect.css";
+import "@/styles/mui-react-date.css";
 
 import dayjs from "dayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";

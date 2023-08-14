@@ -3,10 +3,10 @@ import dayjs from "dayjs";
 
 import { useParams } from "next/navigation";
 
-import { achievementTypeOptions } from "@utils/common";
-import { addAchievement } from "@utils/actions";
+import { achievementTypeOptions } from "@/utils/common";
+import { addAchievement } from "@/utils/actions";
 
-import WizzardButton from "@components/basic/wizButton";
+import WizzardButton from "@/components/basic/wizButton";
 
 export default function AchievementsClient({
   writeAccess,

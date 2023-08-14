@@ -152,5 +152,10 @@ export const achievementTypeOptions = [
   { value: AchievementType.SPECIAL, label: "Special award" },
 ];
 
+export const containsCyrillic = (text: string) => {
+  const cyrillicRegex = /[а-яА-ЯЁё]/;
+  return cyrillicRegex.test(text);
+};
+
 export const getPlaceholderImage = (signature: string) =>
   `https://i0.wp.com/cdn.auth0.com/avatars/${signature}.png?ssl=1`;

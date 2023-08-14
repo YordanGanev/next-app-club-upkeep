@@ -160,3 +160,8 @@ body {
 main {
   background-color: var(--black);
 }
+
+/* Font Awesome icons pre-css load */
+.svg-inline--fa {
+  height: 1em;
+}

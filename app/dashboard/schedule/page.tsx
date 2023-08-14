@@ -1,5 +1,5 @@
 import React from "react";
-import { prisma } from "@utils/db";
+import { prisma } from "@/utils/db";
 
 import { getSession } from "@auth0/nextjs-auth0";
 

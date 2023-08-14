@@ -3,7 +3,7 @@
 import Style from "./styles/WindowFilter.module.css";
 
 import { useContext } from "react";
-import { PopoutContext } from "@contexts/PopoutContext";
+import { PopoutContext } from "@/contexts/PopoutContext";
 
 export default function WindowFilter() {
   const { filterOpts, formVisible } = useContext(PopoutContext);

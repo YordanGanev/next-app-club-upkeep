@@ -4,8 +4,8 @@ import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faUserTie } from "@fortawesome/free-solid-svg-icons";
 
-import DynamicLink from "@components/basic/dynamic-link";
-import CardStyle from "@styles/card-layout.module.css";
+import DynamicLink from "@/components/basic/dynamic-link";
+import CardStyle from "@/styles/card-layout.module.css";
 
 export default function ListTeams({ teams }: { teams: any[] | undefined }) {
   const options: Intl.DateTimeFormatOptions = {

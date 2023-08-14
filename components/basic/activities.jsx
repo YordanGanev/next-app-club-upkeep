@@ -14,9 +14,9 @@ import {
   faCalendarTimes,
 } from "@fortawesome/free-regular-svg-icons";
 
-import { queryDate, EventActivities, createQueryDate } from "@utils/common";
-import { deleteEvent } from "@utils/actions";
-import { PopoutContext } from "@contexts/PopoutContext";
+import { queryDate, EventActivities, createQueryDate } from "@/utils/common";
+import { deleteEvent } from "@/utils/actions";
+import { PopoutContext } from "@/contexts/PopoutContext";
 
 /* Custom date picker component */
 import PropTypes from "prop-types";
@@ -27,7 +27,7 @@ import dayjs from "dayjs";
 import { DatePicker } from "@mui/x-date-pickers";
 
 // Just to add pseudo elements
-import "@styles/pseudo-el-fa-icons.css";
+import "@/styles/pseudo-el-fa-icons.css";
 import Style from "./styles/Activities.module.css";
 
 function ButtonField(props) {

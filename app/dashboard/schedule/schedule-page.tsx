@@ -3,11 +3,11 @@
 import dayjs from "dayjs";
 import { EventType } from "@prisma/client";
 import { useSearchParams } from "next/navigation";
-import { useWindowSize } from "@utils/hooks";
+import { useWindowSize } from "@/utils/hooks";
 
-import Connecting from "@components/basic/connecting";
-import Calendar, { calendarFilterEvents } from "@components/basic/calendar";
-import Activities from "@components/basic/activities";
+import Connecting from "@/components/basic/connecting";
+import Calendar, { calendarFilterEvents } from "@/components/basic/calendar";
+import Activities from "@/components/basic/activities";
 
 import Style from "./schedule.module.css";
 

@@ -1,16 +1,16 @@
 import { getSession } from "@auth0/nextjs-auth0";
 import { redirect } from "next/navigation";
-import { prisma } from "@utils/db";
+import { prisma } from "@/utils/db";
 
 import NotificationsUpdate from "@/components/basic/NotificationsUpdate";
-import ListTeams from "@components/basic/list-teams";
-import ListEvents from "@components/basic/list-events";
+import ListTeams from "@/components/basic/list-teams";
+import ListEvents from "@/components/basic/list-events";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendarXmark } from "@fortawesome/free-solid-svg-icons";
 
 import Style from "./dash.module.css";
-import StyleMissing from "@styles/missing.module.css";
+import StyleMissing from "@/styles/missing.module.css";
 
 export default async function DashboardPage() {
   const session = await getSession();

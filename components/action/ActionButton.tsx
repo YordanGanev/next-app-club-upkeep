@@ -1,7 +1,7 @@
 "use client";
 
 import { useContext, useTransition } from "react";
-import { PopoutContext } from "@contexts/PopoutContext";
+import { PopoutContext } from "@/contexts/PopoutContext";
 import { deleteMedicalRecord } from "@/utils/actions";
 
 export default function DeleteMedicalButton({

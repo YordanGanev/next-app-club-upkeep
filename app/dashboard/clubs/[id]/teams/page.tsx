@@ -2,8 +2,8 @@ import { getSession } from "@auth0/nextjs-auth0";
 import { redirect } from "next/navigation";
 import { SportType } from "@prisma/client";
 
-import { prisma } from "@utils/db";
-import { getPlaceholderImage } from "@utils/common";
+import { prisma } from "@/utils/db";
+import { getPlaceholderImage } from "@/utils/common";
 import { addTeam } from "@/utils/actions";
 
 import Image from "next/image";
@@ -16,11 +16,11 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 import WizzardButton from "@/components/basic/wizButton";
-import DynamicLink from "@components/basic/dynamic-link";
-import TabNav from "@components/layout/tabNav";
+import DynamicLink from "@/components/basic/dynamic-link";
+import TabNav from "@/components/layout/tabNav";
 
 import Style from "../../clubs.module.css";
-import CardStyle from "@styles/card-layout.module.css";
+import CardStyle from "@/styles/card-layout.module.css";
 import NotificationsUpdate from "@/components/basic/NotificationsUpdate";
 
 export const metadata = {

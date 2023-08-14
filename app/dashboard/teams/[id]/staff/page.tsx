@@ -3,26 +3,26 @@ import { InviteType } from "@prisma/client";
 import { getSession } from "@auth0/nextjs-auth0";
 import { redirect } from "next/navigation";
 
-import { prisma } from "@utils/db";
-import { UserNotifyContextType } from "@contexts/NotificationContext";
+import { prisma } from "@/utils/db";
+import { UserNotifyContextType } from "@/contexts/NotificationContext";
 import {
   // UserAccess,
   PlayerManageTeamTabs,
   StaffManageTeamTabs,
-} from "@utils/common";
+} from "@/utils/common";
 
 import Link from "next/link";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserGear } from "@fortawesome/free-solid-svg-icons";
 
-import TabNav from "@components/layout/tabNav";
+import TabNav from "@/components/layout/tabNav";
 import CancelInviteButton from "@/components/action/CancelInviteButton";
 import RemoveStaffButton from "./remove-staff-button";
 import TeamStaffClient from "./team-staff";
 
 import Style from "../../teams.module.css";
-import ListView from "@styles/user-profile.module.css";
+import ListView from "@/styles/user-profile.module.css";
 import NotificationsUpdate from "@/components/basic/NotificationsUpdate";
 
 const UserAccess = {

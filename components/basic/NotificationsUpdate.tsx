@@ -5,7 +5,7 @@ import {
   NotificationContext,
   NotificationUpdate,
   UserNotifyContextType,
-} from "@contexts/NotificationContext";
+} from "@/contexts/NotificationContext";
 
 export default function NotificationsUpdate({
   appUser,

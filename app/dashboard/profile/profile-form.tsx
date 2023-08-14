@@ -1,12 +1,12 @@
 "use client";
 
 import { useForm } from "@/utils/hooks";
-import { updateUser } from "@utils/actions";
+import { updateUser } from "@/utils/actions";
 import dayjs from "dayjs";
-import DateLocalizationProvider from "@contexts/DateProvider";
+import DateLocalizationProvider from "@/contexts/DateProvider";
 
-import PendingButton from "@components/basic/PendingButton";
-import Input from "@components/basic/input";
+import PendingButton from "@/components/basic/PendingButton";
+import Input from "@/components/basic/input";
 
 import Style from "./profile.module.css";
 

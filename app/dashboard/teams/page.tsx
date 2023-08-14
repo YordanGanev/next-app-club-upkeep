@@ -3,12 +3,12 @@ import React from "react";
 import { getSession } from "@auth0/nextjs-auth0";
 import { redirect } from "next/navigation";
 
-import { prisma } from "@utils/db";
+import { prisma } from "@/utils/db";
 
-import ListTeams from "@components/basic/list-teams";
+import ListTeams from "@/components/basic/list-teams";
 
 import Style from "./teams.module.css";
-import CardStyle from "@styles/card-layout.module.css";
+import CardStyle from "@/styles/card-layout.module.css";
 import NotificationsUpdate from "@/components/basic/NotificationsUpdate";
 
 export default async function page() {

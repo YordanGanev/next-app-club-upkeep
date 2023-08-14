@@ -3,14 +3,13 @@ import { redirect } from "next/navigation";
 
 import { Prisma } from "@prisma/client";
 
-import { prisma } from "@utils/db";
-import { addMedicalRecord } from "@utils/actions";
-import { UserNotifyContextType } from "@contexts/NotificationContext";
+import { prisma } from "@/utils/db";
+import { addMedicalRecord } from "@/utils/actions";
 import {
   UserAccess,
   PlayerManageTeamTabs,
   StaffManageTeamTabs,
-} from "@utils/common";
+} from "@/utils/common";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -23,12 +22,12 @@ import {
 
 import Image from "next/image";
 import NotificationsUpdate from "@/components/basic/NotificationsUpdate";
-import TabNav from "@components/layout/tabNav";
-import WizzardButton from "@components/basic/wizButton";
+import TabNav from "@/components/layout/tabNav";
+import WizzardButton from "@/components/basic/wizButton";
 import DeleteMedicalButton from "./del-medical-button";
 
 import Style from "../../teams.module.css";
-import ListView from "@styles/user-profile.module.css";
+import ListView from "@/styles/user-profile.module.css";
 
 const Player_User = Prisma.validator<Prisma.PlayerArgs>()({
   select: {

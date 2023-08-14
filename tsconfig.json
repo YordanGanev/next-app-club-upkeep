@@ -21,11 +21,6 @@
     ],
     "paths": {
       "@/*": ["./*"],
-      "@components/*": ["./components/*"],
-      "@utils/*": ["./utils/*"],
-      "@styles/*": ["./styles/*"],
-      "@common/*": ["./common/*"],
-      "@contexts/*": ["./contexts/*"],
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "components/basic/list-activities.jsx"],

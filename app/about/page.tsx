@@ -1,10 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import DynamicLink from "@components/basic/dynamic-link";
+import DynamicLink from "@/components/basic/dynamic-link";
 import { getSession } from "@auth0/nextjs-auth0";
 
-import HeadBar from "@components/layout/headerBar";
+import HeadBar from "@/components/layout/headerBar";
 
 import "./about-page.css";
 

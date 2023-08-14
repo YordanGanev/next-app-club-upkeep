@@ -1,13 +1,13 @@
 import React from "react";
 
-import NotificationProvider from "@contexts/NotificationContext";
+import NotificationProvider from "@/contexts/NotificationContext";
 import PopoutContextProvider from "@/contexts/PopoutContext";
 import DateLocalizationProvider from "@/contexts/DateProvider";
 
-import Navigation from "@components/layout/navigation";
-import PopoutHandler from "@components/popout/PopoutHandler";
+import Navigation from "@/components/layout/navigation";
+import PopoutHandler from "@/components/popout/PopoutHandler";
 
-import Style from "@styles/dashboard-layout.module.css";
+import Style from "@/styles/dashboard-layout.module.css";
 import { withPageAuthRequired } from "@auth0/nextjs-auth0";
 
 export const metadata = {

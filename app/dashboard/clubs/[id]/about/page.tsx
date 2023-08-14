@@ -3,12 +3,12 @@ import { redirect } from "next/navigation";
 import { prisma } from "@/utils/db";
 import { getSession } from "@auth0/nextjs-auth0";
 
-import TabNav from "@components/layout/tabNav";
-import NotificationsUpdate from "@components/basic/NotificationsUpdate";
-import Profile from "@components/basic/profile";
+import TabNav from "@/components/layout/tabNav";
+import NotificationsUpdate from "@/components/basic/NotificationsUpdate";
+import Profile from "@/components/basic/profile";
 import ProfileInfo, {
   ProfileInfoListType,
-} from "@components/basic/ProfileInfo";
+} from "@/components/basic/ProfileInfo";
 
 import Style from "./about.module.css";
 import { AchievementType } from "@prisma/client";

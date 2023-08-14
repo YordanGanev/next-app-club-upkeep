@@ -1,6 +1,6 @@
 "use server";
-import { prisma } from "@utils/db";
-import { getPlaceholderImage } from "@utils/common";
+import { prisma } from "@/utils/db";
+import { getPlaceholderImage } from "@/utils/common";
 
 import { getSession } from "@auth0/nextjs-auth0";
 

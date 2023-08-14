@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { prisma } from "@utils/db";
+import { prisma } from "@/utils/db";
 
 export async function POST(request: Request) {
   try {
@@ -56,6 +56,6 @@ export async function POST(request: Request) {
   } catch (e) {
     console.log(request.method, request.url);
     console.error(e);
-    return new NextResponse(JSON.stringify(e), { status: 500 });
+    return NextResponse.json(e, { status: 500 });
   }
 }

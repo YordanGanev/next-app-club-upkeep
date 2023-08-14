@@ -20,12 +20,12 @@ import { useContext, useState } from "react";
 import { usePathname } from "next/navigation";
 import { useUser } from "@auth0/nextjs-auth0/client";
 
-import Connecting from "@components/basic/connecting";
-import { NotificationContext } from "@contexts/NotificationContext";
+import Connecting from "@/components/basic/connecting";
+import { NotificationContext } from "@/contexts/NotificationContext";
 import { PopoutContext } from "@/contexts/PopoutContext";
 
 import Style from "./styles/Navigation.module.css";
-import DynamicLink from "@components/basic/dynamic-link";
+import DynamicLink from "@/components/basic/dynamic-link";
 
 export default function Navigation() {
   const pathname = usePathname();

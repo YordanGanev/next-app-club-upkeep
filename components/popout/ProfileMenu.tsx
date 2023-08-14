@@ -1,9 +1,9 @@
 "use client";
 
 import { useUser } from "@auth0/nextjs-auth0/client";
-import { useOutsideClick } from "@utils/hooks";
+import { useOutsideClick } from "@/utils/hooks";
 
-import { PopoutContext } from "@contexts/PopoutContext";
+import { PopoutContext } from "@/contexts/PopoutContext";
 import { useContext } from "react";
 
 import Link from "next/link";

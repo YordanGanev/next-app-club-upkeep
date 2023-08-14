@@ -1,19 +1,19 @@
 import { getSession } from "@auth0/nextjs-auth0";
 import { redirect } from "next/navigation";
 
-import { prisma } from "@utils/db";
+import { prisma } from "@/utils/db";
 
-import { PlayerManageTeamTabs, StaffManageTeamTabs } from "@utils/common";
+import { PlayerManageTeamTabs, StaffManageTeamTabs } from "@/utils/common";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { faMedal, faAward, faTrophy } from "@fortawesome/free-solid-svg-icons";
 
-import TabNav from "@components/layout/tabNav";
-import NotificationsUpdate from "@components/basic/NotificationsUpdate";
+import TabNav from "@/components/layout/tabNav";
+import NotificationsUpdate from "@/components/basic/NotificationsUpdate";
 import AchievementsClient from "./achievements-page";
 
-import "@styles/achievement-icon-color.css";
+import "@/styles/achievement-icon-color.css";
 import Style from "./achievements.module.css";
 
 export default async function page({

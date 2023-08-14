@@ -1,6 +1,6 @@
 "use client";
 
-import DynamicLink from "@components/basic/dynamic-link";
+import DynamicLink from "@/components/basic/dynamic-link";
 import Style from "./styles/TabHeader.module.css";
 
 import { usePathname } from "next/navigation";

@@ -1,8 +1,8 @@
 "use client";
 
 import { useContext, useTransition } from "react";
-import { PopoutContext } from "@contexts/PopoutContext";
-import { removePlayer } from "@utils/actions";
+import { PopoutContext } from "@/contexts/PopoutContext";
+import { removePlayer } from "@/utils/actions";
 
 export default function RemovePlayerButton({
   children,

@@ -9,12 +9,12 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { faHourglassHalf } from "@fortawesome/free-regular-svg-icons";
 
-import { EventActivities } from "@utils/common";
-import { deleteEvent } from "@utils/actions";
+import { EventActivities } from "@/utils/common";
+import { deleteEvent } from "@/utils/actions";
 
 // Just to add pseudo elements
-import "@styles/pseudo-el-fa-icons.css";
-import "@styles/activity-list.css";
+import "@/styles/pseudo-el-fa-icons.css";
+import "@/styles/activity-list.css";
 import Style from "./styles/Activities.module.css";
 
 export default function ListEvents({ events }) {

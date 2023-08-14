@@ -1,10 +1,10 @@
 "use client";
 
-import { invitePlayer, createPlayer } from "@utils/actions";
+import { invitePlayer, createPlayer } from "@/utils/actions";
 
 import { faUserPlus } from "@fortawesome/free-solid-svg-icons";
 
-import WizzardButton from "@components/basic/wizButton";
+import WizzardButton from "@/components/basic/wizButton";
 
 export default function TeamPlayersClient({
   invites,

@@ -1,5 +1,6 @@
 import AppHeader from "./styles/AppHeader.module.css";
 import Link from "next/link";
+import DynamicLink from "@/components/basic/dynamic-link";
 import Image from "next/image";
 
 export default function HeadBar({ user }: { user?: any }) {
@@ -8,33 +9,24 @@ export default function HeadBar({ user }: { user?: any }) {
       <header className={AppHeader.header}>
         <div className={AppHeader.wrapper}>
           <div>
-            <div className={AppHeader.icon}>
-              <Link href="/" legacyBehavior>
-                <Image
-                  width="40"
-                  height="40"
-                  src="/icon.png"
-                  alt="upkeep_icon"
-                />
-              </Link>
-            </div>
+            <DynamicLink className={AppHeader.icon} href="/">
+              <Image width="40" height="40" src="/icon.png" alt="upkeep_icon" />
+            </DynamicLink>
           </div>
 
           <div>
             {/* Profile menu */}
-            <Link href="/dashboard/profile" legacyBehavior>
-              <a className={AppHeader.user}>
-                <span>@{user.nickname}</span>
-                <div className={AppHeader.userImage}>
-                  <Image
-                    width="32"
-                    height="32"
-                    src={user.picture}
-                    alt={`@img-${user.name}`}
-                  />
-                </div>
-              </a>
-            </Link>
+            <DynamicLink href="/dashboard/profile" className={AppHeader.user}>
+              <span>@{user.nickname}</span>
+              <div className={AppHeader.userImage}>
+                <Image
+                  width="32"
+                  height="32"
+                  src={user.picture}
+                  alt={`@img-${user.name}`}
+                />
+              </div>
+            </DynamicLink>
           </div>
         </div>
       </header>
@@ -45,9 +37,9 @@ export default function HeadBar({ user }: { user?: any }) {
     <header className={AppHeader.header}>
       <div className={AppHeader.wrapper}>
         <div className={AppHeader.icon}>
-          <Link href="/" legacyBehavior>
+          <DynamicLink href="/">
             <Image width="40" height="40" src="/icon.png" alt="upkeep_icon" />
-          </Link>
+          </DynamicLink>
         </div>
 
         <div className={AppHeader.loginGroup}>

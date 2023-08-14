@@ -3,14 +3,14 @@
 import dayjs from "dayjs";
 import { EventType } from "@prisma/client";
 import { useSearchParams } from "next/navigation";
-import { useWindowSize } from "@utils/hooks";
+import { useWindowSize } from "@/utils/hooks";
 
-import { addEvent } from "@utils/actions";
+import { addEvent } from "@/utils/actions";
 
-import Connecting from "@components/basic/connecting";
-import WizzardButton from "@components/basic/wizButton";
-import Calendar, { calendarFilterEvents } from "@components/basic/calendar";
-import Activities from "@components/basic/activities";
+import Connecting from "@/components/basic/connecting";
+import WizzardButton from "@/components/basic/wizButton";
+import Calendar, { calendarFilterEvents } from "@/components/basic/calendar";
+import Activities from "@/components/basic/activities";
 
 import Style from "../../teams.module.css";
 

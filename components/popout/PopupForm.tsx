@@ -2,10 +2,10 @@
 import { useState, useContext } from "react";
 
 import { PopoutContext, InputType } from "@/contexts/PopoutContext";
-import { useOutsideClick, useForm } from "@utils/hooks";
+import { useOutsideClick, useForm } from "@/utils/hooks";
 
-import Input from "@components/basic/input";
-import Button from "@components/basic/button";
+import Input from "@/components/basic/input";
+import Button from "@/components/basic/button";
 
 import Style from "./styles/PopupForm.module.css";
 

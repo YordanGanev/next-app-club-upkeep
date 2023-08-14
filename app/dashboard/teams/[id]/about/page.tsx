@@ -2,11 +2,11 @@ import { redirect } from "next/navigation";
 import { getSession } from "@auth0/nextjs-auth0";
 import { AchievementType } from "@prisma/client";
 
-import { prisma } from "@utils/db";
-import { PlayerManageTeamTabs, StaffManageTeamTabs } from "@utils/common";
+import { prisma } from "@/utils/db";
+import { PlayerManageTeamTabs, StaffManageTeamTabs } from "@/utils/common";
 
 import TabNav from "@/components/layout/tabNav";
-import NotificationsUpdate from "@components/basic/NotificationsUpdate";
+import NotificationsUpdate from "@/components/basic/NotificationsUpdate";
 import Profile from "@/components/basic/profile";
 import ProfileInfo, {
   ProfileInfoListType,

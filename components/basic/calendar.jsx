@@ -11,7 +11,7 @@ import {
   createQueryString,
   createQueryDate,
   queryDate,
-} from "utils/common";
+} from "@/utils/common";
 
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 
@@ -23,7 +23,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 import Style from "./styles/Calendar.module.css";
-import "@styles/activity-list.css";
+import "@/styles/activity-list.css";
 
 const weekdayStrings = [
   "Monday",

@@ -2,10 +2,10 @@
 
 import { useContext } from "react";
 
-import { useOutsideClick } from "@utils/hooks";
-import { PopoutContext } from "@contexts/PopoutContext";
+import { useOutsideClick } from "@/utils/hooks";
+import { PopoutContext } from "@/contexts/PopoutContext";
 
-import Button from "@components/basic/button";
+import Button from "@/components/basic/button";
 
 import Style from "./styles/ConfirmAction.module.css";
 

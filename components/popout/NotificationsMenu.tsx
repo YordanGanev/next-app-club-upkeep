@@ -1,18 +1,18 @@
 "use client";
 
 import { useUser } from "@auth0/nextjs-auth0/client";
-import { useOutsideClick } from "@utils/hooks";
+import { useOutsideClick } from "@/utils/hooks";
 
 import Image from "next/image";
 import Style from "./styles/Notifications.module.css";
 
-import Button from "@components/basic/button";
+import Button from "@/components/basic/button";
 
 import { useContext } from "react";
 
-import { NotificationContext } from "@contexts/NotificationContext";
+import { NotificationContext } from "@/contexts/NotificationContext";
 
-import { acceptInvite, cancelInvite } from "@utils/actions";
+import { acceptInvite, cancelInvite } from "@/utils/actions";
 
 export default function NotificationsMenu() {
   const { user, isLoading } = useUser();

@@ -1,21 +1,21 @@
 import { getSession } from "@auth0/nextjs-auth0";
 import { redirect } from "next/navigation";
 
-import { prisma } from "@utils/db";
-import { addClub } from "@utils/actions";
+import { prisma } from "@/utils/db";
+import { addClub } from "@/utils/actions";
 
 // Components
 import Image from "next/image";
 
-import WizzardButton from "@components/basic/wizButton";
-import DynamicLink from "@components/basic/dynamic-link";
+import WizzardButton from "@/components/basic/wizButton";
+import DynamicLink from "@/components/basic/dynamic-link";
 import NotificationsUpdate from "@/components/basic/NotificationsUpdate";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPeopleGroup } from "@fortawesome/free-solid-svg-icons";
 
 // Style
 import Style from "./clubs.module.css";
-import CardStyle from "@styles/card-layout.module.css";
+import CardStyle from "@/styles/card-layout.module.css";
 
 export const metadata = {
   title: "Clubs",
