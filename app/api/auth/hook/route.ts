@@ -6,15 +6,11 @@ export async function POST(request: Request) {
     // handle request body json
     const json = await request.json();
 
-    console.log(json);
     const { email, name, picture, nickname, secret } = json;
 
     // validate
     if (secret !== process.env.AUTH0_HOOK_SECRET) {
-      return new NextResponse(JSON.stringify({ message: "Invalid token" }), {
-        status: 403,
-        headers: { "Content-Type": "application/json" },
-      });
+      return NextResponse.json({ message: "Invalid token" }, { status: 403 });
     }
 
     // add user with valid input data
@@ -28,14 +24,6 @@ export async function POST(request: Request) {
       });
     }
   } catch (error: any) {
-    return new NextResponse(
-      JSON.stringify({
-        message: error.message,
-      }),
-      {
-        status: 500,
-        headers: { "Content-Type": "application/json" },
-      }
-    );
+    return NextResponse.json({ message: error.message }, { status: 500 });
   }
 }

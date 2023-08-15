@@ -4,6 +4,7 @@ import { useUser } from "@auth0/nextjs-auth0/client";
 import { useOutsideClick } from "@/utils/hooks";
 
 import { PopoutContext } from "@/contexts/PopoutContext";
+import { ThemeContext } from "@/contexts/ThemeContext";
 import { useContext } from "react";
 
 import Link from "next/link";
@@ -17,6 +18,9 @@ export default function ProfileMenu() {
   const { user, isLoading } = useUser();
 
   const { profileMenuState, setProfileMenuState } = useContext(PopoutContext);
+
+  const { theme, setTheme } = useContext(ThemeContext);
+
   let ref = useOutsideClick(() => setProfileMenuState(false));
 
   return (
@@ -36,9 +40,30 @@ export default function ProfileMenu() {
             {isLoading && <span>Loading user info</span>}
             {user && <span>{user?.email}</span>}
           </div>
+          <div className={`${Style.userMenu} ${Style.settings}`}>
+            <ul>
+              <a
+                onClick={(e) => {
+                  e.preventDefault();
+
+                  if (theme === "light") setTheme("dark");
+                  else setTheme("light");
+
+                  setProfileMenuState(false);
+                }}
+              >
+                <li>
+                  <i>
+                    <FontAwesomeIcon icon={faUser} />
+                  </i>
+                  Change theme
+                </li>
+              </a>
+            </ul>
+          </div>
           <div className={Style.userMenu}>
             <ul>
-              <Link key="kProfile" href="/dashboard/profile" legacyBehavior>
+              <Link href="/dashboard/profile" legacyBehavior>
                 <a>
                   <li>
                     <i>

@@ -79,7 +79,8 @@
     max-width: clampmin(600px, 95vw);
     border: 2px solid var(--neutralSecondary);
     padding: 1rem;
-    background-color: var(--extraDarker);
+    background-color: var(--black);
+    box-shadow: 0px 0px 5px 1px var(--white);
 }
 
 .formField {

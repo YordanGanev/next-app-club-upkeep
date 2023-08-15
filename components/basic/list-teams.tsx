@@ -7,7 +7,27 @@ import { faUser, faUserTie } from "@fortawesome/free-solid-svg-icons";
 import DynamicLink from "@/components/basic/dynamic-link";
 import CardStyle from "@/styles/card-layout.module.css";
 
-export default function ListTeams({ teams }: { teams: any[] | undefined }) {
+import { Prisma } from "@prisma/client";
+
+const teamForList = Prisma.validator<Prisma.TeamArgs>()({
+  select: {
+    id: true,
+    name: true,
+    picture: true,
+    createdAt: true,
+    updatedAt: true,
+    _count: {
+      select: {
+        player: true,
+        staff: true,
+      },
+    },
+  },
+});
+
+type TeamList = Prisma.TeamGetPayload<typeof teamForList>[];
+
+export default function ListTeams({ teams }: { teams: TeamList }) {
   const options: Intl.DateTimeFormatOptions = {
     year: "numeric",
     month: "numeric",

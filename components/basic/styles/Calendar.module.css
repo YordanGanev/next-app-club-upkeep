@@ -134,8 +134,9 @@
     gap: .5rem;
 }
 
-.activity>* {
-    color: var(--white);
+.activity * {
+    /* color: var(--white); */
+    color: var(--activityFontColor);
 }
 
 @media screen and (max-width: 1100px) {

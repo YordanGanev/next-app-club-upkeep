@@ -28,6 +28,7 @@
 .listTitle {
     padding-right: 1rem;
     position: relative;
+    color: var(--activityFontColor);
 }
 
 .date {
@@ -59,6 +60,10 @@
 .listTitle i {
     width: 2ch;
     text-align: center;
+}
+
+.listTitle svg path {
+    fill: var(--activityFontColor);
 }
 
 .list>input[type="checkbox"],

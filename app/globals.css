@@ -43,6 +43,7 @@
   --errorColor: #eb505a;
   --warningColor: #f5b700;
   /* Activity in scheldue colors */
+  --activityFontColor: var(--extraWhite);
   --activityTraining: var(--extraSecondary);
   --activityTournament: #b65e5e;
   --activityLeague: #b59545;
@@ -78,6 +79,35 @@
   --zIdxMax: calc(var(--zIdxPopupWrap) + 1);
 }
 
+/* === Theme Light === */
+html[data-theme="light"] {
+  /* Main */
+  --themeDarker: #f8f8f8;
+  --themeDark: #f4f4f4;
+  --themeDarkAlt: #eaeaea;
+  --themePrimary: #ffffff;
+  --themeSecondary: #dadada;
+  --themeLight: #d0d0d0;
+  --themeLighter: #a6a6a6;
+  --themeLighterAlt: #767676;
+  /* Foreground */
+  --black: #f0f0f0;
+  --neutralDark: #bab8b7;
+  --neutralPrimary: #a3a2a0;
+  --neutralPrimaryAlt: #8d8b8a;
+  --neutralSecondary: #323130;
+  --neutralTertiary: #050505;
+  --white: #020202;
+  /* More */
+  --neutralTertiaryAlt: #f7f7fd;
+  /* --neutralDark: #605e5d; */
+  --neutralQuaternaryAlt: #f5f5fd;
+  --neutralLight: #f4f4fd;
+  --neutralLighter: #f3f3fd;
+  --neutralLighterAlt: #f3f3fd;
+}
+
+
 * {
   box-sizing: border-box;
   padding: 0;
@@ -95,6 +125,7 @@ body {
 a {
   /* color: inherit; */
   text-decoration: none;
+  cursor: pointer;
 }
 
 button {

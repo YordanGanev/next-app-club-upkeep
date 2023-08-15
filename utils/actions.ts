@@ -256,8 +256,7 @@ export async function createPlayer(
     },
   });
 
-  console.log(player, name, picture);
-  //TODO add to prisma
+  // console.log(player, name, picture);
 }
 
 export async function addEvent(
@@ -277,16 +276,16 @@ export async function addEvent(
   const time = data.get("time") as string;
   const note = data.get("note") as string;
 
-  console.log("type", type);
-  console.log("date", date);
-  console.log("time", time);
-  console.log("note", note);
+  // console.log("type", type);
+  // console.log("date", date);
+  // console.log("time", time);
+  // console.log("note", note);
 
-  const dateInput = new Date(date);
-
+  const [day, month, year] = date.split("/");
   const [hours, mins] = time.split(":");
 
-  console.log(dateInput, hours, mins);
+  const dateInput = new Date(`${month}/${day}/${year}`);
+  // console.log(dateInput, hours, mins);
 
   dateInput.setHours(Number(hours));
   dateInput.setMinutes(Number(mins));

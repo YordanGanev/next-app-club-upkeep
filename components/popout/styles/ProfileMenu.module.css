@@ -28,6 +28,12 @@
 .userMenu {
     background-color: var(--neutralPrimary);
     border-radius: 0.5em;
+    padding: .3em 0;
+}
+
+.settings {
+    border-radius: 0;
+    border-bottom: 1px solid var(--themeDarkAlt);
 }
 
 .userMenu ul {
@@ -49,38 +55,6 @@
     background-color: var(--themeDarkAlt);
 }
 
-.close {
-    cursor: pointer;
-    top: -40px;
-    right: 0;
-    position: absolute;
-    border-radius: .5rem;
-    background-color: var(--neutralPrimary);
-    border: 1px solid var(--white);
-    height: 36px;
-    aspect-ratio: 1;
-}
-
-.close::after,
-.close::before {
-    position: absolute;
-    content: "";
-    display: block;
-    height: 26px;
-    width: 4px;
-    background-color: var(--errorColor);
-    left: 50%;
-    top: 50%;
-}
-
-.close::after {
-    transform: translate(-50%, -50%) rotate(45deg);
-}
-.close::before {
-    transform: translate(-50%, -50%) rotate(-45deg);
-}
-
-
 @media screen and (max-width: 500px) {
     .userProfileMenu {
         bottom: unset;
@@ -88,5 +62,36 @@
         top: 340px;
         left: 1rem;
         right: 1rem;
+    }
+
+    .close {
+        cursor: pointer;
+        top: -40px;
+        right: 0;
+        position: absolute;
+        border-radius: .5rem;
+        background-color: var(--neutralPrimary);
+        border: 1px solid var(--white);
+        height: 36px;
+        aspect-ratio: 1;
+    }
+
+    .close::after,
+    .close::before {
+        position: absolute;
+        content: "";
+        display: block;
+        height: 26px;
+        width: 4px;
+        background-color: var(--errorColor);
+        left: 50%;
+        top: 50%;
+    }
+
+    .close::after {
+        transform: translate(-50%, -50%) rotate(45deg);
+    }
+    .close::before {
+        transform: translate(-50%, -50%) rotate(-45deg);
     }
 }

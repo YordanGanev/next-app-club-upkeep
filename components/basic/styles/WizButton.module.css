@@ -28,7 +28,8 @@
 }
 
 .wizButton {
-    background-color: var(--white);
+    background-color: var(--extraWhite);
+    border: 1px solid var(--extraPrimary);
     display: block;
     height: 3rem;
     width: 3rem;

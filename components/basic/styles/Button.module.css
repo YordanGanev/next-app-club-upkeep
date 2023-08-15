@@ -15,11 +15,11 @@
 }
 
 .btnNormal {
-    background-color: var(--themeLighter);
-    border-color: var(--themeLighterAlt);
+    background-color: var(--themeLighterAlt);
+    /* border-color: var(--themeLighterAlt); */
 }
 
 .btnExtra {
     background-color: var(--extraSecondary);
-    border-color: var(--extraPrimary);
+    /* border-color: var(--extraPrimary); */
 }

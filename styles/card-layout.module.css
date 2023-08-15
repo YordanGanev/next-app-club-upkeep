@@ -27,7 +27,7 @@
 }
 
 .card:hover {
-    background-color: #333;
+    background-color: var(--themeSecondary);
 }
 
 .card div,
