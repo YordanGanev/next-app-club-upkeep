@@ -10,6 +10,7 @@ import Profile from "@/components/basic/profile";
 import ProfileInfo, {
   ProfileInfoListType,
 } from "@/components/basic/ProfileInfo";
+import NotificationsUpdate from "@/components/basic/NotificationsUpdate";
 
 export default async function ServerComponent() {
   const session = await getSession();
@@ -23,6 +24,11 @@ export default async function ServerComponent() {
       email: user?.email,
     },
     include: {
+      invite: {
+        include: {
+          team: true,
+        },
+      },
       _count: {
         select: {
           team: true,
@@ -145,6 +151,7 @@ export default async function ServerComponent() {
 
         <ProfileForm appUser={appUser} />
       </div>
+      <NotificationsUpdate appUser={appUser} />
     </>
   );
 }
