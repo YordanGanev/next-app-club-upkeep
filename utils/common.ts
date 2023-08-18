@@ -9,6 +9,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { faHandshake, faClipboard } from "@fortawesome/free-regular-svg-icons";
 
+export type UserAccessType = "owner" | "staff" | "player";
+
 export const ManageClubTabs = [
   { slug: "teams", title: "Teams" },
   { slug: "about", title: "About" },

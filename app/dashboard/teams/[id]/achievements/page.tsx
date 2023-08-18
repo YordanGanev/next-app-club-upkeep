@@ -3,11 +3,20 @@ import { redirect } from "next/navigation";
 
 import { prisma } from "@/utils/db";
 
-import { PlayerManageTeamTabs, StaffManageTeamTabs } from "@/utils/common";
+import {
+  PlayerManageTeamTabs,
+  StaffManageTeamTabs,
+  UserAccessType,
+} from "@/utils/common";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import { faMedal, faAward, faTrophy } from "@fortawesome/free-solid-svg-icons";
+import {
+  faMedal,
+  faAward,
+  faTrophy,
+  faSlash,
+} from "@fortawesome/free-solid-svg-icons";
 
 import TabNav from "@/components/layout/tabNav";
 import NotificationsUpdate from "@/components/basic/NotificationsUpdate";
@@ -15,6 +24,7 @@ import AchievementsClient from "./achievements-page";
 
 import "@/styles/achievement-icon-color.css";
 import Style from "./achievements.module.css";
+import Missing from "@/styles/missing.module.css";
 
 export default async function page({
   params: { id },
@@ -39,6 +49,8 @@ export default async function page({
       },
     },
   });
+
+  if (!appUser) redirect("/about");
 
   const team = await prisma.team.findUnique({
     where: {
@@ -70,6 +82,31 @@ export default async function page({
 
   if (!team) redirect("/dashboard/teams");
 
+  const { club, staff, player: players, achievements } = team;
+
+  let access: UserAccessType = null;
+
+  if (club.ownerId === appUser.id) {
+    access = "owner";
+  } else {
+    players?.forEach((player) => {
+      if (player.userId === appUser.id) {
+        access = "player";
+      }
+    });
+    if (access !== "player") {
+      staff?.forEach((member) => {
+        if (member.id === appUser.id) {
+          access = "staff";
+        }
+      });
+    }
+  }
+
+  if (access === null) redirect("/dashboard/teams");
+
+  const WriteAccess = access === "owner" || access === "staff";
+
   const AchievementMap = {
     FIRST_PLACE: { name: "Champion", icon: faMedal },
     SECOND_PLACE: { name: "2nd place", icon: faMedal },
@@ -82,7 +119,18 @@ export default async function page({
     <>
       <TabNav tabs={true ? StaffManageTeamTabs : PlayerManageTeamTabs} />
       <div className={`dashboard-content-wrapper ${Style.wrapper}`}>
-        {team.achievements.map((achievement) => {
+        {achievements.length === 0 && (
+          <div className={Missing.wrapper}>
+            <div>
+              <span className="fa-layers fa-fw">
+                <FontAwesomeIcon icon={faAward} />
+                <FontAwesomeIcon icon={faSlash} />
+              </span>
+            </div>
+            <div>No achievements recorded yet</div>
+          </div>
+        )}
+        {achievements.map((achievement) => {
           const date = new Date(achievement.date);
           const [month, year] = date
             .toLocaleDateString("en-US", {
@@ -131,7 +179,7 @@ export default async function page({
           );
         })}
       </div>
-      <AchievementsClient writeAccess={true} />
+      <AchievementsClient writeAccess={WriteAccess} />
       <NotificationsUpdate appUser={appUser} />
     </>
   );

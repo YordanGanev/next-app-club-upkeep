@@ -132,6 +132,7 @@ export default async function TeamMedicalPage({
     month: "long",
     day: "numeric",
   };
+
   const form = {
     fetch: {
       master_data: { teamId: team.id },
