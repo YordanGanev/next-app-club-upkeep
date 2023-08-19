@@ -11,8 +11,8 @@ import Link from "next/link";
 import Style from "./styles/ProfileMenu.module.css";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
-import { faUser } from "@fortawesome/free-regular-svg-icons";
+import { faRightFromBracket, faSun } from "@fortawesome/free-solid-svg-icons";
+import { faUser, faMoon } from "@fortawesome/free-regular-svg-icons";
 
 export default function ProfileMenu() {
   const { user, isLoading } = useUser();
@@ -54,9 +54,11 @@ export default function ProfileMenu() {
               >
                 <li>
                   <i>
-                    <FontAwesomeIcon icon={faUser} />
+                    <FontAwesomeIcon
+                      icon={theme === "light" ? faMoon : faSun}
+                    />
                   </i>
-                  Change theme
+                  {theme === "light" ? "Dark" : "Light"} theme
                 </li>
               </a>
             </ul>
