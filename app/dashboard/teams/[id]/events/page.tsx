@@ -2,7 +2,11 @@ import { redirect } from "next/navigation";
 import { getSession } from "@auth0/nextjs-auth0";
 
 import { prisma } from "@/utils/db";
-import { PlayerManageTeamTabs, StaffManageTeamTabs } from "@/utils/common";
+import {
+  PlayerManageTeamTabs,
+  StaffManageTeamTabs,
+  checkUserAccess,
+} from "@/utils/common";
 
 import TabNav from "@/components/layout/tabNav";
 import NotificationsUpdate from "@/components/basic/NotificationsUpdate";
@@ -65,6 +69,11 @@ export default async function EventPage({
           ownerId: true,
         },
       },
+      player: {
+        select: {
+          userId: true,
+        },
+      },
       staff: {
         select: {
           id: true,
@@ -90,18 +99,16 @@ export default async function EventPage({
   });
   if (!team) redirect("/dashboard/teams");
 
-  let WriteAccess = false;
+  const { club, staff, player: players } = team;
 
-  const { club, staff } = team;
-  if (club.ownerId === appUser.id) {
-    WriteAccess = true;
-  } else {
-    staff?.forEach((member) => {
-      if (member.id === appUser.id) {
-        WriteAccess = true;
-      }
-    });
-  }
+  const { access, WriteAccess } = checkUserAccess(
+    appUser.id,
+    club.ownerId,
+    staff,
+    players
+  );
+
+  if (access === null) redirect("/dashboard/teams");
 
   return (
     <>

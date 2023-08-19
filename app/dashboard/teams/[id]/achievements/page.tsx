@@ -6,7 +6,7 @@ import { prisma } from "@/utils/db";
 import {
   PlayerManageTeamTabs,
   StaffManageTeamTabs,
-  UserAccessType,
+  checkUserAccess,
 } from "@/utils/common";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -84,28 +84,14 @@ export default async function page({
 
   const { club, staff, player: players, achievements } = team;
 
-  let access: UserAccessType = null;
-
-  if (club.ownerId === appUser.id) {
-    access = "owner";
-  } else {
-    players?.forEach((player) => {
-      if (player.userId === appUser.id) {
-        access = "player";
-      }
-    });
-    if (access !== "player") {
-      staff?.forEach((member) => {
-        if (member.id === appUser.id) {
-          access = "staff";
-        }
-      });
-    }
-  }
+  const { access, WriteAccess } = checkUserAccess(
+    appUser.id,
+    club.ownerId,
+    staff,
+    players
+  );
 
   if (access === null) redirect("/dashboard/teams");
-
-  const WriteAccess = access === "owner" || access === "staff";
 
   const AchievementMap = {
     FIRST_PLACE: { name: "Champion", icon: faMedal },

@@ -4,9 +4,9 @@ import { InviteType } from "@prisma/client";
 
 import { prisma } from "@/utils/db";
 import {
-  UserAccess,
   PlayerManageTeamTabs,
   StaffManageTeamTabs,
+  checkUserAccess,
 } from "@/utils/common";
 
 import Image from "next/image";
@@ -96,29 +96,22 @@ export default async function PlayersPage({
     },
   });
 
-  let access = UserAccess.player;
-  let WriteAccess = false;
+  const { club, staff, player: players } = team;
 
-  const { club, staff, player } = team;
-  if (club.ownerId === appUser.id) {
-    access = UserAccess.owner;
-    WriteAccess = true;
-  } else {
-    staff?.forEach((member) => {
-      if (member.id === appUser.id) {
-        access = UserAccess.staff;
-        WriteAccess = true;
-      }
-    });
-  }
+  const { access, WriteAccess } = checkUserAccess(
+    appUser.id,
+    club.ownerId,
+    staff,
+    players
+  );
+
+  if (access === null) redirect("/dashboard/teams");
 
   const options: Intl.DateTimeFormatOptions = {
     year: "numeric",
     month: "numeric",
     day: "numeric",
   };
-
-  const players = team.player;
 
   return (
     <>
@@ -210,7 +203,7 @@ export default async function PlayersPage({
                   </div>
                   {WriteAccess && (
                     <CancelInviteButton
-                      teamId={team.id}
+                      teamId={id}
                       userId={i.userId}
                       className="global-button border-remove"
                     >

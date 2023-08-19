@@ -6,9 +6,9 @@ import { Prisma } from "@prisma/client";
 import { prisma } from "@/utils/db";
 import { addMedicalRecord } from "@/utils/actions";
 import {
-  UserAccess,
   PlayerManageTeamTabs,
   StaffManageTeamTabs,
+  checkUserAccess,
 } from "@/utils/common";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -103,30 +103,25 @@ export default async function TeamMedicalPage({
           medical: true,
           name: true,
           picture: true,
+          userId: true,
         },
       },
     },
   });
 
-  if (!team) redirect("/about");
+  if (!team) redirect("/dashboard/teams");
 
-  let access = UserAccess.player;
-  let WriteAccess = false;
+  const { club, staff, player: players } = team;
 
-  const { club, staff, player } = team;
-  if (club.ownerId === appUser.id) {
-    access = UserAccess.owner;
-    WriteAccess = true;
-  } else {
-    staff?.forEach((member) => {
-      if (member.id === appUser.id) {
-        access = UserAccess.staff;
-        WriteAccess = true;
-      }
-    });
-  }
+  const { access, WriteAccess } = checkUserAccess(
+    appUser.id,
+    club.ownerId,
+    staff,
+    players
+  );
 
-  const players = team.player;
+  if (access === null) redirect("/dashboard/teams");
+
   const options: Intl.DateTimeFormatOptions = {
     year: "numeric",
     month: "long",

@@ -1,4 +1,10 @@
-import { SportType, Achievement, AchievementType } from "@prisma/client";
+import {
+  SportType,
+  Achievement,
+  AchievementType,
+  User,
+  Player,
+} from "@prisma/client";
 import { ReadonlyURLSearchParams } from "next/navigation";
 
 import {
@@ -9,7 +15,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { faHandshake, faClipboard } from "@fortawesome/free-regular-svg-icons";
 
-export type UserAccessType = "owner" | "staff" | "player";
+export type UserAccessType = null | "owner" | "staff" | "player";
 
 export const ManageClubTabs = [
   { slug: "teams", title: "Teams" },
@@ -32,12 +38,6 @@ export const StaffManageTeamTabs = [
   { slug: "achievements", title: "Achievements" },
   { slug: "about", title: "About" },
 ];
-
-export const UserAccess = {
-  owner: "owner",
-  staff: "staff",
-  player: "player",
-};
 
 export const EventActivities = {
   TRAINING: { name: "Training", icon: faDumbbell },
@@ -153,6 +153,37 @@ export const achievementTypeOptions = [
   { value: AchievementType.MVP, label: "MVP award" },
   { value: AchievementType.SPECIAL, label: "Special award" },
 ];
+
+export const checkUserAccess: (
+  userId: string,
+  ownerId: string,
+  staff: { id: string }[],
+  players: { userId: string | null }[]
+) => {
+  access: UserAccessType;
+  WriteAccess: boolean;
+} = (userId, ownerId, staff, players) => {
+  let access: UserAccessType = null;
+
+  if (ownerId === userId) {
+    access = "owner";
+  } else {
+    players?.forEach((player) => {
+      if (player.userId === userId) {
+        access = "player";
+      }
+    });
+    if (access !== "player") {
+      staff?.forEach((member) => {
+        if (member.id === userId) {
+          access = "staff";
+        }
+      });
+    }
+  }
+
+  return { access, WriteAccess: access === "owner" || access === "staff" };
+};
 
 export const containsCyrillic = (text: string) => {
   const cyrillicRegex = /[а-яА-ЯЁё]/;

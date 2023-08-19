@@ -29,7 +29,7 @@ const DynamicLink = forwardRef<
       href={href}
       onClick={(e) => {
         e.preventDefault();
-        router.replace(href as string);
+        router.push(href as string);
         router.refresh();
       }}
     >

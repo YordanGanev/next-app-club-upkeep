@@ -3,7 +3,11 @@ import { getSession } from "@auth0/nextjs-auth0";
 import { AchievementType } from "@prisma/client";
 
 import { prisma } from "@/utils/db";
-import { PlayerManageTeamTabs, StaffManageTeamTabs } from "@/utils/common";
+import {
+  PlayerManageTeamTabs,
+  StaffManageTeamTabs,
+  checkUserAccess,
+} from "@/utils/common";
 
 import TabNav from "@/components/layout/tabNav";
 import NotificationsUpdate from "@/components/basic/NotificationsUpdate";
@@ -80,16 +84,16 @@ export default async function page({ params }: { params: { id: string } }) {
     },
   });
 
-  let WriteAccess = false;
-  if (team.club.ownerId === appUser.id) {
-    WriteAccess = true;
-  } else {
-    team.staff?.forEach((member) => {
-      if (member.id === appUser.id) {
-        WriteAccess = true;
-      }
-    });
-  }
+  // const { club, staff, player: players, achievements } = team;
+
+  const { access, WriteAccess } = checkUserAccess(
+    appUser.id,
+    team.club.ownerId,
+    team.staff,
+    team.player
+  );
+
+  if (access === null) redirect("/dashboard/teams");
 
   const options: Intl.DateTimeFormatOptions = {
     year: "numeric",
