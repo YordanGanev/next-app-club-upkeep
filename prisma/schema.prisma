@@ -95,6 +95,8 @@ model Event {
   date   DateTime
   note   String
   team   Team      @relation(fields: [teamId], references: [id], onDelete: Cascade)
+
+  @@unique([teamId, type, date])
 }
 
 model Invite {

@@ -1,7 +1,11 @@
 "use client";
 import { useState, useContext } from "react";
 
-import { PopoutContext, InputType } from "@/contexts/PopoutContext";
+import {
+  PopoutContext,
+  InputType,
+  FormSubmitResultType,
+} from "@/contexts/PopoutContext";
 import { useOutsideClick, useForm } from "@/utils/hooks";
 
 import Input from "@/components/basic/input";
@@ -15,8 +19,8 @@ export default function PopupForm() {
   const [values, handleChange] = useForm({});
 
   const ref = useOutsideClick(() => {
-    console.log("Click Outside", formState.persist);
-    console.log(formState);
+    // console.log("Click Outside", formState.persist);
+    // console.log(formState);
 
     if (formState.persist) return;
     if (true) return; // temp fix presist?
@@ -26,12 +30,13 @@ export default function PopupForm() {
 
   // const [isUpdating, setUpdating] = useState(false); // if needed for slow update
   const [isUpdated, setUpdated] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
 
-  const info = <p className={Style.error}>Unable to submit</p>;
   if (isUpdated) {
     setTimeout(() => {
       setUpdated(false);
-    }, 1000);
+      setErrorMsg("");
+    }, 5000);
   }
 
   return (
@@ -42,11 +47,23 @@ export default function PopupForm() {
             className={Style.form}
             action={(data: FormData) => {
               if (formState.onSubmitAction)
-                if (formState.fetch?.master_data)
-                  formState.onSubmitAction(data, formState.fetch.master_data);
-                else formState.onSubmitAction(data, undefined);
-              formHide();
-              handleChange(null); // reset input values
+                formState
+                  .onSubmitAction(data, formState.fetch?.master_data)
+                  .then((result: FormSubmitResultType) => {
+                    console.log(result);
+                    if (result.success) {
+                      formHide();
+                      handleChange(null); // reset input values
+                    } else {
+                      setErrorMsg(result?.message || "Unable to submit");
+                      setUpdated(true);
+                    }
+                  })
+                  .catch((error) => {
+                    console.log(error);
+                    setErrorMsg("Unable to submit");
+                    setUpdated(true);
+                  });
             }}
           >
             <div className={Style.header}>
@@ -73,7 +90,12 @@ export default function PopupForm() {
               );
             })}
 
-            {isUpdated && info}
+            {isUpdated && (
+              <div className={Style.error}>
+                <div className={Style.errorMsg}>{errorMsg}</div>
+              </div>
+            )}
+
             <div className={Style.formField}>
               <Button
                 type="submit"

@@ -39,7 +39,7 @@
 .form > div > select,
 .form > div > button {
     margin: 0.5rem;
-    background-color: var(--neutralPrimary);
+    background-color: var(--themePrimary);
     padding: 0.5rem;
     border-color: var(--neutralPrimaryAlt);
     border-radius: 0.5rem;

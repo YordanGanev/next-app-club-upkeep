@@ -81,7 +81,8 @@
 }
 
 .form .MuiFormControl-root {
-  background-color: var(--neutralPrimary);
+  /* background-color: var(--neutralPrimary); */
+  background-color: var(--themePrimary);
   border-radius: 0.5rem;
   margin: .5rem;
   border: 2px outset var(--neutralPrimaryAlt);

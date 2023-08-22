@@ -185,8 +185,8 @@ export const checkUserAccess: (
   return { access, WriteAccess: access === "owner" || access === "staff" };
 };
 
-export const containsCyrillic = (text: string) => {
-  const cyrillicRegex = /[а-яА-ЯЁё]/;
+export const startsWithCyrillic = (text: string) => {
+  const cyrillicRegex = /^[а-яА-Я]{2}/;
   return cyrillicRegex.test(text);
 };
 

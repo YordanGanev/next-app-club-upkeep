@@ -8,6 +8,7 @@ export default function DeleteMedicalButton({
   children,
   id,
   className,
+  ...props
 }: {
   children?: React.ReactNode;
   id: string;
@@ -16,16 +17,26 @@ export default function DeleteMedicalButton({
   const { setAction } = useContext(PopoutContext);
   const [isPending, startTransition] = useTransition();
 
+  console.log(props);
+
   return (
     <button
+      {...props}
       className={className}
+      disabled={isPending}
       onClick={() => {
         setAction({
           title: "Delete Medical Record",
           message: "Permanently delete the medical record?",
           callback: () => {
             startTransition(() => {
-              deleteMedicalRecord(id);
+              deleteMedicalRecord(id)
+                .then((result) => {
+                  console.log(result);
+                })
+                .catch((error) => {
+                  console.log(error);
+                });
             });
           },
         });

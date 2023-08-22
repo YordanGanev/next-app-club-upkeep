@@ -129,9 +129,6 @@ export default async function TeamMedicalPage({
   };
 
   const form = {
-    fetch: {
-      master_data: { teamId: team.id },
-    },
     title: "Add Medical Record",
     inputs: [
       {

@@ -1,49 +1,71 @@
 "use server";
 import { prisma } from "@/utils/db";
-import { getPlaceholderImage } from "@/utils/common";
+import { startsWithCyrillic, getPlaceholderImage } from "@/utils/common";
 
 import { getSession } from "@auth0/nextjs-auth0";
 
-import { redirect } from "next/navigation";
 import {
   Achievement,
   AchievementType,
   EventType,
   InviteType,
+  Prisma,
   SportType,
 } from "@prisma/client";
+
+// const SESSION_EXPIRED = { success: false, message: "Session expired" };
+const SESSION_EXPIRED = { success: false };
 
 export async function addClub(data: FormData) {
   const session = await getSession();
 
-  if (!session) {
-    return;
-  }
+  if (!session) return SESSION_EXPIRED;
 
   const name = data.get("name") as string;
 
-  const picture = getPlaceholderImage(name.slice(0, 2).toLowerCase());
+  let pic: string = name.slice(0, 2).toLowerCase();
 
-  const user = await prisma.user.update({
-    where: {
-      email: session.user.email,
-    },
-    data: {
-      club: {
-        create: {
-          name,
-          picture,
+  if (startsWithCyrillic(name)) {
+    console.log("STARTS CYRILLIC");
+    pic = String.fromCharCode(Math.floor(Math.random() * 26) + 97);
+  }
+  console.log(pic);
+
+  const picture = getPlaceholderImage(pic);
+  console.log(picture);
+
+  try {
+    const user = await prisma.user.update({
+      where: {
+        email: session.user.email,
+      },
+      data: {
+        club: {
+          create: {
+            name,
+            picture,
+          },
         },
       },
-    },
-  });
+    });
+  } catch (e) {
+    console.log(e);
+    if (e instanceof Prisma.PrismaClientKnownRequestError) {
+      if (e.code === "P2002") {
+        return { success: false, message: "Club name already taken" };
+      }
+      return { success: false };
+    }
+  }
+
+  return { success: true };
 }
 
 export async function addTeam(
   data: FormData,
   master_data: { clubId: string } | undefined
 ) {
-  if (!master_data) return;
+  if (!master_data) return SESSION_EXPIRED;
 
   const session = await getSession();
 
@@ -51,22 +73,43 @@ export async function addTeam(
 
   const name = data.get("name") as string;
   const sport = data.get("sport") as SportType;
-  const picture = getPlaceholderImage(name.slice(0, 2).toLowerCase());
 
-  const updated = await prisma.club.update({
-    where: {
-      id: master_data.clubId,
-    },
-    data: {
-      teams: {
-        create: {
-          name,
-          sport,
-          picture,
+  let pic: string = name.slice(0, 2).toLowerCase();
+
+  if (startsWithCyrillic(name)) {
+    console.log("STARTS CYRILLIC");
+    pic = String.fromCharCode(Math.floor(Math.random() * 26) + 97);
+  }
+  console.log(pic);
+  const picture = getPlaceholderImage(pic);
+  console.log(picture);
+
+  try {
+    const updated = await prisma.club.update({
+      where: {
+        id: master_data.clubId,
+      },
+      data: {
+        teams: {
+          create: {
+            name,
+            sport,
+            picture,
+          },
         },
       },
-    },
-  });
+    });
+  } catch (e) {
+    console.log(e);
+    if (e instanceof Prisma.PrismaClientKnownRequestError) {
+      if (e.code === "P2002") {
+        return { success: false, message: "Team with this name already exist" };
+      }
+      return { success: false };
+    }
+  }
+
+  return { success: true };
 }
 
 export async function updateUser(data: FormData) {
@@ -89,15 +132,14 @@ export async function updateUser(data: FormData) {
       birthdate: new Date(birthdate),
     },
   });
+
+  return { success: true };
 }
 
-export async function addMedicalRecord(
-  data: FormData,
-  master_data: { teamId: string } | undefined
-) {
+export async function addMedicalRecord(data: FormData) {
   const session = await getSession();
 
-  if (!session) return;
+  if (!session) return SESSION_EXPIRED;
 
   const weight = Number(data.get("weight")) as number;
 
@@ -116,7 +158,7 @@ export async function addMedicalRecord(
     },
   });
 
-  if (!player) return;
+  if (!player) return { success: false, message: "Player not found" };
 
   if (player.user?.birthdate) {
     const diff =
@@ -139,7 +181,7 @@ export async function addMedicalRecord(
     },
   });
 
-  return;
+  return { success: true };
 }
 
 export async function invitePlayer(
@@ -148,7 +190,7 @@ export async function invitePlayer(
 ) {
   const session = await getSession();
 
-  if (!session) return;
+  if (!session) return SESSION_EXPIRED;
 
   const { teamId } = master_data;
 
@@ -185,6 +227,8 @@ export async function invitePlayer(
       },
     },
   });
+
+  return { success: true };
 }
 
 export async function inviteStaff(
@@ -193,8 +237,7 @@ export async function inviteStaff(
 ) {
   const session = await getSession();
 
-  if (!session) return;
-
+  if (!session) return SESSION_EXPIRED;
   const { teamId } = master_data;
 
   const emails: string[] = [];
@@ -230,6 +273,8 @@ export async function inviteStaff(
       },
     },
   });
+
+  return { success: true };
 }
 
 export async function createPlayer(
@@ -237,26 +282,41 @@ export async function createPlayer(
   master_data: { teamId: string }
 ) {
   const session = await getSession();
-
-  if (!session) return;
+  if (!session) return SESSION_EXPIRED;
 
   const name = data.get("name") as string;
 
-  const picture = getPlaceholderImage(name.slice(0, 2).toLowerCase());
+  let pic: string = name.slice(0, 2).toLowerCase();
 
-  const player = await prisma.player.create({
-    data: {
-      name: name,
-      picture,
-      Team: {
-        connect: {
-          id: master_data.teamId,
+  if (startsWithCyrillic(name)) {
+    pic = String.fromCharCode(Math.floor(Math.random() * 26) + 97);
+  }
+
+  const picture = getPlaceholderImage(pic);
+
+  try {
+    const player = await prisma.player.create({
+      data: {
+        name: name,
+        picture,
+        Team: {
+          connect: {
+            id: master_data.teamId,
+          },
         },
       },
-    },
-  });
+    });
+  } catch (e) {
+    console.log(e);
+    if (e instanceof Prisma.PrismaClientKnownRequestError) {
+      if (e.code === "P2002") {
+        return { success: false, message: "Player already exists" };
+      }
+      return { success: false };
+    }
+  }
 
-  // console.log(player, name, picture);
+  return { success: true };
 }
 
 export async function addEvent(
@@ -265,45 +325,51 @@ export async function addEvent(
 ) {
   const session = await getSession();
 
-  if (!session) return;
+  if (!session) return SESSION_EXPIRED;
 
   const { teamId, offset } = master_data;
 
-  console.log(teamId, offset);
+  // console.log(teamId, offset);
 
   const type = data.get("type") as string;
   const date = data.get("date") as string;
   const time = data.get("time") as string;
   const note = data.get("note") as string;
 
-  // console.log("type", type);
-  // console.log("date", date);
-  // console.log("time", time);
-  // console.log("note", note);
-
   const [day, month, year] = date.split("/");
   const [hours, mins] = time.split(":");
 
   const dateInput = new Date(`${month}/${day}/${year}`);
-  // console.log(dateInput, hours, mins);
 
   dateInput.setHours(Number(hours));
   dateInput.setMinutes(Number(mins));
 
-  const event = await prisma.team.update({
-    where: {
-      id: teamId,
-    },
-    data: {
-      events: {
-        create: {
-          type: type as EventType,
-          date: dateInput,
-          note,
+  try {
+    const event = await prisma.team.update({
+      where: {
+        id: teamId,
+      },
+      data: {
+        events: {
+          create: {
+            type: type as EventType,
+            date: dateInput,
+            note,
+          },
         },
       },
-    },
-  });
+    });
+  } catch (e) {
+    console.log(e);
+    if (e instanceof Prisma.PrismaClientKnownRequestError) {
+      if (e.code === "P2002") {
+        return { success: false, message: "Event already exists" };
+      }
+    }
+    return { success: false };
+  }
+
+  return { success: true };
 }
 
 export async function addAchievement(
@@ -477,7 +543,7 @@ export async function deleteMedicalRecord(id: string) {
   "use server";
   const session = await getSession();
 
-  if (!session) return;
+  if (!session) return false;
 
   const find = await prisma.medical.findUnique({
     where: {
@@ -485,11 +551,15 @@ export async function deleteMedicalRecord(id: string) {
     },
   });
 
+  if (!find) return false;
+
   const medical = await prisma.medical.delete({
     where: {
       id,
     },
   });
+
+  return true;
 }
 
 export async function incrementUnseenInvites(text: string) {

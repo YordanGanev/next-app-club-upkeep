@@ -34,7 +34,15 @@ type ConfirmActionType = {
   callback: () => void;
 };
 
-type FormOnSubmitAction = (data: FormData, master_data: {} | undefined) => void;
+export type FormSubmitResultType = {
+  success: boolean;
+  message?: string;
+};
+
+type FormOnSubmitAction = (
+  data: FormData,
+  master_data: {} | undefined
+) => Promise<FormSubmitResultType>;
 
 export type InputType = {
   type: string;

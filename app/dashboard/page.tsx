@@ -15,13 +15,7 @@ import StyleMissing from "@/styles/missing.module.css";
 export default async function DashboardPage() {
   const session = await getSession();
 
-  if (!session)
-    return (
-      <>
-        <h1>No session Dashboard</h1>
-        <a href="/api/auth/login">Login</a>
-      </>
-    );
+  if (!session) redirect("/about");
 
   const appUser = await prisma.user.findUnique({
     where: {

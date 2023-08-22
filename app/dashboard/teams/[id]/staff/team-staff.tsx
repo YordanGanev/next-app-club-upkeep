@@ -1,5 +1,4 @@
 "use client";
-import { UserAccess } from "@/utils/common";
 import { inviteStaff } from "@/utils/actions";
 
 import WizzardButton from "@/components/basic/wizButton";

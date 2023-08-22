@@ -57,7 +57,7 @@ export default function TeamEventsPage({
         name: "date",
         required: true,
         value: dayjs(today),
-        // minDate: dayjs(today),
+        minDate: dayjs(today),
         maxDate: dayjs(new Date(2034, 11, 31)),
         format: "DD/MM/YYYY",
       },

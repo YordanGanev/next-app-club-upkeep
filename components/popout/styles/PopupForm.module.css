@@ -99,11 +99,15 @@
 .form>.formField>select,
 .form>.formField>button {
     margin: 0.5rem;
-    background-color: var(--neutralPrimary);
+    background-color: var(--themePrimary);
     padding: 0.5rem;
     border-color: var(--neutralPrimaryAlt);
     border-radius: 0.5rem;
     font-size: 1.2rem;
+}
+
+.form>.formField>button {
+    background-color: var(--neutralPrimary)
 }
 
 .form>.formField>button {
@@ -123,7 +127,18 @@
 /* Error message */
 
 .error {
+    position: relative;
+    height: max-content;
+    min-height: calc(1.2 * 4em);
+}
+
+.errorMsg {
+    padding: 0.5em;
+    color: var(--errorColor);
     text-align: center;
-    padding: 0.5rem;
-    color: var(--extraLight);
+    white-space: normal;
+    position: absolute;
+    text-align: center;
+    white-space: normal;
+    width: 100%;
 }
