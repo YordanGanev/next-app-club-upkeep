@@ -27,16 +27,6 @@
     padding: 1em;
 }
 
-.danger input { 
-    background-color: var(--errorColor);
-}
-
-.info {
-
-}
-
-
-
 .info p:first-of-type {
     font-weight: bold;
 }

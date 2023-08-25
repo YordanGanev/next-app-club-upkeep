@@ -547,22 +547,32 @@ export async function deleteEvent(eventId: string, teamId: string) {
 
   if (!session) return;
 
-  const event = await prisma.event.findUnique({
-    where: {
-      id: eventId,
-    },
-    select: {
-      teamId: true,
-    },
-  });
+  console.log(eventId, teamId);
+  try {
+    const event = await prisma.event.findUnique({
+      where: {
+        id: eventId,
+      },
+      select: {
+        teamId: true,
+      },
+    });
 
-  if (event?.teamId !== teamId) return;
+    console.log(event);
+    if (event?.teamId !== teamId) return { success: false };
 
-  const deleted = await prisma.event.delete({
-    where: {
-      id: eventId,
-    },
-  });
+    const deleted = await prisma.event.delete({
+      where: {
+        id: eventId,
+      },
+    });
+
+    console.log(deleted);
+  } catch (e) {
+    console.log(e);
+    return { success: false };
+  }
+  return { success: true };
 }
 
 export async function deleteMedicalRecord(id: string) {

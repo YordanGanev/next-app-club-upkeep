@@ -283,7 +283,7 @@ export default function Activities({ events, editable = false }) {
                             title: "Delete event",
                             message: "Delete event",
                             callback: () => {
-                              deleteEvent(e.teamId, e.id);
+                              deleteEvent(e.id, e.teamId);
                             },
                           });
                         }}

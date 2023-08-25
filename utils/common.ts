@@ -55,10 +55,10 @@ export const createQueryString = (
 ) => {
   const params = new URLSearchParams(searchParams.toString());
 
-  console.log(query);
+  // console.log(query);
   query.forEach(({ name, value }) => params.set(name, value));
 
-  console.log(params);
+  // console.log(params);
   return params.toString();
 };
 
@@ -66,8 +66,6 @@ export const queryDate = (searchParams: ReadonlyURLSearchParams) => {
   const day = searchParams.get("day");
   const month = searchParams.get("month");
   const year = searchParams.get("year");
-
-  console.log(day, month, year);
 
   if (!day || !month || !year) return new Date();
 

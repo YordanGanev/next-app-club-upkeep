@@ -92,6 +92,7 @@ export default function Calendar({ events }) {
         date.getDate()
       );
       router.push(`${pathname}?${query}`);
+      router.refresh();
     }
   }, []);
 
@@ -124,6 +125,7 @@ export default function Calendar({ events }) {
               "list"
             );
             router.push(`${pathname}?${query}`);
+            router.refresh();
           }}
         >
           <div className={Style.date}>{i}</div>
@@ -173,6 +175,7 @@ export default function Calendar({ events }) {
               "list"
             );
             router.push(`${pathname}?${query}`);
+            router.refresh();
           }}
           className={Style.unactiveMonth}
         >
@@ -245,6 +248,7 @@ export default function Calendar({ events }) {
                   date.getDate()
                 );
                 router.push(`${pathname}?${query}`);
+                router.refresh();
               }}
             >
               <FontAwesomeIcon icon={faChevronLeft} />
@@ -270,6 +274,7 @@ export default function Calendar({ events }) {
                     );
 
                     router.push(`${pathname}?${query}`);
+                    router.refresh();
                   }
                 }}
                 minDate={dayjs(new Date(2023, 0, 1))}
@@ -289,6 +294,7 @@ export default function Calendar({ events }) {
                 );
 
                 router.push(`${pathname}?${query}`);
+                router.refresh();
               }}
             >
               <FontAwesomeIcon icon={faChevronRight} />

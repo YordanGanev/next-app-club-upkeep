@@ -85,8 +85,6 @@ export default async function page({ params }: { params: { id: string } }) {
     },
   });
 
-  // const { club, staff, player: players, achievements } = team;
-
   const { access, WriteAccess } = checkUserAccess(
     appUser.id,
     team.club.ownerId,
