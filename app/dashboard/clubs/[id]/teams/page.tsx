@@ -80,9 +80,9 @@ export default async function ManageClubPage({
   ];
 
   const genderOptions = [
+    { value: GenderType.MIXED, label: "Mixed" },
     { value: GenderType.WOMEN, label: "Women" },
     { value: GenderType.MEN, label: "Men" },
-    { value: GenderType.MIXED, label: "Mixed" },
   ];
 
   // Form setup Object

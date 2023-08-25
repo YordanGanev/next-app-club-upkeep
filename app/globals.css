@@ -41,6 +41,7 @@
   --extraWhite: #e7e4ff;
   /* Extra color */
   --errorColor: #eb505a;
+  --dangerColor: #46110e;
   --warningColor: #f5b700;
   /* Activity in scheldue colors */
   --activityFontColor: var(--extraWhite);
@@ -105,6 +106,8 @@ html[data-theme="light"] {
   --neutralLight: #f4f4fd;
   --neutralLighter: #f3f3fd;
   --neutralLighterAlt: #f3f3fd;
+
+  --dangerColor: #f7dcda;
 }
 
 

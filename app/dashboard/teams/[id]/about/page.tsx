@@ -17,6 +17,7 @@ import ProfileInfo, {
 } from "@/components/basic/ProfileInfo";
 
 import Style from "./team-about.module.css";
+import ProfileAction from "@/components/basic/ProfileAction";
 
 export default async function page({ params }: { params: { id: string } }) {
   const session = await getSession();
@@ -36,7 +37,7 @@ export default async function page({ params }: { params: { id: string } }) {
     },
   });
 
-  if (!appUser) return <h1>User Not Found</h1>;
+  if (!appUser) redirect("/about");
 
   const team = await prisma.team.findUnique({
     where: {
@@ -210,6 +211,8 @@ export default async function page({ params }: { params: { id: string } }) {
         </div>
 
         <ProfileInfo title="Team Information" list={infoList} />
+
+        {access === "owner" && <ProfileAction about="team" id={params.id} />}
       </div>
 
       <NotificationsUpdate appUser={appUser} />

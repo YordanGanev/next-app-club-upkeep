@@ -12,6 +12,7 @@ import ProfileInfo, {
 
 import Style from "./about.module.css";
 import { AchievementType } from "@prisma/client";
+import ProfileAction from "@/components/basic/ProfileAction";
 
 export default async function page({ params }: { params: { id: string } }) {
   const session = await getSession();
@@ -262,6 +263,8 @@ export default async function page({ params }: { params: { id: string } }) {
         </div>
 
         <ProfileInfo title="Club Info" list={infoList} />
+
+        <ProfileAction about="club" id={params.id} />
       </div>
       <NotificationsUpdate appUser={appUser} />
     </>

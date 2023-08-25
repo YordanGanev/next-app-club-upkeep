@@ -13,6 +13,7 @@ import {
   Prisma,
   SportType,
 } from "@prisma/client";
+import { FormSubmitResultType } from "@/contexts/PopoutContext";
 
 // const SESSION_EXPIRED = { success: false, message: "Session expired" };
 const SESSION_EXPIRED = { success: false };
@@ -602,4 +603,60 @@ export async function incrementUnseenInvites(text: string) {
       },
     },
   });
+}
+
+export async function deleteTeam(teamId: string) {
+  const session = await getSession();
+
+  if (!session) return SESSION_EXPIRED;
+
+  const playerCount = await prisma.player.count({
+    where: {
+      teamId,
+    },
+  });
+
+  if (playerCount > 0)
+    return { success: false, message: "Team still has players" };
+
+  try {
+    const team = await prisma.team.delete({
+      where: {
+        id: teamId,
+      },
+    });
+  } catch (e) {
+    console.log(e);
+    return { success: false };
+  }
+
+  return { success: true };
+}
+
+export async function deleteClub(clubId: string) {
+  const session = await getSession();
+
+  if (!session) return SESSION_EXPIRED;
+
+  const teamsCount = await prisma.team.count({
+    where: {
+      clubId,
+    },
+  });
+
+  if (teamsCount > 0)
+    return { success: false, message: "Club still has teams" };
+
+  try {
+    const club = await prisma.club.delete({
+      where: {
+        id: clubId,
+      },
+    });
+  } catch (e) {
+    console.log(e);
+    return { success: false };
+  }
+
+  return { success: true };
 }
