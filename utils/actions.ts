@@ -16,6 +16,8 @@ import {
 
 // const SESSION_EXPIRED = { success: false, message: "Session expired" };
 const SESSION_EXPIRED = { success: false };
+const MAX_CLUB_COUNT = 15;
+const MAX_TEAM_COUNT = 15;
 
 export async function addClub(data: FormData) {
   const session = await getSession();
@@ -33,6 +35,17 @@ export async function addClub(data: FormData) {
   const picture = getPlaceholderImage(pic);
 
   try {
+    const clubsCount = await prisma.club.count({
+      where: {
+        owner: {
+          email: session.user.email,
+        },
+      },
+    });
+
+    if (clubsCount === MAX_CLUB_COUNT)
+      return { success: false, message: "Clubs limit reached!" };
+
     const user = await prisma.user.update({
       where: {
         email: session.user.email,
@@ -84,6 +97,15 @@ export async function addTeam(
   const picture = getPlaceholderImage(pic);
 
   try {
+    const teamCount = await prisma.team.count({
+      where: {
+        clubId: master_data.clubId,
+      },
+    });
+
+    if (teamCount === MAX_TEAM_COUNT)
+      return { success: false, message: "Teams limit reached!" };
+
     const updated = await prisma.club.update({
       where: {
         id: master_data.clubId,

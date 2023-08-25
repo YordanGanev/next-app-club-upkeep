@@ -133,7 +133,9 @@ export default async function ManageClubPage({
   return (
     <>
       <TabNav tabs={ManageClubTabs} />
-      <div className={CardStyle.wrapperWizButton}>
+      <div
+        className={`dashboard-content-wrapper ${CardStyle.wrapperWizButton}`}
+      >
         {club.teams.length == 0 && (
           <div className={Style.empty}>
             <div>
