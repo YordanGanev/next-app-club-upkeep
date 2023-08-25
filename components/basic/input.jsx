@@ -42,6 +42,7 @@ function Input({ inputProps, handleChange }) {
             handleChange(null, { name: inputProps?.name, value: option.value });
           }}
           options={inputProps?.options}
+          defaultValue={inputProps?.defaultValue}
           className="multi-select-container"
           classNamePrefix="multi-select"
         ></Select>

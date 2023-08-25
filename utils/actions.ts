@@ -8,6 +8,7 @@ import {
   Achievement,
   AchievementType,
   EventType,
+  GenderType,
   InviteType,
   Prisma,
   SportType,
@@ -26,13 +27,10 @@ export async function addClub(data: FormData) {
   let pic: string = name.slice(0, 2).toLowerCase();
 
   if (startsWithCyrillic(name)) {
-    console.log("STARTS CYRILLIC");
     pic = String.fromCharCode(Math.floor(Math.random() * 26) + 97);
   }
-  console.log(pic);
 
   const picture = getPlaceholderImage(pic);
-  console.log(picture);
 
   try {
     const user = await prisma.user.update({
@@ -73,16 +71,17 @@ export async function addTeam(
 
   const name = data.get("name") as string;
   const sport = data.get("sport") as SportType;
+  const age = data.get("age") as string;
+  const gender = data.get("gender") as GenderType;
+
+  const ageGroup = age ? Number(age) : null;
 
   let pic: string = name.slice(0, 2).toLowerCase();
 
   if (startsWithCyrillic(name)) {
-    console.log("STARTS CYRILLIC");
     pic = String.fromCharCode(Math.floor(Math.random() * 26) + 97);
   }
-  console.log(pic);
   const picture = getPlaceholderImage(pic);
-  console.log(picture);
 
   try {
     const updated = await prisma.club.update({
@@ -95,6 +94,8 @@ export async function addTeam(
             name,
             sport,
             picture,
+            ageGroup,
+            gender,
           },
         },
       },
@@ -119,6 +120,7 @@ export async function updateUser(data: FormData) {
 
   const name = data.get("name") as string;
   const date = data.get("birthdate") as string;
+  const gender = data.get("gender") as GenderType;
 
   const [day, month, year] = date.split("/");
   const birthdate = new Date(`${year}-${month}-${day}`);
@@ -130,6 +132,7 @@ export async function updateUser(data: FormData) {
     data: {
       name,
       birthdate: new Date(birthdate),
+      gender,
     },
   });
 

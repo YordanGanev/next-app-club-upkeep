@@ -4,6 +4,7 @@ import {
   AchievementType,
   User,
   Player,
+  EventType,
 } from "@prisma/client";
 import { ReadonlyURLSearchParams } from "next/navigation";
 
@@ -152,6 +153,15 @@ export const achievementTypeOptions = [
   { value: AchievementType.THIRD_PLACE, label: "3rd place" },
   { value: AchievementType.MVP, label: "MVP award" },
   { value: AchievementType.SPECIAL, label: "Special award" },
+];
+
+const eventTypeOptions = [
+  { value: EventType.TRAINING, label: "Training" },
+  { value: EventType.LEAGUE_GAME, label: "League game" },
+  { value: EventType.TOURNAMENT_GAME, label: "Tournament game" },
+  { value: EventType.TACTICS, label: "Tactics" },
+  { value: EventType.MEETING, label: "Meeting" },
+  { value: EventType.MEDICAL, label: "Medical" },
 ];
 
 export const checkUserAccess: (

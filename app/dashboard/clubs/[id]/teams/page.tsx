@@ -1,11 +1,9 @@
 import { getSession } from "@auth0/nextjs-auth0";
 import { redirect } from "next/navigation";
-import { SportType } from "@prisma/client";
+import { GenderType, SportType } from "@prisma/client";
 
 import { prisma } from "@/utils/db";
 import { addTeam } from "@/utils/actions";
-
-import Image from "next/image";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUsersSlash } from "@fortawesome/free-solid-svg-icons";
@@ -62,7 +60,7 @@ export default async function ManageClubPage({
 
   if (!club) redirect("/about");
 
-  if (club.ownerId != appUser.id) return <h1>Invalid data</h1>;
+  if (club.ownerId != appUser.id) redirect("/dashboards/clubs");
 
   // Setup tabs to be displayed
   const ManageClubTabs = [
@@ -79,6 +77,12 @@ export default async function ManageClubPage({
     { value: SportType.FIELD_HOKEY, label: "Field Hokey" },
     { value: SportType.RUGBY, label: "Rugby" },
     { value: SportType.OTHER, label: "Other" },
+  ];
+
+  const genderOptions = [
+    { value: GenderType.WOMEN, label: "Women" },
+    { value: GenderType.MEN, label: "Men" },
+    { value: GenderType.MIXED, label: "Mixed" },
   ];
 
   // Form setup Object
@@ -107,6 +111,20 @@ export default async function ManageClubPage({
         placeholder: "Select sport type",
         options: sportTypeOptions,
         required: true,
+      },
+      {
+        type: "Select",
+        name: "gender",
+        options: genderOptions,
+        placeholder: "Select gender",
+        required: true,
+      },
+      {
+        type: "number",
+        name: "age",
+        placeholder: "Age group (optional)",
+        min: "4",
+        max: "35",
       },
     ],
     onSubmitAction: addTeam,

@@ -220,12 +220,11 @@ export default async function PlayersPage({
           );
         })}
       </div>
-
-      <TeamPlayersClient
-        teamId={id}
-        writeAccess={WriteAccess}
-        invites={appUser.invite}
-      />
+      {WriteAccess && (
+        <TeamPlayersClient
+          team={{ id: team.id, gender: team.gender, ageGroup: team.ageGroup }}
+        />
+      )}
 
       <NotificationsUpdate appUser={appUser} />
     </>

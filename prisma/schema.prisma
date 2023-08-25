@@ -8,22 +8,23 @@ datasource db {
 }
 
 model User {
-  id            String    @id @default(uuid())
-  picture       String    @default("/default.png")
+  id            String      @id @default(uuid())
+  picture       String      @default("/default.png")
   name          String
-  nickname      String    @unique
-  email         String    @unique
-  verified      Boolean   @default(false)
+  nickname      String      @unique
+  email         String      @unique
+  verified      Boolean     @default(false)
   orgId         Int?
-  birthdate     DateTime? @db.Date
+  birthdate     DateTime?   @db.Date
   country       String?
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-  unseenInvites Int       @default(0)
+  gender        GenderType? @default(MIXED)
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  unseenInvites Int         @default(0)
   club          Club[]
   invite        Invite[]
   player        Player[]
-  team          Team[]    @relation("TeamToUser")
+  team          Team[]      @relation("TeamToUser")
 
   @@index([email])
 }
@@ -48,6 +49,8 @@ model Team {
   name         String        @unique
   createdAt    DateTime      @default(now())
   updatedAt    DateTime      @updatedAt
+  ageGroup     Int?
+  gender       GenderType    @default(MIXED)
   events       Event[]
   invite       Invite[]
   player       Player[]
@@ -150,4 +153,10 @@ enum AchievementType {
   THIRD_PLACE
   MVP
   SPECIAL
+}
+
+enum GenderType {
+  MEN
+  WOMEN
+  MIXED
 }

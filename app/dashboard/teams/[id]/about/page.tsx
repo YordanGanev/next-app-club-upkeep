@@ -130,6 +130,13 @@ export default async function page({ params }: { params: { id: string } }) {
 
   const infoList: ProfileInfoListType = [
     { note: `Created at ${createdAt}`, responsive: true },
+
+    {
+      note: `${team.gender[0]}${team.gender.slice(1).toLowerCase()} Team`,
+    },
+    {
+      note: `Age group: ${team.ageGroup ? team.ageGroup : "any"}`,
+    },
     {
       note:
         team.player.length > 0

@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/utils/db";
+import { GenderType, Prisma } from "@prisma/client";
 
 export async function POST(request: Request) {
   try {
@@ -7,49 +8,72 @@ export async function POST(request: Request) {
 
     const data = await request.json();
 
-    const { teamId, filter, search } = data;
+    console.log(data);
 
-    const users = await prisma.user.findMany({
-      where: {
-        email: {
-          startsWith: search,
-        },
-        NOT: {
-          OR: [
-            {
-              player: {
-                some: {
-                  Team: {
-                    id: teamId,
-                  },
-                },
-              },
-            },
-            {
-              team: {
-                some: {
+    const { teamId, gender, ageGroup, search } = data;
+
+    const today = new Date();
+    const gt = new Date(today.getFullYear() - ageGroup, 0, 0);
+
+    let filterUsers: Prisma.UserWhereInput = {
+      email: {
+        startsWith: search,
+      },
+      NOT: {
+        OR: [
+          {
+            player: {
+              some: {
+                Team: {
                   id: teamId,
                 },
               },
             },
-            {
-              invite: {
-                some: {
-                  teamId: teamId,
-                },
+          },
+          {
+            team: {
+              some: {
+                id: teamId,
               },
             },
-          ],
-        },
-      },
-      include: {
-        player: {
-          select: {
-            teamId: true,
-            userId: true,
           },
-        },
+          {
+            invite: {
+              some: {
+                teamId: teamId,
+              },
+            },
+          },
+        ],
       },
+    };
+
+    if (ageGroup) {
+      filterUsers = {
+        ...filterUsers,
+        OR: [
+          {
+            birthdate: {
+              gt,
+            },
+          },
+          {
+            birthdate: null,
+          },
+        ],
+      };
+    }
+
+    if (gender === GenderType.MEN || gender == GenderType.WOMEN) {
+      filterUsers = {
+        ...filterUsers,
+        gender: {
+          in: [GenderType.MIXED, gender],
+        },
+      };
+    }
+    const users = await prisma.user.findMany({
+      where: filterUsers,
     });
 
     return NextResponse.json(users);

@@ -7,6 +7,10 @@
 
 .multi-select__control {
     background-color: var(--themePrimary) !important;
+    border-radius: .5rem !important;
+    border-style: inset !important;
+    border-width: 2px !important;
+    font-size: large !important;
 }
 
 .multi-select__menu {
@@ -33,4 +37,5 @@
 .multi-select__option--is-focused {
     filter: brightness(1.2) !important;
     background-color: var(--themeLight) !important;
+    color: var(--white) !important;
 }

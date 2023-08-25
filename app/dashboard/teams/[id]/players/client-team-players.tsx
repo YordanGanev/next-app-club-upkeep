@@ -5,23 +5,23 @@ import { invitePlayer, createPlayer } from "@/utils/actions";
 import { faUserPlus } from "@fortawesome/free-solid-svg-icons";
 
 import WizzardButton from "@/components/basic/wizButton";
+import { GenderType } from "@prisma/client";
 
 export default function TeamPlayersClient({
-  invites,
-  writeAccess,
-  teamId,
+  team,
 }: {
-  invites: any;
-  writeAccess: boolean;
-  teamId: string;
+  team: { id: string; gender: GenderType; ageGroup: number | null };
 }) {
+  const { id: teamId, gender, ageGroup } = team;
+
   const loadOptions = async (inputValue: string) => {
     try {
       const response = await fetch("/api/user/search", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          filter: invites?.map((i: any) => i.user?.email),
+          ageGroup,
+          gender,
           teamId,
           search: inputValue,
         }),
@@ -80,18 +80,14 @@ export default function TeamPlayersClient({
   };
 
   return (
-    <>
-      {writeAccess && (
-        <WizzardButton
-          form={form}
-          extra={[
-            {
-              icon: faUserPlus,
-              form: createPlayerForm,
-            },
-          ]}
-        />
-      )}
-    </>
+    <WizzardButton
+      form={form}
+      extra={[
+        {
+          icon: faUserPlus,
+          form: createPlayerForm,
+        },
+      ]}
+    />
   );
 }

@@ -29,7 +29,7 @@ export default async function page({
     },
   });
 
-  if (!appUser) return <h1>No user</h1>;
+  if (!appUser) redirect("about");
 
   let day, month, year;
   let date: Date;

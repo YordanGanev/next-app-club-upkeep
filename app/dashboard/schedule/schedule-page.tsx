@@ -20,15 +20,6 @@ export default function SchedulePage({ events }: { events: any }) {
 
   const view = searchParams.get("view");
 
-  const eventTypeOptions = [
-    { value: EventType.TRAINING, label: "Training" },
-    { value: EventType.LEAGUE_GAME, label: "League game" },
-    { value: EventType.TOURNAMENT_GAME, label: "Tournament game" },
-    { value: EventType.TACTICS, label: "Tactics" },
-    { value: EventType.MEETING, label: "Meeting" },
-    { value: EventType.MEDICAL, label: "Medical" },
-  ];
-
   if (!window?.width) {
     return <Connecting message={null} />;
   }
