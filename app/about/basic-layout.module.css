@@ -16,7 +16,7 @@
 
 .content>nav,
 .content>main {
-    overflow-y: scroll;
+    overflow-y: auto;
     flex: 1 auto;
     min-height: calc( 100vh - var(--headerHeight) - var(--headerYPaddings) * 2 - 1rem - 10px);
     max-height: calc( 100vh - var(--headerHeight) - var(--headerYPaddings) * 2 - 1rem - 10px);

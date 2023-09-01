@@ -21,7 +21,7 @@
 }
 
 .main {
-    overflow-y: scroll;
+    overflow-y: auto;
     flex: 1 auto;
     min-height: 100vh;
     max-height: 100vh;

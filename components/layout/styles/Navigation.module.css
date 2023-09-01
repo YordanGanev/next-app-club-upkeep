@@ -79,7 +79,7 @@
 ------------------------------ */
 
 .main {
-    overflow-y: scroll;
+    overflow-y: auto;
     border-bottom: 1px solid var(--themeLight);
 }
 
