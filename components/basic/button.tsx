@@ -4,11 +4,13 @@ export default function Button(
   {
     label,
     isSpecial,
+    isLight,
     callback,
     type,
   }: {
     label?: string;
     isSpecial?: boolean;
+    isLight?: boolean;
     callback?: () => void;
     type?: "submit" | "button" | "reset" | undefined;
   } = {
@@ -25,7 +27,9 @@ export default function Button(
         // e.persist();
         if (callback) callback();
       }}
-      className={isSpecial ? Style.btnExtra : Style.btnNormal}
+      className={`${isSpecial ? Style.btnExtra : Style.btnNormal} ${
+        isLight ? Style.btnLight : ""
+      }`}
     >
       {label}
     </button>

@@ -75,6 +75,7 @@ export default function NotificationsMenu() {
                       <Button
                         label="Decline"
                         isSpecial={false}
+                        isLight={true}
                         callback={() => {
                           removeRow(inv.team.name);
                           inviteHandler(false, inv);
@@ -83,6 +84,7 @@ export default function NotificationsMenu() {
                       <Button
                         label="Accept"
                         isSpecial={true}
+                        isLight={true}
                         callback={() => {
                           removeRow(inv.team.name);
                           inviteHandler(true, inv);
