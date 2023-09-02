@@ -83,7 +83,9 @@ function SubmitButton({
 
   return (
     <button
-      className={`global-button border-${isPending ? "disabled" : "remove"}`}
+      className={`global-button global-button-inh border-${
+        isPending ? "disabled" : "remove"
+      }`}
       onClick={() => {
         startTransition(() => {
           setAction({

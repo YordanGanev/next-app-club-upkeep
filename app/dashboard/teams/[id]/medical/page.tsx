@@ -18,6 +18,7 @@ import {
   faTriangleExclamation,
   faTrash,
   faBookMedical,
+  faCakeCandles,
 } from "@fortawesome/free-solid-svg-icons";
 
 import Image from "next/image";
@@ -97,10 +98,15 @@ export default async function TeamMedicalPage({
               nickname: true,
               email: true,
               picture: true,
+              birthdate: true,
             },
           },
           id: true,
-          medical: true,
+          medical: {
+            orderBy: {
+              date: "desc",
+            },
+          },
           name: true,
           picture: true,
           userId: true,
@@ -165,10 +171,19 @@ export default async function TeamMedicalPage({
     onSubmitAction: addMedicalRecord,
   };
 
+  const calculateAge = (birthdate: Date, currentDate: Date) =>
+    Math.floor(
+      (currentDate.getTime() - birthdate.getTime()) / 31557600000 // 365+1/4 days per year to milliseconds
+    );
+
+  const today = new Date();
+  const expireDate = new Date();
+  expireDate.setMonth(today.getMonth() - 5);
+
   return (
     <>
       <TabNav tabs={WriteAccess ? StaffManageTeamTabs : PlayerManageTeamTabs} />
-      <div className={Style.wrapper}>
+      <div className={`${Style.wrapper} ${WriteAccess ? Style.wizBtn : ""}`}>
         {!players.some((p) => p.medical.length > 0) && (
           <div className={Style.empty}>
             <div>
@@ -181,7 +196,6 @@ export default async function TeamMedicalPage({
           let picture: string;
           let name;
           let email;
-
           if (p.user?.email && p.medical.length > 0) {
             picture = p.user.picture;
             name = p.user.name === p.user.email ? p.user.nickname : p.user.name;
@@ -221,10 +235,11 @@ export default async function TeamMedicalPage({
                 <div className={ListView.content}>
                   <div className={ListView.date}>
                     <span>
-                      {new Date(
-                        p.medical[p.medical.length - 1]?.date
-                      ).toLocaleDateString("en-UK", options)}
-                      {true && (
+                      {new Date(p.medical[0]?.date).toLocaleDateString(
+                        "en-UK",
+                        options
+                      )}
+                      {new Date(p.medical[0]?.date) < expireDate && (
                         <div className={`${ListView.icon} ${ListView.warn}`}>
                           <FontAwesomeIcon icon={faTriangleExclamation} />
                         </div>
@@ -233,13 +248,26 @@ export default async function TeamMedicalPage({
                     <span> </span>
                   </div>
                   <div className={ListView.stats}>
+                    <div className={ListView.age}>
+                      {p.user?.birthdate && (
+                        <>
+                          <FontAwesomeIcon icon={faCakeCandles} />
+                          <span>
+                            <span>Age:</span>
+                            <span className="note">{` ${calculateAge(
+                              new Date(p.user?.birthdate),
+                              today
+                            )}`}</span>
+                          </span>
+                        </>
+                      )}
+                    </div>
                     <div className={ListView.weight}>
                       <FontAwesomeIcon icon={faWeightScale} />
                       <span>
                         <span>Weight:</span>
                         <span className={"note"}>
-                          {" "}
-                          {p.medical[p.medical.length - 1]?.weight} kg
+                          {` ${p.medical[0]?.weight} kg`}
                         </span>
                       </span>
                     </div>
@@ -248,8 +276,7 @@ export default async function TeamMedicalPage({
                       <span>
                         <span>Height:</span>
                         <span className="note">
-                          {" "}
-                          {p.medical[p.medical.length - 1]?.height} cm
+                          {` ${p.medical[0]?.height} cm`}
                         </span>
                       </span>
                     </div>
@@ -259,7 +286,9 @@ export default async function TeamMedicalPage({
                     <>
                       <input type="checkbox" id={`ext-${p.id}`} />
                       <div className={ListView.extendRecords}>
-                        <span className={ListView.extendTitle}>History</span>
+                        <div className={ListView.extendTitle}>
+                          <span>History</span>
+                        </div>
                         {p.medical.map((m) => {
                           return (
                             <div key={`history-${m.id}`}>
@@ -271,17 +300,39 @@ export default async function TeamMedicalPage({
                                   )}
                                 </span>
                               </div>
-                              <div className={ListView.medicalStats}>
-                                <div>
-                                  <span>{m.weight} kg</span>
-                                  <span>{m.height} cm</span>
+                              <div className={ListView.medicalRecord}>
+                                <div className={ListView.medicalStats}>
+                                  <div>
+                                    <FontAwesomeIcon icon={faWeightScale} />
+                                    <span>{m.weight} kg</span>
+                                  </div>
+                                  <div>
+                                    <FontAwesomeIcon icon={faRuler} />
+                                    <span>{m.height} cm</span>
+                                  </div>
+                                  <div>
+                                    {p.user?.birthdate && (
+                                      <>
+                                        <FontAwesomeIcon icon={faCakeCandles} />
+                                        <span>
+                                          {`Age ${calculateAge(
+                                            p.user.birthdate,
+                                            new Date(m.date)
+                                          )}`}
+                                        </span>
+                                      </>
+                                    )}
+                                  </div>
                                 </div>
-                                <DeleteMedicalButton
-                                  className={`${ListView.deleteMedical} global-button border-remove`}
-                                  id={m.id}
-                                >
-                                  <FontAwesomeIcon icon={faTrash} />
-                                </DeleteMedicalButton>
+                                {WriteAccess && (
+                                  <DeleteMedicalButton
+                                    className={`${ListView.deleteMedical} global-button border-remove`}
+                                    id={m.id}
+                                  >
+                                    <FontAwesomeIcon icon={faTrash} />
+                                  </DeleteMedicalButton>
+                                )}
+                                {!WriteAccess && <div></div>}
                               </div>
                             </div>
                           );
@@ -295,7 +346,7 @@ export default async function TeamMedicalPage({
           );
         })}
       </div>
-      <WizzardButton form={form} extra={null} />
+      {WriteAccess && <WizzardButton form={form} extra={null} />}
       <NotificationsUpdate appUser={appUser} />
     </>
   );

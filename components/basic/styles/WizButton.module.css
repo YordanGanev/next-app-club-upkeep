@@ -45,6 +45,9 @@
     outline-offset: 2px;
 }
 
+.extra > svg > path {
+    color: var(--extraWhite)
+}
 
 /* Main button + */
 
@@ -72,10 +75,6 @@
 /* mobile */
 
 @media (hover: none)  {
-    .wrapper {
-        bottom: 1.5rem;
-    }
-    
     .extra {
         background-color: var(--extraTertiary);
         height: 2.5rem;
@@ -92,28 +91,20 @@
 }
 
 /* desktop */
-
 @media (hover: hover) {
-    .wrapper:focus-within>.extra,
-    .wrapper:hover>.extra,
-    .wrapper:active>.extra {
-        background-color: var(--extraTertiary);
-        height: 2.5rem;
-        width: 2.5rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-bottom: .5rem;
-    }
-
     .extra>svg {
         display: none;
-        color: var(--extraWhite);
     }
 
     .wrapper:focus-within>.extra>svg,
     .wrapper:hover>.extra>svg,
     .wrapper:active>.extra>svg {
         display: block;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .wrapper {
+        bottom: 1.2rem;
     }
 }

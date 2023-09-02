@@ -1,5 +1,5 @@
 .wrapper {
-    background-color: var(--neutralPrimary);
+    background-color: var(--black);
     border: 1px solid var(--themeDarkAlt);
     border-radius: 0.5em;
     position: absolute;
@@ -64,7 +64,15 @@
 }
 
 .type {
-    color: var(--themeDarkAlt);
+    /* color: var(--themeDarkAlt); */
+    padding: .25rem;
+    border: 1px solid var(--neutralPrimaryAlt);
+    border-radius: .5rem;
+    font-weight: bold;
+    font-size: small;
+    color: var(--neutralPrimaryAlt);
+    width: min-content;
+    margin-left: .25em;
 }
 
 /* >>(accept)(decline) Buttons */

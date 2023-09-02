@@ -171,6 +171,8 @@ li {
   align-self: center;
   font-weight: bold;
   font-size: small;
+
+  background-color: var(--black);
 }
 
 .global-button:hover,
@@ -179,7 +181,12 @@ li {
 }
 
 label.global-button {
+  cursor: pointer;
   width: calc(8ch + 1.2rem);
+}
+
+.global-button-inh {
+  background-color: inherit !important;
 }
 
 

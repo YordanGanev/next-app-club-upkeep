@@ -70,7 +70,7 @@ export default function NotificationsMenu() {
                   </div>
                   <div className={Style.content}>
                     <p>{inv.team.name}</p>
-                    <p>{inv.type}</p>
+                    <p className={Style.type}>{inv.type}</p>
                     <div className={Style.buttons}>
                       <Button
                         label="Decline"
