@@ -12,6 +12,7 @@
     padding: 1rem;
     border-radius: 2rem;
     background-color: var(--black);
+    box-shadow: 0px 0px 5px 1px var(--white);
 }
 
 /* Close Title and header */

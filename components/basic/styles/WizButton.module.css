@@ -40,6 +40,7 @@
 
 .wizButton:focus,
 .extra:focus
+.wizButton:hover,
 .wizButton:active {
     outline: 2px dashed var(--white);
     outline-offset: 2px;
@@ -100,6 +101,17 @@
     .wrapper:hover>.extra>svg,
     .wrapper:active>.extra>svg {
         display: block;
+    }
+
+    .wrapper:focus-within>.extra,
+    .wrapper:hover>.extra {
+        background-color: var(--extraTertiary);
+        height: 2.5rem;
+        width: 2.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: .5rem;
     }
 }
 

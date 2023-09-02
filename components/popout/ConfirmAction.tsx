@@ -37,11 +37,13 @@ export default function ConfirmAction() {
               <Button
                 label={"Confirm"}
                 isSpecial={true}
+                isLight={true}
                 callback={actionAccept}
               />
               <Button
                 label={"Decline"}
                 isSpecial={false}
+                isLight={true}
                 callback={actionDecline}
               />
             </div>
