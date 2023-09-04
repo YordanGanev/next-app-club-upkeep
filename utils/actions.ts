@@ -404,7 +404,7 @@ export async function addAchievement(
 ) {
   const session = await getSession();
 
-  if (!session) return;
+  if (!session) return SESSION_EXPIRED;
 
   const { teamId } = master_data;
 
@@ -416,22 +416,31 @@ export async function addAchievement(
   const dateInput = new Date(date);
 
   // console.log(type, competition, description, date, dateInput);
-
-  const achievement = await prisma.team.update({
-    where: {
-      id: teamId,
-    },
-    data: {
-      achievements: {
-        create: {
-          type,
-          competition,
-          description,
-          date: dateInput,
+  try {
+    const achievement = await prisma.team.update({
+      where: {
+        id: teamId,
+      },
+      data: {
+        achievements: {
+          create: {
+            type,
+            competition,
+            description,
+            date: dateInput,
+          },
         },
       },
-    },
-  });
+    });
+  } catch (e) {
+    console.log(e);
+    return {
+      success: false,
+      message: "Unexpected error occured! Please try again!",
+    };
+  }
+
+  return { success: true };
 }
 
 // Custom invoaction methods
