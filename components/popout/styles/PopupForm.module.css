@@ -95,6 +95,7 @@
     font-size: 1rem;
 }
 
+.form>.formField>textarea,
 .form>.formField>input,
 .form>.formField>select,
 .form>.formField>button {

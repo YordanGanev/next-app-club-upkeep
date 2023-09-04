@@ -57,6 +57,7 @@ model Team {
   club         Club          @relation(fields: [clubId], references: [id], onDelete: Cascade)
   staff        User[]        @relation("TeamToUser")
   achievements Achievement[]
+  posts        Post[]
 }
 
 model Player {
@@ -120,6 +121,15 @@ model Achievement {
   date        DateTime
   teamId      String
   team        Team            @relation(fields: [teamId], references: [id], onDelete: Cascade)
+}
+
+model Post {
+  id        String   @id @default(uuid())
+  title     String
+  message   String
+  createdAt DateTime @default(now())
+  teamId    String
+  team      Team     @relation(fields: [teamId], references: [id], onDelete: Cascade)
 }
 
 enum EventType {

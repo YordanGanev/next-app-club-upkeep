@@ -443,6 +443,41 @@ export async function addAchievement(
   return { success: true };
 }
 
+export async function addPost(data: FormData, master_data: { teamId: string }) {
+  const session = await getSession();
+
+  if (!session) return SESSION_EXPIRED;
+
+  const { teamId } = master_data;
+
+  const title = data.get("title") as string;
+  const message = data.get("message") as string;
+
+  try {
+    const post = await prisma.team.update({
+      where: {
+        id: teamId,
+      },
+      data: {
+        posts: {
+          create: {
+            title,
+            message,
+          },
+        },
+      },
+    });
+  } catch (e) {
+    console.log(e);
+    return {
+      success: false,
+      message: "Unexpected error occured! Please try again!",
+    };
+  }
+
+  return { success: true };
+}
+
 // Custom invoaction methods
 // Simulating api calls
 

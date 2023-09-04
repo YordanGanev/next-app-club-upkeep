@@ -27,6 +27,7 @@ export const PlayerManageTeamTabs = [
   { slug: "players", title: "Players" },
   { slug: "medical", title: "Medicals" },
   { slug: "events", title: "Events" },
+  { slug: "posts", title: "Posts" },
   { slug: "achievements", title: "Achievements" },
   { slug: "about", title: "About" },
 ];
@@ -36,6 +37,7 @@ export const StaffManageTeamTabs = [
   { slug: "staff", title: "Staff" },
   { slug: "medical", title: "Medicals" },
   { slug: "events", title: "Events" },
+  { slug: "posts", title: "Posts" },
   { slug: "achievements", title: "Achievements" },
   { slug: "about", title: "About" },
 ];

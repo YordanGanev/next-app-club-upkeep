@@ -86,6 +86,14 @@ function Input({ inputProps, handleChange }) {
           }}
         />
       );
+    case "textarea":
+      return (
+        <textarea
+          {...inputProps}
+          onChange={handleChange}
+          // className="textarea"
+        />
+      );
     default:
       return <input {...inputProps} onChange={handleChange} />;
   }
