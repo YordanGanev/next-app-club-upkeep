@@ -16,7 +16,7 @@ import {
 
 import { faBell as farBell } from "@fortawesome/free-regular-svg-icons";
 
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { useUser } from "@auth0/nextjs-auth0/client";
 
@@ -39,6 +39,10 @@ export default function Navigation() {
 
   const [mobileMenuHide, setMobileView] = useState(true);
 
+  useEffect(() => {
+    if (mobileMenuHide === false) setMobileView(true);
+  }, [pathname]);
+
   const main = pathname.split("/")[2];
 
   const items = [
@@ -52,16 +56,14 @@ export default function Navigation() {
 
     setNotifyState(true);
 
-    console.log("setNotifyState", true);
     if (!notification.new) return;
 
     setNotifyInvites(0);
-    console.log("setNotifyInvites", 0);
 
     fetch(`/api/user/${notification.options[0].userId}/invite`, {
       method: "DELETE",
       cache: "no-cache",
-    }).then(() => setNotifyInvites(0));
+    });
   };
 
   const addNotify = notification?.options?.length > 0;
@@ -79,7 +81,16 @@ export default function Navigation() {
                 setMobileView(!mobileMenuHide);
               }}
             >
-              <FontAwesomeIcon icon={faBars} />
+              <span className={`${Style.iconNotify} fa-layers`}>
+                <FontAwesomeIcon icon={faBars} />
+                {addNotify && notification?.new > 0 && (
+                  <span
+                    className={`${Style.newNotify} ${Style.iconNotify} fa-layers-counter`}
+                  >
+                    {notification?.new > 9 ? "9+" : notification?.new}
+                  </span>
+                )}
+              </span>
             </div>
             <Link href="/about" prefetch={false} legacyBehavior>
               <a>
