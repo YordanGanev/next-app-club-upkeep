@@ -11,6 +11,7 @@ import { faCalendarXmark } from "@fortawesome/free-solid-svg-icons";
 
 import Style from "./dash.module.css";
 import StyleMissing from "@/styles/missing.module.css";
+import { Prisma } from "@prisma/client";
 
 export default async function DashboardPage() {
   const session = await getSession();
@@ -32,6 +33,45 @@ export default async function DashboardPage() {
 
   if (!appUser) redirect("/about");
 
+  /*const teams = await prisma.team.findMany({
+    where: {
+      OR: [
+        {
+          club: {
+            ownerId: appUser.id,
+          },
+        },
+        {
+          player: {
+            some: {
+              userId: appUser.id,
+            },
+          },
+        },
+        {
+          staff: {
+            some: {
+              id: appUser.id,
+            },
+          },
+        },
+      ],
+    },
+    include: {
+      _count: {
+        select: {
+          player: true,
+          staff: true,
+        },
+      },
+    },
+    orderBy: {
+      player: {
+        createdAt: "desc",
+      },
+    },
+    take: 6,
+  });*/
   const teams = await prisma.team.findMany({
     where: {
       OR: [
@@ -57,6 +97,15 @@ export default async function DashboardPage() {
       ],
     },
     include: {
+      player: {
+        select: {
+          joinnedAt: true,
+        },
+        orderBy: {
+          joinnedAt: "desc",
+        },
+        take: 1,
+      },
       _count: {
         select: {
           player: true,
@@ -93,9 +142,42 @@ export default async function DashboardPage() {
     },
   });
 
+  const teamsForSort = Prisma.validator<Prisma.TeamArgs>()({
+    include: {
+      _count: {
+        select: {
+          player: true,
+          staff: true,
+        },
+      },
+      player: {
+        select: {
+          joinnedAt: true,
+        },
+      },
+    },
+  });
+
+  function recentTeams(teams: Prisma.TeamGetPayload<typeof teamsForSort>[]) {
+    return teams
+      .sort((a, b) => {
+        if (a.player.length === 0 && b.player.length === 0) return 0;
+        if (a.player.length === 0) return 1;
+        if (b.player.length === 0) return -1;
+        return (
+          new Date(a.player[0]?.joinnedAt).getMilliseconds() -
+          new Date(b.player[0]?.joinnedAt).getMilliseconds()
+        );
+      })
+      .slice(0, 6);
+  }
+
   return (
     <>
       <div className={`dashboard-content-wrapper ${Style.wrapper}`}>
+        <section>
+          <h2>Welcome, {appUser.name}!</h2>
+        </section>
         <section>
           <h2>Upcoming events</h2>
           {upcomingEvents.length === 0 && (
@@ -119,7 +201,7 @@ export default async function DashboardPage() {
               <div>Not member of any team yet</div>
             </div>
           )}
-          {teams.length > 0 && <ListTeams teams={teams} />}
+          {teams.length > 0 && <ListTeams teams={recentTeams(teams)} />}
         </section>
 
         <NotificationsUpdate appUser={appUser} />

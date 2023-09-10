@@ -142,6 +142,7 @@ export default async function page({ params }: { params: { id: string } }) {
     select: {
       sport: true,
     },
+    distinct: ["sport"],
   });
 
   const activitiesCount = await prisma.event.count({

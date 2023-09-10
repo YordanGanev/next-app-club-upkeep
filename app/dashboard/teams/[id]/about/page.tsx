@@ -60,6 +60,14 @@ export default async function page({ params }: { params: { id: string } }) {
           name: true,
           picture: true,
           createdAt: true,
+          owner: {
+            select: {
+              name: true,
+              nickname: true,
+              picture: true,
+              email: true,
+            },
+          },
         },
       },
       achievements: {
@@ -93,6 +101,11 @@ export default async function page({ params }: { params: { id: string } }) {
   );
 
   if (access === null) redirect("/dashboard/teams");
+
+  const ownerName =
+    team.club.owner.name === team.club.owner.email
+      ? team.club.owner.nickname
+      : team.club.owner.name;
 
   const options: Intl.DateTimeFormatOptions = {
     year: "numeric",
@@ -205,6 +218,12 @@ export default async function page({ params }: { params: { id: string } }) {
             picture={team.club.picture}
             title={team.club.name}
             subtitle={"Team's club"}
+          />
+          <Profile
+            picture={team.club.owner.picture}
+            title={ownerName}
+            subtitle={team.club.owner.email}
+            description="Owner"
           />
         </div>
 
