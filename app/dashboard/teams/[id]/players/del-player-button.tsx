@@ -8,10 +8,14 @@ export default function RemovePlayerButton({
   children,
   id,
   className,
+  title,
+  message,
 }: {
   children?: React.ReactNode;
   id: string;
   className?: string;
+  title?: string;
+  message?: string;
 }) {
   const { setAction } = useContext(PopoutContext);
   const [isPending, startTransition] = useTransition();
@@ -21,9 +25,10 @@ export default function RemovePlayerButton({
       className={className}
       onClick={() => {
         setAction({
-          title: "Delete Player",
-          message:
-            "Permanently delete the player?\r\nAll records will be lost.",
+          title: title ? title : "Delete Player",
+          message: message
+            ? message
+            : "Permanently delete the player?\r\nAll records will be lost.",
           callback: () => {
             startTransition(() => {
               removePlayer(id);

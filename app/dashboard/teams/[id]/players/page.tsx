@@ -162,6 +162,8 @@ export default async function PlayersPage({
                     <RemovePlayerButton
                       id={p.id}
                       className="global-button border-remove"
+                      title="Leave Team"
+                      message="You will lose access to the team and your player records will be lost."
                     >
                       Leave
                     </RemovePlayerButton>

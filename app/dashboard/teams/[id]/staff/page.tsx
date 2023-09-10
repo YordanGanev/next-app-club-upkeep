@@ -9,6 +9,7 @@ import {
   // UserAccess,
   PlayerManageTeamTabs,
   StaffManageTeamTabs,
+  checkUserAccess,
 } from "@/utils/common";
 
 import Link from "next/link";
@@ -80,6 +81,11 @@ export default async function TeamStaffPage({
           picture: true,
         },
       },
+      player: {
+        select: {
+          userId: true,
+        },
+      },
     },
   });
 
@@ -100,21 +106,14 @@ export default async function TeamStaffPage({
     },
   });
 
-  let access: keyof typeof UserAccess = "player";
+  const { access, WriteAccess } = checkUserAccess(
+    appUser.id,
+    team.club.ownerId,
+    team.staff,
+    team.player
+  );
 
-  let WriteAccess = false;
-
-  if (team.club.ownerId === appUser.id) {
-    access = "owner";
-    WriteAccess = true;
-  } else {
-    team.staff?.forEach((member) => {
-      if (member.id === appUser.id) {
-        access = "staff";
-        WriteAccess = true;
-      }
-    });
-  }
+  if (access === null) redirect("/dashboard/teams");
 
   return (
     <>
@@ -155,6 +154,17 @@ export default async function TeamStaffPage({
                       className="global-button border-remove"
                     >
                       Remove
+                    </RemoveStaffButton>
+                  )}
+                  {appUser.id === member.id && (
+                    <RemoveStaffButton
+                      className="global-button border-remove"
+                      teamId={team.id}
+                      userId={member.id}
+                      title="Leave Team"
+                      message="You will lose access to the team."
+                    >
+                      Leave
                     </RemoveStaffButton>
                   )}
                 </div>

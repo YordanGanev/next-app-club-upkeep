@@ -9,11 +9,15 @@ export default function RemoveStaffButton({
   teamId,
   userId,
   className,
+  title,
+  message,
 }: {
   children?: React.ReactNode;
   teamId: string;
   userId: string;
   className?: string;
+  title?: string;
+  message?: string;
 }) {
   const { setAction } = useContext(PopoutContext);
   const [isPending, startTransition] = useTransition();
@@ -24,8 +28,10 @@ export default function RemoveStaffButton({
       className={className}
       onClick={() => {
         setAction({
-          title: "Remove Staff member",
-          message: "Staff member will no longer have access to this team",
+          title: title ? title : "Remove Staff member",
+          message: message
+            ? message
+            : "Staff member will no longer have access to this team",
           callback: () => {
             startTransition(() => {
               removeStaff(teamId, userId);
