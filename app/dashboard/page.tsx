@@ -33,45 +33,6 @@ export default async function DashboardPage() {
 
   if (!appUser) redirect("/about");
 
-  /*const teams = await prisma.team.findMany({
-    where: {
-      OR: [
-        {
-          club: {
-            ownerId: appUser.id,
-          },
-        },
-        {
-          player: {
-            some: {
-              userId: appUser.id,
-            },
-          },
-        },
-        {
-          staff: {
-            some: {
-              id: appUser.id,
-            },
-          },
-        },
-      ],
-    },
-    include: {
-      _count: {
-        select: {
-          player: true,
-          staff: true,
-        },
-      },
-    },
-    orderBy: {
-      player: {
-        createdAt: "desc",
-      },
-    },
-    take: 6,
-  });*/
   const teams = await prisma.team.findMany({
     where: {
       OR: [
@@ -176,7 +137,11 @@ export default async function DashboardPage() {
     <>
       <div className={`dashboard-content-wrapper ${Style.wrapper}`}>
         <section>
-          <h2>Welcome, {appUser.name}!</h2>
+          <h2>
+            {`Welcome, ${
+              appUser.name === appUser.email ? appUser.nickname : appUser.name
+            }!`}
+          </h2>
         </section>
         <section>
           <h2>Upcoming events</h2>
