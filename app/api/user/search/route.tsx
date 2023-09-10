@@ -44,6 +44,17 @@ export async function POST(request: Request) {
               },
             },
           },
+          {
+            club: {
+              some: {
+                teams: {
+                  some: {
+                    id: teamId,
+                  },
+                },
+              },
+            },
+          },
         ],
       },
     };
