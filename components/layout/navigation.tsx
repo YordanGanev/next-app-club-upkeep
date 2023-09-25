@@ -16,6 +16,7 @@ import {
 
 import { faBell as farBell } from "@fortawesome/free-regular-svg-icons";
 
+import { useTranslations } from "next-intl";
 import { useContext, useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { useUser } from "@auth0/nextjs-auth0/client";
@@ -37,18 +38,21 @@ export default function Navigation() {
 
   const { setProfileMenuState } = useContext(PopoutContext);
 
+  const t = useTranslations("Nav");
+
   const [mobileMenuHide, setMobileView] = useState(true);
 
   useEffect(() => {
     if (mobileMenuHide === false) setMobileView(true);
   }, [pathname]);
 
-  const main = pathname.split("/")[2];
+  const main = pathname.split("/")[2] || "";
 
   const items = [
-    { slug: "clubs", icon: faFlagCheckered },
-    { slug: "teams", icon: faPeopleGroup },
-    { slug: "schedule", icon: faCalendar },
+    { slug: "", title: t("home"), icon: faHome },
+    { slug: "clubs", title: t("clubs"), icon: faFlagCheckered },
+    { slug: "teams", title: t("teams"), icon: faPeopleGroup },
+    { slug: "schedule", title: t("schedule"), icon: faCalendar },
   ];
 
   const handleNotification = () => {
@@ -105,16 +109,6 @@ export default function Navigation() {
             <h2> Club Upkeep </h2>
           </div>
           <div className={Style.main}>
-            <DynamicLink href={`/dashboard`} className={Style.linkContainer}>
-              <div
-                className={`${Style.link} ${
-                  main === undefined ? Style.select : null
-                }`}
-              >
-                <FontAwesomeIcon icon={faHome} />
-                <span>Home</span>
-              </div>
-            </DynamicLink>
             {items.map((item) => {
               let current = false;
 
@@ -133,7 +127,7 @@ export default function Navigation() {
                     className={`${Style.link} ${current ? Style.select : null}`}
                   >
                     <FontAwesomeIcon icon={item.icon} />
-                    <span>{item.slug}</span>
+                    <span>{item.title}</span>
                   </div>
                 </DynamicLink>
               );
@@ -158,7 +152,7 @@ export default function Navigation() {
                     </span>
                   )}
                 </span>
-                <span> Notifications </span>
+                <span>{t("notifications")}</span>
               </button>
             </div>
 

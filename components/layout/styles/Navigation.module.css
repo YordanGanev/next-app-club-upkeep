@@ -1,77 +1,80 @@
 .wrapper {
-    font-size: medium;
-    min-width: 240px;
-    max-width: 240px;
-    background-color: var(--themeDarkAlt);
-    border-right: 2px solid var(--themeLight);
-    display: flex;
+  font-size: medium;
+  min-width: 240px;
+  max-width: 240px;
+  background-color: var(--themeDarkAlt);
+  border-right: 2px solid var(--themeLight);
+  display: flex;
 }
 
 .wrapper button {
-    box-sizing: border-box
+  box-sizing: border-box;
 }
 
 .linkContainer,
 .profile {
-    cursor: pointer;
+  cursor: pointer;
 }
 
-.wrapper>nav {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    width: 100%;
-    padding: .5rem;
+.wrapper > nav {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  padding: 0.5rem;
+}
+
+.link svg {
+  min-width: 1.2em;
 }
 
 .header,
 .user {
-    flex: 0 0 auto;
+  flex: 0 0 auto;
 }
 
 .main {
-    flex: 1 1 auto;
-    gap: .5em;
-    display: flex;
-    flex-direction: column;
+  flex: 1 1 auto;
+  gap: 0.5em;
+  display: flex;
+  flex-direction: column;
 }
 
-.notifications.add:hover>button,
+.notifications.add:hover > button,
 .profile:hover,
-.linkContainer:hover>.link {
-    background-color: var(--themeSecondary);
+.linkContainer:hover > .link {
+  background-color: var(--themeSecondary);
 }
 
-.notifications>button,
+.notifications > button,
 .main div {
-    font-weight: 700;
-    padding: 1em;
-    border-radius: 2rem;
-    display: flex;
-    align-items: center;
-    gap: 1em;
-    width: min-content;
+  font-weight: 700;
+  padding: 1em;
+  border-radius: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  width: min-content;
 }
-
 
 /* ------------------------------ 
 -------------HEADER--------------
 ------------------------------ */
 
 .header {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
-.header>h2 {
-    font-size: large;
-    font-weight: 700;
-    color: var(--extraLighterAlt);
+.header > h2 {
+  font-size: large;
+  font-weight: 700;
+  color: var(--extraLighterAlt);
 }
 
-.menuToggle  {
-    display: none;
+.menuToggle {
+  display: none;
 }
 
 /* ------------------------------ 
@@ -79,127 +82,127 @@
 ------------------------------ */
 
 .main {
-    overflow-y: auto;
-    border-bottom: 1px solid var(--themeLight);
+  overflow-y: auto;
+  border-bottom: 1px solid var(--themeLight);
 }
 
 .link {
-    text-transform: capitalize;
+  text-transform: capitalize;
 }
 
 .link.select {
-    background-color: var(--themeDark);
+  background-color: var(--themeDark);
 }
-
 
 /* ------------------------------ 
 ----------------USER-------------
 ------------------------------ */
 
 .notifications {
-    border-radius: 2rem;
-    opacity: .5;
+  border-radius: 2rem;
+  opacity: 0.5;
+  text-transform: capitalize;
 }
 
 .notifications.add {
-    cursor: pointer;
-    opacity: 1;
+  cursor: pointer;
+  opacity: 1;
 }
 
 .profile {
-    display: flex;
-    gap: .5rem;
-    align-items: center;
-    width: 100%;
-    padding: .5rem;
-    border-radius: 2rem;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 2rem;
 }
 
-.profile>span {
-    font-size: medium;
-    text-overflow: hidden;
-    white-space: nowrap;
-    overflow: hidden;
-    width: 100%;
-    flex-grow: 1;
+.profile > span {
+  font-size: medium;
+  text-overflow: hidden;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 100%;
+  flex-grow: 1;
 }
 
-.profile>img {
-    border-radius: 50%;
+.profile > img {
+  border-radius: 50%;
 }
 
-.notifications>button>i {
-    position: relative;
+.notifications > button > i {
+  position: relative;
 }
 
 .newNotify {
-    right: -0.5em;
-    top: -.5em;
-    transform: scale(.6);
+  right: -0.5em;
+  top: -0.5em;
+  transform: scale(0.6);
 }
 
 .connecting {
-    overflow: hidden;
+  overflow: hidden;
 }
 
 @media screen and (min-width: 500px) and (max-width: 1000px) {
-    .wrapper {
-        min-width: fit-content;
-        max-width: fit-content;
-        border-right: none;
-        border-bottom: 1px solid var(--themeLight);
-    }
-    .wrapper>a {
-        align-items: center;
-        justify-items: center;
-    }
-    
-    .wrapper svg {
-        width: 1em;
-    }
+  .wrapper {
+    min-width: fit-content;
+    max-width: fit-content;
+    border-right: none;
+    border-bottom: 1px solid var(--themeLight);
+  }
+  .wrapper > a {
+    align-items: center;
+    justify-items: center;
+  }
 
-    .profile ,
-    .header {
-        justify-content: center;
-    }
+  .wrapper svg {
+    width: 1em;
+  }
 
-    .wrapper span,
-    .header>h2,
-    .profile>span,
-    .profile>svg {
-        display: none;
-    }
+  .profile,
+  .header {
+    justify-content: center;
+  }
 
-    .notifications .iconNotify {
-        display: inline-block ;
-    }
+  .wrapper span,
+  .header > h2,
+  .profile > span,
+  .profile > svg {
+    display: none;
+  }
+
+  .notifications .iconNotify {
+    display: inline-block;
+  }
 }
 
 @media screen and (max-width: 500px) {
-    .wrapper {
-        width: 100%;
-        max-width: 100%;
-        min-width: 100%;
-        border-right: none;
-        border-bottom: 2px solid var(--themeLight);
-    }
-    
-    .wrapper .main {
-        overflow: visible;
-        align-items: center;
-    }
+  .wrapper {
+    width: 100%;
+    max-width: 100%;
+    min-width: 100%;
+    border-right: none;
+    border-bottom: 2px solid var(--themeLight);
+  }
 
-    .wrapper.closed .main,
-    .wrapper.closed .user {
-        display: none;
-    }
+  .wrapper .main {
+    overflow: visible;
+    align-items: center;
+  }
 
-    .menuToggle {
-        display: flex;
-        justify-content: center;
-        align-content: center;
-        height: 36px;
-        aspect-ratio: 1;
-        align-items: center;
-    }
+  .wrapper.closed .main,
+  .wrapper.closed .user {
+    display: none;
+  }
+
+  .menuToggle {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    height: 36px;
+    aspect-ratio: 1;
+    align-items: center;
+  }
 }

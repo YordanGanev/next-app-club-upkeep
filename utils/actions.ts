@@ -144,19 +144,43 @@ export async function updateUser(data: FormData) {
   const name = data.get("name") as string;
   const date = data.get("birthdate") as string;
   const gender = data.get("gender") as GenderType;
+  const language = data.get("country") as string;
 
   const [day, month, year] = date.split("/");
   const birthdate = new Date(`${year}-${month}-${day}`);
+
+  const userUpdateData: {
+    name?: string;
+    birthdate?: Date | null;
+    gender?: GenderType;
+    country?: string;
+  } = {};
+
+  if (name) {
+    userUpdateData.name = name;
+  }
+
+  if (date) {
+    userUpdateData.birthdate = birthdate;
+  }
+
+  if (birthdate.toString() === "Invalid Date") {
+    userUpdateData.birthdate = null;
+  }
+
+  if (gender) {
+    userUpdateData.gender = gender;
+  }
+
+  if (language) {
+    userUpdateData.country = language;
+  }
 
   const user = await prisma.user.update({
     where: {
       email: session.user.email,
     },
-    data: {
-      name,
-      birthdate: new Date(birthdate),
-      gender,
-    },
+    data: userUpdateData,
   });
 
   return { success: true };

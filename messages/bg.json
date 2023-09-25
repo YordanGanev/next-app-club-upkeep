@@ -1,0 +1,66 @@
+{
+  "Nav": {
+    "home": "начало",
+    "clubs": "клубове",
+    "teams": "отбори",
+    "schedule": "график",
+    "notifications": "Известия"
+  },
+  "ClubTabs": {
+    "teams": "отбори",
+    "about": "за нас"
+  },
+  "TeamsTabs": {
+    "players": "играчи",
+    "staff": "персонал",
+    "medical": "медицинско обслужване",
+    "events": "събития",
+    "posts": "съобщения",
+    "achievements": "постижения",
+    "about": "за нас"
+  },
+  "Dashboard": {
+    "greeting": "Добре дошли",
+    "upcoming": "Предстоящи събития",
+    "recentTeam": "Последни отбори",
+    "noUpcoming": "Няма предстоящи събития",
+    "noTeams": "Все още не членувате в отбор"
+  },
+  "MenuProfile": {
+    "light": "светла тема",
+    "dark": "тъмна тема",
+    "profile": "профил",
+    "logout": "изход"
+  },
+  "UserAbout": {
+    "title": "Информация за потребител",
+    "verified": "Потвърден имейл",
+    "notVerified": "Непотвърден имейл",
+    "joined": "Присъединил се на {joinDate, date, long}",
+    "edited": "Последни редакции на {joinDate, date, long}",
+    "clubs": "Собственик на {value, number} клуба",
+    "club": "Собственик на 1 клуб",
+    "teams": "Собственик на {value, number} отбора",
+    "team": "Собственик на 1 отбор",
+    "player": "Състезател за {value, number} отбора",
+    "playerOne": "Състезател за 1 отбор",
+    "staff": "Персонал в {value, number} отбора",
+    "staffOne": "Персонал в 1 отбор",
+    "noClubs": "Не притежава клубове",
+    "noTeams": "Не притежава отбори",
+    "noPlayer": "Не е състезател в отбор",
+    "noStaff": "Не е част от персонала на отбор",
+    "birthdate": "Дата на раждане {birthdate, date, long}"
+  },
+  "UserEdit": {
+    "title": "Настройка на профил",
+    "name": "Име",
+    "gender": "Пол",
+    "birthdate": "Дата на раждане",
+    "language": "Език",
+    "gnone": "Не е посочен",
+    "gwoman": "Жена",
+    "gman": "Мъж",
+    "submit": "Запази"
+  }
+}

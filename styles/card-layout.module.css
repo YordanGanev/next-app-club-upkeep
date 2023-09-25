@@ -1,75 +1,74 @@
 .wrapper {
-    max-width: var(--max-width);
-    margin: 0 auto;
+  max-width: var(--max-width);
+  margin: 0 auto;
 }
 
 .wrapperWizButton {
-    padding-right: var(--paddingWizButton);
+  padding-right: var(--paddingWizButton);
 }
 
 .container {
-    padding: .5em;
-    display: grid;
-    gap: 1em;
-    grid-template-columns: repeat( auto-fill, minmax(20rem, 1fr));
+  padding: 0.5em;
+  display: grid;
+  gap: 1em;
+  grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
 }
 
 .card {
-    border-radius: 1em;
-    display: flex;
+  border-radius: 1em;
+  display: flex;
 }
 
-.card>a {
-    padding: .75em;
-    display: flex;
-    gap: .5rem;
-    align-items: center;
+.card > a {
+  padding: 0.75em;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
 }
 
 .card:hover {
-    background-color: var(--themeSecondary);
+  background-color: var(--themeSecondary);
 }
 
 .card div,
 .card p,
 .card h2 {
-    overflow: hidden;
-    text-overflow: ellipsis;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .card img {
-    border-radius: 50%;
+  border-radius: 50%;
 }
 
 .card h2 {
-    padding-bottom: .5em;
+  padding-bottom: 0.5em;
 }
-
 
 /*---*/
 
 .stats {
-    display: flex;
-    gap: .5em;
-    justify-content: space-evenly;
+  display: flex;
+  gap: 0.5em;
+  justify-content: space-evenly;
 }
 
-.stats>div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: .25em;
-    margin-top: .5em;
-    margin-bottom: .5em;
+.stats > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25em;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
 }
 
 .statsLabel {
-    font-weight: 700;
-    text-align: center;
-    filter: brightness(.5);
+  font-weight: 700;
+  text-align: center;
+  filter: brightness(0.5);
 }
 
 .icon > span {
-    padding-left: .5em;
+  padding-left: 0.5em;
 }

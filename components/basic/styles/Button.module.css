@@ -1,29 +1,29 @@
 .btnExtra,
 .btnNormal {
-    all: unset;
-    padding: 0.3rem 1rem;
-    border-radius: .5rem;
-    cursor: pointer;
-    text-align: center;  
+  all: unset;
+  padding: 0.3rem 1rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  text-align: center;
 }
 
 .btnExtra:hover,
 .btnNormal:hover,
 .btnExtra:focus,
 .btnNormal:focus {
-    filter: brightness(1.2);
+  filter: brightness(1.2);
 }
 
 .btnLight {
-    color: var(--extraWhite); 
+  color: var(--extraWhite);
 }
 
 .btnNormal {
-    background-color: var(--themeLighterAlt);
-    /* border-color: var(--themeLighterAlt); */
+  background-color: var(--themeLighterAlt);
+  /* border-color: var(--themeLighterAlt); */
 }
 
 .btnExtra {
-    background-color: var(--extraSecondary);
-    /* border-color: var(--extraPrimary); */
+  background-color: var(--extraSecondary);
+  /* border-color: var(--extraPrimary); */
 }

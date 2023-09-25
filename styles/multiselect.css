@@ -1,41 +1,41 @@
 /* Style for multi-select */
 
 .multi-select-container {
-    border: none;
-    margin: .5rem;
+  border: none;
+  margin: 0.5rem;
 }
 
 .multi-select__control {
-    background-color: var(--themePrimary) !important;
-    border-radius: .5rem !important;
-    border-style: inset !important;
-    border-width: 2px !important;
-    font-size: large !important;
+  background-color: var(--themePrimary) !important;
+  border-radius: 0.5rem !important;
+  border-style: inset !important;
+  border-width: 2px !important;
+  font-size: large !important;
 }
 
 .multi-select__menu {
-    color: var(--white) !important;
-    background-color: var(--themePrimary) !important;
+  color: var(--white) !important;
+  background-color: var(--themePrimary) !important;
 }
 
 .multi-select__input {
-    color: var(--white) !important;
+  color: var(--white) !important;
 }
 
 .multi-select__single-value {
-    color: var(--white) !important;
+  color: var(--white) !important;
 }
 
 .multi-select__multi-value__remove {
-    background-color: var(--neutralTertiary);
+  background-color: var(--neutralTertiary);
 }
 
-.multi-select__multi-value__remove>svg>path {
-    color: var(--themePrimary);
+.multi-select__multi-value__remove > svg > path {
+  color: var(--themePrimary);
 }
 
 .multi-select__option--is-focused {
-    filter: brightness(1.2) !important;
-    background-color: var(--themeLight) !important;
-    color: var(--white) !important;
+  filter: brightness(1.2) !important;
+  background-color: var(--themeLight) !important;
+  color: var(--white) !important;
 }

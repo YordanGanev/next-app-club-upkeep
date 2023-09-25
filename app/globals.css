@@ -1,7 +1,9 @@
 :root {
   --max-width: 1200px;
   --border-radius: 12px;
-  --font-mono: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono", "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro", "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
+  --font-mono: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono",
+    "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro",
+    "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
   /* === Theme variables === */
   /* Main */
   --themeDarker: #020202;
@@ -110,7 +112,6 @@ html[data-theme="light"] {
   --dangerColor: #f7dcda;
 }
 
-
 * {
   box-sizing: border-box;
   padding: 0;
@@ -144,7 +145,7 @@ li {
 .dashboard-content-wrapper {
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: .75rem;
+  padding: 0.75rem;
 }
 
 /* Buttons  */
@@ -163,7 +164,7 @@ li {
 }
 
 .global-button {
-  padding: .5rem;
+  padding: 0.5rem;
   border-radius: 1rem;
   height: min-content;
   width: 8ch;
@@ -177,7 +178,7 @@ li {
 
 .global-button:hover,
 .global-button:focus {
-  filter: brightness(.7);
+  filter: brightness(0.7);
 }
 
 label.global-button {
@@ -188,7 +189,6 @@ label.global-button {
 .global-button-inh {
   background-color: inherit !important;
 }
-
 
 /*
 ------------------------------------------

@@ -1,145 +1,140 @@
 /* Form positions */
 
 .wrapper {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    max-width: clampmin(var(--max-width), 95vw);
-    z-index: var(--zIdxPopup);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: clampmin(var(--max-width), 95vw);
+  z-index: var(--zIdxPopup);
 }
-
 
 /* Close Title and header */
 
 .header {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding-bottom: 1rem;
-    border-bottom: 2px solid #333;
-    gap: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #333;
+  gap: 1rem;
 }
-
 
 /* Close button styles */
 
 .close {
-    cursor: pointer;
-    background-color: var(--themeLighter);
-    border-radius: 50%;
-    position: relative;
+  cursor: pointer;
+  background-color: var(--themeLighter);
+  border-radius: 50%;
+  position: relative;
 }
 
-.header>div,
+.header > div,
 .close {
-    height: 32px;
-    aspect-ratio: 1;
+  height: 32px;
+  aspect-ratio: 1;
 }
 
 .close:focus,
 .close:hover {
-    background-color: var(--themeLighterAlt);
+  background-color: var(--themeLighterAlt);
 }
-
 
 /* Draw x */
 
 .close::before,
 .close::after {
-    content: "";
-    display: block;
-    background-color: var(--extraWhite);
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 4px;
-    height: 20px;
-    border-radius: 2px;
+  content: "";
+  display: block;
+  background-color: var(--extraWhite);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 4px;
+  height: 20px;
+  border-radius: 2px;
 }
 
 .close::before {
-    transform: translate(-50%, -50%) rotate(45deg);
+  transform: translate(-50%, -50%) rotate(45deg);
 }
 
 .close::after {
-    transform: translate(-50%, -50%) rotate(-45deg);
+  transform: translate(-50%, -50%) rotate(-45deg);
 }
-
 
 /* Fix view for form inputs */
 
 .form {
-    border-radius: 1rem;
-    width: 100%;
-    max-width: clampmin(600px, 95vw);
-    border: 2px solid var(--neutralSecondary);
-    padding: 1rem;
-    background-color: var(--black);
-    box-shadow: 0px 0px 5px 1px var(--white);
+  border-radius: 1rem;
+  width: 100%;
+  max-width: clampmin(600px, 95vw);
+  border: 2px solid var(--neutralSecondary);
+  padding: 1rem;
+  background-color: var(--black);
+  box-shadow: 0px 0px 5px 1px var(--white);
 }
 
 .formField {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
-.form>div>label {
-    margin-top: 0.5rem;
-    margin-left: 0.5rem;
-    margin-top: 1rem;
-    font-size: 1rem;
+.form > div > label {
+  margin-top: 0.5rem;
+  margin-left: 0.5rem;
+  margin-top: 1rem;
+  font-size: 1rem;
 }
 
-.form>.formField>textarea,
-.form>.formField>input,
-.form>.formField>select,
-.form>.formField>button {
-    margin: 0.5rem;
-    background-color: var(--themePrimary);
-    padding: 0.5rem;
-    border-color: var(--neutralPrimaryAlt);
-    border-radius: 0.5rem;
-    font-size: 1.2rem;
+.form > .formField > textarea,
+.form > .formField > input,
+.form > .formField > select,
+.form > .formField > button {
+  margin: 0.5rem;
+  background-color: var(--themePrimary);
+  padding: 0.5rem;
+  border-color: var(--neutralPrimaryAlt);
+  border-radius: 0.5rem;
+  font-size: 1.2rem;
 }
 
-.form>.formField>button {
-    background-color: var(--neutralPrimary)
+.form > .formField > button {
+  background-color: var(--neutralPrimary);
 }
 
-.form>.formField>button {
-    cursor: pointer;
+.form > .formField > button {
+  cursor: pointer;
 }
 
 .form input:focus {
-    outline: none;
+  outline: none;
 }
 
 .formField:last-of-type {
-    padding-top: 1rem;
-    border-top: 1px solid #333;
+  padding-top: 1rem;
+  border-top: 1px solid #333;
 }
-
 
 /* Error message */
 
 .error {
-    position: relative;
-    height: max-content;
-    min-height: calc(1.2 * 4em);
+  position: relative;
+  height: max-content;
+  min-height: calc(1.2 * 4em);
 }
 
 .errorMsg {
-    padding: 0.5em;
-    color: var(--errorColor);
-    text-align: center;
-    white-space: normal;
-    position: absolute;
-    text-align: center;
-    white-space: normal;
-    width: 100%;
+  padding: 0.5em;
+  color: var(--errorColor);
+  text-align: center;
+  white-space: normal;
+  position: absolute;
+  text-align: center;
+  white-space: normal;
+  width: 100%;
 }

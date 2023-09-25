@@ -1,122 +1,119 @@
 /* Wrapper positioning */
 
 .wrapper {
-    position: fixed;
-    display: flex;
-    right: 2rem;
-    bottom: 3rem;
-    flex-direction: column;
-    align-items: center;
+  position: fixed;
+  display: flex;
+  right: 2rem;
+  bottom: 3rem;
+  flex-direction: column;
+  align-items: center;
 }
-
 
 /* Main button spin */
 
-.wrapper:focus-within>.wizButton,
-.wrapper:hover>.wizButton,
-.wrapper:active>.wizButton {
-    transform: rotate(180deg);
+.wrapper:focus-within > .wizButton,
+.wrapper:hover > .wizButton,
+.wrapper:active > .wizButton {
+  transform: rotate(180deg);
 }
 
 /* Main and extra buttons */
 
 .wizButton,
 .extra {
-    cursor: pointer;
-    border-radius: 50%;
-    z-index: var(--zIdxFooter);
-    transition-duration: 0.5s;
+  cursor: pointer;
+  border-radius: 50%;
+  z-index: var(--zIdxFooter);
+  transition-duration: 0.5s;
 }
 
 .wizButton {
-    background-color: var(--extraWhite);
-    border: 1px solid var(--extraPrimary);
-    display: block;
-    height: 3rem;
-    width: 3rem;
-    position: relative;
+  background-color: var(--extraWhite);
+  border: 1px solid var(--extraPrimary);
+  display: block;
+  height: 3rem;
+  width: 3rem;
+  position: relative;
 }
 
-
 .wizButton:focus,
-.extra:focus
-.wizButton:hover,
+.extra:focus .wizButton:hover,
 .wizButton:active {
-    outline: 2px dashed var(--white);
-    outline-offset: 2px;
+  outline: 2px dashed var(--white);
+  outline-offset: 2px;
 }
 
 .extra > svg > path {
-    color: var(--extraWhite)
+  color: var(--extraWhite);
 }
 
 /* Main button + */
 
 .wizButton::before,
 .wizButton::after {
-    content: "";
-    background-color: var(--extraPrimary);
-    border-radius: 0.15rem;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+  content: "";
+  background-color: var(--extraPrimary);
+  border-radius: 0.15rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .wizButton::before {
-    width: 2rem;
-    height: 0.3rem;
+  width: 2rem;
+  height: 0.3rem;
 }
 
 .wizButton::after {
-    width: 0.3rem;
-    height: 2rem;
+  width: 0.3rem;
+  height: 2rem;
 }
 
 /* mobile */
 
-@media (hover: none)  {
-    .extra {
-        background-color: var(--extraTertiary);
-        height: 2.5rem;
-        width: 2.5rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-bottom: .5rem;
-    }
+@media (hover: none) {
+  .extra {
+    background-color: var(--extraTertiary);
+    height: 2.5rem;
+    width: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+  }
 
-    .extra>svg {
-        display: block;
-    }
+  .extra > svg {
+    display: block;
+  }
 }
 
 /* desktop */
 @media (hover: hover) {
-    .extra>svg {
-        display: none;
-    }
+  .extra > svg {
+    display: none;
+  }
 
-    .wrapper:focus-within>.extra>svg,
-    .wrapper:hover>.extra>svg,
-    .wrapper:active>.extra>svg {
-        display: block;
-    }
+  .wrapper:focus-within > .extra > svg,
+  .wrapper:hover > .extra > svg,
+  .wrapper:active > .extra > svg {
+    display: block;
+  }
 
-    .wrapper:focus-within>.extra,
-    .wrapper:hover>.extra {
-        background-color: var(--extraTertiary);
-        height: 2.5rem;
-        width: 2.5rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-bottom: .5rem;
-    }
+  .wrapper:focus-within > .extra,
+  .wrapper:hover > .extra {
+    background-color: var(--extraTertiary);
+    height: 2.5rem;
+    width: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+  }
 }
 
 @media screen and (max-width: 1000px) {
-    .wrapper {
-        bottom: 1.2rem;
-    }
+  .wrapper {
+    bottom: 1.2rem;
+  }
 }

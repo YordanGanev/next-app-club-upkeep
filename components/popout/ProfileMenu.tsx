@@ -13,6 +13,7 @@ import Style from "./styles/ProfileMenu.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRightFromBracket, faSun } from "@fortawesome/free-solid-svg-icons";
 import { faUser, faMoon } from "@fortawesome/free-regular-svg-icons";
+import { useTranslations } from "next-intl";
 
 export default function ProfileMenu() {
   const { user, isLoading } = useUser();
@@ -20,6 +21,8 @@ export default function ProfileMenu() {
   const { profileMenuState, setProfileMenuState } = useContext(PopoutContext);
 
   const { theme, setTheme } = useContext(ThemeContext);
+
+  const t = useTranslations("MenuProfile");
 
   let ref = useOutsideClick(() => setProfileMenuState(false));
 
@@ -58,7 +61,7 @@ export default function ProfileMenu() {
                       icon={theme === "light" ? faMoon : faSun}
                     />
                   </i>
-                  {theme === "light" ? "Dark" : "Light"} theme
+                  {theme === "light" ? t("dark") : t("light")}
                 </li>
               </a>
             </ul>
@@ -71,7 +74,7 @@ export default function ProfileMenu() {
                     <i>
                       <FontAwesomeIcon icon={faUser} />
                     </i>
-                    Profile
+                    {t("profile")}
                   </li>
                 </a>
               </Link>
@@ -80,7 +83,7 @@ export default function ProfileMenu() {
                   <i>
                     <FontAwesomeIcon icon={faRightFromBracket} />
                   </i>
-                  Sign out
+                  {t("logout")}
                 </li>
               </a>
             </ul>

@@ -45,6 +45,7 @@ function Input({ inputProps, handleChange }) {
           defaultValue={inputProps?.defaultValue}
           className="multi-select-container"
           classNamePrefix="multi-select"
+          inputId={inputProps?.name}
         ></Select>
       );
     case "Date":
@@ -57,7 +58,11 @@ function Input({ inputProps, handleChange }) {
           format={inputProps?.format}
           views={inputProps?.views}
           slotProps={{
-            textField: { name: inputProps.name, required: inputProps.required },
+            textField: {
+              name: inputProps.name,
+              required: inputProps.required,
+              id: inputProps.name,
+            },
           }}
           // fix for getting props from postgress from user table
           // initial value is not in the right format
@@ -77,6 +82,7 @@ function Input({ inputProps, handleChange }) {
           placeholder={inputProps?.placeholder}
           required={inputProps?.required}
           name={inputProps?.name}
+          inputId={inputProps?.name}
           onChange={(time) => {
             // console.log(time);
             handleChange(null, {

@@ -1,88 +1,86 @@
 .wrapper {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    max-width: clampmin(var(--max-width), 95vw);
-    z-index: var(--zIdxPopup);
-    border: 1px solid var(--white);
-    padding: 1rem;
-    border-radius: 2rem;
-    background-color: var(--black);
-    box-shadow: 0px 0px 5px 1px var(--white);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: clampmin(var(--max-width), 95vw);
+  z-index: var(--zIdxPopup);
+  border: 1px solid var(--white);
+  padding: 1rem;
+  border-radius: 2rem;
+  background-color: var(--black);
+  box-shadow: 0px 0px 5px 1px var(--white);
 }
 
 /* Close Title and header */
 .header {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding-bottom: 1rem;
-    border-bottom: 2px solid #333;
-    gap: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #333;
+  gap: 1rem;
 }
-
 
 /* Close button styles */
 .close {
-    cursor: pointer;
-    background-color: var(--themeLighter);
-    border-radius: 50%;
-    position: relative;
+  cursor: pointer;
+  background-color: var(--themeLighter);
+  border-radius: 50%;
+  position: relative;
 }
 
-.header>div,
+.header > div,
 .close {
-    height: 32px;
-    aspect-ratio: 1;
+  height: 32px;
+  aspect-ratio: 1;
 }
 
 .close:focus,
 .close:hover {
-    background-color: var(--themeLighterAlt);
+  background-color: var(--themeLighterAlt);
 }
-
 
 /* Draw x */
 .close::before,
 .close::after {
-    content: "";
-    display: block;
-    background-color: var(--extraWhite);
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 4px;
-    height: 20px;
-    border-radius: 2px;
+  content: "";
+  display: block;
+  background-color: var(--extraWhite);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 4px;
+  height: 20px;
+  border-radius: 2px;
 }
 
 .close::before {
-    transform: translate(-50%, -50%) rotate(45deg);
+  transform: translate(-50%, -50%) rotate(45deg);
 }
 
 .close::after {
-    transform: translate(-50%, -50%) rotate(-45deg);
+  transform: translate(-50%, -50%) rotate(-45deg);
 }
 /* buttons */
 .buttons {
-    display: flex;
-    justify-content: space-evenly;
+  display: flex;
+  justify-content: space-evenly;
 }
 
 /* Message */
 .message {
-    text-align: center;
-    padding: 2rem;
+  text-align: center;
+  padding: 2rem;
 }
 
 /* Error message */
 .error {
-    text-align: center;
-    padding: 0.5rem;
-    color: var(--extraLight);
+  text-align: center;
+  padding: 0.5rem;
+  color: var(--extraLight);
 }

@@ -1,9 +1,4 @@
-import React from "react";
-
-import { UserProvider } from "@auth0/nextjs-auth0/client";
-
 import "./globals.css";
-import ThemeProvider from "@/contexts/ThemeContext";
 
 export const metadata = {
   title: "Club Upkeep App",
@@ -15,13 +10,5 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <html lang="en">
-      <UserProvider>
-        <ThemeProvider>
-          <body>{children}</body>
-        </ThemeProvider>
-      </UserProvider>
-    </html>
-  );
+  return children;
 }

@@ -1,0 +1,66 @@
+{
+  "Nav": {
+    "home": "Startseite",
+    "clubs": "Vereine",
+    "teams": "Teams",
+    "schedule": "Zeitplan",
+    "notifications": "Meldung"
+  },
+  "ClubTabs": {
+    "teams": "Teams",
+    "about": "Über uns"
+  },
+  "TeamsTabs": {
+    "players": "Spieler",
+    "staff": "Mitarbeiter",
+    "medical": "Medizinische Versorgung",
+    "events": "Veranstaltungen",
+    "posts": "Beiträge",
+    "achievements": "Erfolge",
+    "about": "Über uns"
+  },
+  "Dashboard": {
+    "greeting": "Willkommen",
+    "upcoming": "Bevorstehende Veranstaltungen",
+    "recentTeam": "Letzte Teams",
+    "noUpcoming": "Keine Veranstaltungen in naher Zukunft",
+    "noTeams": "Noch kein Mitglied eines Teams"
+  },
+  "MenuProfile": {
+    "light": "Helle Oberfläche",
+    "dark": "Dunkle Oberfläche",
+    "profile": "Profil",
+    "logout": "Abmelden"
+  },
+  "UserAbout": {
+    "title": "Benutzerinformationen",
+    "verified": "E-Mail verifiziert",
+    "notVerified": "E-Mail nicht verifiziert",
+    "joined": "Beigetreten am {joinDate, date, long}",
+    "edited": "Zuletzt bearbeitet am {joinDate, date, long}",
+    "clubs": "{value, number} Vereine im Besitz",
+    "club": "1 Verein im Besitz",
+    "teams": "{value, number} Teams im Besitz",
+    "team": "1 Team im Besitz",
+    "player": "Spieler für {value, number} Teams",
+    "playerOne": "Spieler für 1 Team",
+    "staff": "Mitarbeiter für {value, number} Teams",
+    "staffOne": "Mitarbeiter für 1 Team",
+    "noClubs": "Keine Vereine im Besitz",
+    "noTeams": "Keine Teams im Besitz",
+    "noPlayer": "Kein Spieler für ein Team",
+    "noStaff": "Kein Mitglied des Teams",
+    "birthdate": "Geburtsdatum {birthdate, date, long}"
+  },
+  "UserEdit": {
+    "title": "Profil bearbeiten",
+    "name": "Name",
+    "gender": "Geschlecht",
+    "birthdate": "Geburtsdatum",
+    "language": "Sprache",
+    "gnone": "Nicht angegeben",
+    "gwoman": "Weiblich",
+    "gman": "Männlich",
+    "submit": "Aktualisieren"
+  }
+}

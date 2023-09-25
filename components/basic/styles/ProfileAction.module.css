@@ -1,33 +1,33 @@
 .wrapper {
-    width: 100%;
-    max-width: 600px;
-    margin: 0 auto;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 .wrapper h3 {
-    padding-bottom: 1em;
+  padding-bottom: 1em;
 }
 
 .form {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: inherit;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: inherit;
 }
 
 .error {
-    color: var(--errorColor);
-    padding: 1em 0;
-    text-align: center;
-    font-weight: bold;
+  color: var(--errorColor);
+  padding: 1em 0;
+  text-align: center;
+  font-weight: bold;
 }
 
 .danger {
-    background-color: var(--dangerColor);    
-    border-radius: .5em;
-    padding: 1em;
+  background-color: var(--dangerColor);
+  border-radius: 0.5em;
+  padding: 1em;
 }
 
 .info p:first-of-type {
-    font-weight: bold;
+  font-weight: bold;
 }

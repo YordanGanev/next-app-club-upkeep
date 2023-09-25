@@ -1,0 +1,66 @@
+{
+  "Nav": {
+    "home": "home",
+    "clubs": "clubs",
+    "teams": "teams",
+    "schedule": "schedule",
+    "notifications": "notifications"
+  },
+  "TabsClub": {
+    "teams": "teams",
+    "about": "about"
+  },
+  "TabsTeams": {
+    "players": "players",
+    "staff": "staff",
+    "medical": "medical",
+    "events": "events",
+    "posts": "posts",
+    "achievements": "achievements",
+    "about": "about"
+  },
+  "Dashboard": {
+    "greeting": "Welcome",
+    "upcoming": "Upcoming events",
+    "recentTeam": "Recent teams",
+    "noUpcoming": "No events to attend",
+    "noTeams": "Not member of any team yet"
+  },
+  "MenuProfile": {
+    "light": "light theme",
+    "dark": "dark theme",
+    "profile": "profile",
+    "logout": "sign out"
+  },
+  "UserAbout": {
+    "title": "User Information",
+    "verified": "Email verified",
+    "notVerified": "Email not verified",
+    "joined": "Joined at {joinDate, date, long}",
+    "edited": "Last edit {joinDate, date, long}",
+    "clubs": "{value, number} clubs owned",
+    "club": "1 club owned",
+    "teams": "{value, number} teams owned",
+    "team": "1 team owned",
+    "player": "Player for {value, number} teams",
+    "playerOne": "Player for 1 team",
+    "staff": "Staff for {value, number} teams",
+    "staffOne": "Staff for 1 team",
+    "noClubs": "No clubs owned",
+    "noTeams": "No teams owned",
+    "noPlayer": "Not a player for a team",
+    "noStaff": "Not staff member for a team",
+    "birthdate": "Дата на раждане {birthdate, date, long}"
+  },
+  "UserEdit": {
+    "title": "Edit profile",
+    "name": "Name",
+    "gender": "Gender",
+    "birthdate": "Birthdate",
+    "language": "Language",
+    "gnone": "Not specified",
+    "gwoman": "Female",
+    "gman": "Male",
+    "submit": "Submit"
+  }
+}

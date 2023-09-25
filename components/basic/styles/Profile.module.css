@@ -1,39 +1,39 @@
 .wrapper {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    /* justify-content: center; */
-    gap: 2em;
-    width: 100%;
-    padding: 1em 0em;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  /* justify-content: center; */
+  gap: 2em;
+  width: 100%;
+  padding: 1em 0em;
 }
 
 .image {
-    border-radius: 50%;
+  border-radius: 50%;
 }
 
 .subtitle {
-    margin-bottom: 1rem;
-    font-size: 1.3em;
+  margin-bottom: 1rem;
+  font-size: 1.3em;
 }
 
 .description {
-    padding: 0.5rem 0rem;
+  padding: 0.5rem 0rem;
 }
 
 /* ------------ */
 
 @media screen and (max-width: 500px) {
-    .wrapper {
-        flex-direction: column;
-        gap: .5em;
-    }
+  .wrapper {
+    flex-direction: column;
+    gap: 0.5em;
+  }
 
-    .content {
-        text-align: center;
-    }
+  .content {
+    text-align: center;
+  }
 
-    .content .description.responsive  {
-        display: none;
-    }
+  .content .description.responsive {
+    display: none;
+  }
 }

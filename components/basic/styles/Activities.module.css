@@ -1,7 +1,7 @@
 .wrapper,
 .listTitle,
 .listExtend {
-    padding: .5rem;
+  padding: 0.5rem;
 }
 
 .wrapper,
@@ -10,126 +10,125 @@
 .eventTime,
 .eventNote,
 .title,
-.title>button {
-    display: flex;
-    gap: .5rem;
+.title > button {
+  display: flex;
+  gap: 0.5rem;
 }
 
 .wrapper,
 .list {
-    flex-direction: column;
+  flex-direction: column;
 }
 
 .listTitle,
-.title>button {
-    cursor: pointer;
+.title > button {
+  cursor: pointer;
 }
 
 .listTitle {
-    padding-right: 1rem;
-    position: relative;
-    color: var(--activityFontColor);
+  padding-right: 1rem;
+  position: relative;
+  color: var(--activityFontColor);
 }
 
 .date {
-    font-weight: 700;
-    margin: auto;
+  font-weight: 700;
+  margin: auto;
 }
 
 .select {
-    border: 1px solid var(--white);
+  border: 1px solid var(--white);
 }
 
 .select:hover {
-    background-color: var(--themeDarkAlt);
+  background-color: var(--themeDarkAlt);
 }
 
 .listTitle:hover {
-    filter: brightness(1.1);
+  filter: brightness(1.1);
 }
 
-.title>button {
-    font-family: "Font Awesome 6 Free";
-    padding: 1rem;
-    width: fit-content;
-    border-radius: 2rem;
-    gap: 1rem;
-    font-weight: 700;
+.title > button {
+  font-family: "Font Awesome 6 Free";
+  padding: 1rem;
+  width: fit-content;
+  border-radius: 2rem;
+  gap: 1rem;
+  font-weight: 700;
 }
 
 .listTitle i {
-    width: 2ch;
-    text-align: center;
+  width: 2ch;
+  text-align: center;
 }
 
 .listTitle svg path {
-    fill: var(--activityFontColor);
+  fill: var(--activityFontColor);
 }
 
-.list>input[type="checkbox"],
-.list>input[type="checkbox"]:checked~.listExtend {
-    display: none;
+.list > input[type="checkbox"],
+.list > input[type="checkbox"]:checked ~ .listExtend {
+  display: none;
 }
 
 .listTitle::after {
-    display: inline-block;
-    text-rendering: auto;
-    font: var(--fa-font-solid);
-    content: "\f077";
-    position: absolute;
-    right: .5rem;
-    top: 50%;
-    transform: translateY(-50%);
+  display: inline-block;
+  text-rendering: auto;
+  font: var(--fa-font-solid);
+  content: "\f077";
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
-.list>input[type="checkbox"]:checked~.listTitle::after {
-    content: "\f078";
+.list > input[type="checkbox"]:checked ~ .listTitle::after {
+  content: "\f078";
 }
 
 /* */
 .listExtend {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
-
 
 /*
     Event Time / Counters / Info
 */
 
 .eventTime {
-    justify-content: space-between;
-    align-items: center;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .eventTimeText {
-    font-size: larger;
-    font-weight: 700;
+  font-size: larger;
+  font-weight: 700;
 }
 
 .eventTime svg {
-    padding-left: .5em;
+  padding-left: 0.5em;
 }
 
 .eventNote {
-    padding: 0 1rem;
-    align-items: center;
-    opacity: .8;
+  padding: 0 1rem;
+  align-items: center;
+  opacity: 0.8;
 }
 
 .eventNote i {
-    padding-right: .5rem;
-    font-size: x-small;
+  padding-right: 0.5rem;
+  font-size: x-small;
 }
 
 .noEvents {
-    padding: 1rem;
-    text-align: center;
-    font-size: larger;
-    font-weight: 700;
-    color: var(--themeLight);
-    opacity: .7;
+  padding: 1rem;
+  text-align: center;
+  font-size: larger;
+  font-weight: 700;
+  color: var(--themeLight);
+  opacity: 0.7;
 }
 
 /* 
@@ -137,75 +136,72 @@
 */
 
 .eventBoard {
-    display: flex;
-    gap: 1rem;
-    position: relative;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
+  display: flex;
+  gap: 1rem;
+  position: relative;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .eventTeam {
-    display: flex;
-    gap: .5rem;
-    align-items: center;
-    font-size: medium;
-    font-weight: 700;
-    left: 0;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  font-size: medium;
+  font-weight: 700;
+  left: 0;
 }
 
 .eventTeam > img {
-    border-radius: 50%;
+  border-radius: 50%;
 }
 
 .eventBoard button.border-view {
-    border: 2px solid var(--extraLighterAlt);
+  border: 2px solid var(--extraLighterAlt);
 }
 
 .eventBoard button.borderRemove {
-    border: 2px solid var(--errorColor);
+  border: 2px solid var(--errorColor);
 }
 
 .eventBoard button {
-    background-color: var(--black);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 8ch;
-    height: min-content;
-    cursor: pointer;
-    font-weight: bold;
-    padding: .25rem;
-    border-radius: 1rem;
-    font-size:smaller;
-
+  background-color: var(--black);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 8ch;
+  height: min-content;
+  cursor: pointer;
+  font-weight: bold;
+  padding: 0.25rem;
+  border-radius: 1rem;
+  font-size: smaller;
 }
-
-
 
 /* -----
 calendarPopout
 -----*/
 
 .title {
-    position: relative;
+  position: relative;
 }
 
 .calendarPopout {
-    background-color: var(--black);
-    z-index: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: black;
+  background-color: var(--black);
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
 }
 
-.calendarPopout>* {
-    color: black;
+.calendarPopout > * {
+  color: black;
 }
 
 @media screen and (max-width: 600px) {
-    .wrapper {
-        overflow-x: auto;
-    }
+  .wrapper {
+    overflow-x: auto;
+  }
 }
