@@ -59,17 +59,18 @@ export default async function ServerComponent({
     },
   });
 
-  console.log(locale);
-  if (locale !== appUser.country) {
+  if (appUser.country !== null && locale !== appUser.country) {
     redirect(`/${appUser.country}/dashboard/profile`);
   }
 
   return (
-    <ProfileContent
-      appUser={appUser}
-      userOwnedClubs={userOwnedClubs}
-      email_verified={user.email_verified}
-    />
+    <>
+      <ProfileContent
+        appUser={appUser}
+        userOwnedClubs={userOwnedClubs}
+        email_verified={user.email_verified}
+      />
+    </>
   );
 }
 
@@ -129,7 +130,7 @@ function ProfileContent({
               appUser._count.player === 1
                 ? tUser("player")
                 : tUser("players", { value: appUser._count.player })
-            } }`
+            }`
           : tUser("noPlayer"),
     },
     {
@@ -137,9 +138,9 @@ function ProfileContent({
         appUser._count.team > 0
           ? `${
               appUser._count.team === 1
-                ? tUser("staff")
-                : tUser("staffs", { value: appUser._count.team })
-            })}`
+                ? tUser("staffOne")
+                : tUser("staff", { value: appUser._count.team })
+            }`
           : tUser("noStaff"),
     },
   ];
